@@ -1,0 +1,156 @@
+/*main.css */
+
+/* clear css */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+body {
+	font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+	font-weight: 400;
+	color: #2f4f4f;
+	background-color: #f3f3f3;
+}
+.logo {
+	margin: 25px 0 50px 0;
+}
+.current a, .menu-item a:hover {
+	color: #099f7d;
+	border-bottom: dotted 1px;
+}
+a {
+	text-decoration: none;
+	color: #2f4f4f;
+}
+a:hover {
+	color: #099f7d;
+}
+h1 {
+	font-family: 'Allura', cursive, sans-serif;
+	font-size: 70px;
+	text-align: center;
+	margin-bottom: -20px;
+}
+h2 {
+	font-size: 12px;
+	text-align: center;
+}
+h3 {
+	font-size: 28px;
+	padding: 15px 0 15px 0;
+}
+nav ul {
+	list-style-type: none;
+}
+nav li {
+	display: inline;
+	margin: 0 20px 0 20px;
+}
+.mainmenu {
+	font-size: 18px;
+	font-weight: 500;
+	text-transform: uppercase;
+	text-align: center;
+	margin: 10px 0 50px 0;
+}
+a li .current {
+	color: #099f7d;
+	border-bottom: dotted 1px;
+}
+.line {
+	width: 95%;
+	margin: 20px auto 20px auto;
+	border-bottom: dotted 1px #099f7d;
+}
+.date {
+	position: relative;
+	background-color: #fff;
+	padding: 0 15px 0 15px;
+	top: -30px;
+	display: inline;
+	min-height: 11px;
+}
+.content {
+	width: 940px;
+	margin: 0 auto 40px auto;
+	padding: 15px 15px 15px 15px;
+	background-color: #fff;
+	font-family: 'Raleway', 'Roboto', 'Helvetica Neue', sans-serif;
+	font-size: 14px;
+	text-align: center;
+	box-shadow: 1px 1px 5px #999999;
+	border-radius: 3px;
+}
+.content p {
+	line-height: 2.5;
+}
+.teaser p, .post p {
+	margin: 0 auto 15px auto;
+	width: 95%;
+	line-height: 1.75;
+	text-align: left;
+}
+button {
+	outline: none;
+	border: none;
+	content: 'Read More';
+	background: #099f7d;
+	padding: 10px 10px 10px 10px;
+	color: #fff;
+	border-radius: 3px;
+	margin: 45px auto 10px auto;
+	font-family: 'Raleway', sans-serif;
+	font-size: 14px;
+	width: 95px;
+	text-align: center;
+}
+button:hover {
+	background: #066f57;
+}
+@media screen and (max-width: 1060px) {
+	.content {
+		width: 85%;
+	}
+}
+@media screen and (max-width: 480px) {
+	nav li {
+		display: block;
+		padding: 10px 0 10px 0;
+	}
+	h1 {
+		font-size: 7em;
+		line-height: .8;
+	}
+	h2 {
+		display: none;
+	}
+	.mainmenu {
+		font-size: 2em;
+	}
+	.line {
+		display: none;
+	}
+	.date {
+		display: block;
+		background-color: none;
+		top: 0px;
+		margin: 0 auto 20px auto;
+	}
+}
