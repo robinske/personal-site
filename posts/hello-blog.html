@@ -35,16 +35,22 @@
       </div>  
     </header>
     <div class="content">
-      <h3 class="title">Hello, Blog</h1>
+      <h3 class="title">Hello, Blog</h3>
       <div class="line"></div>
-      <div class="date">January 22, 2016</div>
+      <div class="date">January 25, 2016</div>
       <div class="post">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae pellentesque diam. Fusce rutrum ante sit amet semper finibus. Nam sem lorem, viverra quis mi eget, euismod convallis odio. Praesent non interdum ex, non ullamcorper ipsum. Nunc ultrices, metus eget posuere tempus, risus lectus lacinia turpis, et hendrerit ipsum nisl at erat. Cras maximus sagittis quam, vitae rutrum elit ullamcorper quis. Aliquam et egestas felis, vel consequat elit. In blandit dui urna, et dapibus ex sagittis ut. Fusce commodo lectus et lacus pretium sagittis. Nam id magna mauris.</p>
-      <p>Duis a urna lorem. Donec massa leo, dignissim et nisi et, tempus dapibus leo. Maecenas at tempor est, at vehicula massa. Aliquam erat nunc, vulputate vel efficitur sed, volutpat tincidunt leo. Nulla dictum rhoncus purus, auctor pharetra nibh tempor mattis. Morbi ut semper nisi. Duis sem orci, fringilla nec lorem nec, sodales hendrerit justo. Suspendisse nec suscipit sem, id ullamcorper sapien. Mauris in est id urna volutpat volutpat. Proin pulvinar feugiat dui. Proin luctus ultrices augue, nec imperdiet augue pharetra in. Sed sit amet augue finibus, porttitor purus sed, venenatis ipsum. Quisque tortor enim, finibus mattis ultrices quis, gravida sed neque. Maecenas ornare sodales tortor in imperdiet. Suspendisse blandit ex et mauris porttitor, accumsan rhoncus metus ultricies.</p>
-      <p>Sed at nibh iaculis, hendrerit felis a, faucibus arcu. Pellentesque urna sapien, scelerisque at metus at, malesuada vehicula ligula. Ut bibendum feugiat felis, sit amet luctus risus egestas in. Suspendisse potenti. Integer maximus viverra diam eget egestas. Etiam laoreet risus sed leo facilisis, in sodales felis suscipit. Suspendisse efficitur sem tellus, at commodo mauris molestie in. Etiam vestibulum, nulla in ultrices molestie, nibh neque cursus augue, in efficitur quam magna non turpis. Curabitur in nibh luctus, sollicitudin arcu non, auctor felis.</p>
-      <p>Cras scelerisque congue odio ac bibendum. Ut vel consectetur tellus. Sed consectetur commodo nulla quis fermentum. Pellentesque laoreet placerat arcu, sit amet malesuada erat iaculis vel. Morbi gravida, orci ut malesuada luctus, lorem nunc dapibus lectus, venenatis facilisis elit est eget augue. Cras fermentum convallis nibh, vel porta massa maximus non. Nullam sed purus iaculis, convallis diam ullamcorper, porttitor mauris. Duis a sem sed mauris vehicula eleifend. Phasellus semper at ipsum in posuere. Fusce lectus ante, iaculis sit amet malesuada at, accumsan quis tellus. Sed condimentum congue tempor.</p>
-      <p>Sed mollis ex lorem, quis interdum turpis porta id. Cras eget neque id mi posuere auctor. Nam aliquam commodo est, interdum finibus tellus blandit non. In sed ligula mauris. Pellentesque sagittis imperdiet tincidunt. Maecenas mi ex, vulputate ut ligula nec, consequat egestas magna. Aliquam non est eu sapien laoreet aliquet luctus nec quam. Pellentesque aliquet egestas lorem et sagittis. Nam mauris ante, convallis quis orci vehicula, maximus vestibulum nisi. Maecenas laoreet nibh nec enim iaculis fringilla. Nunc sollicitudin urna nec eleifend tempor. Morbi eget semper enim, ut venenatis mauris. Nullam varius diam mauris, eu imperdiet mi consectetur non.</p>
-      </div>
+      <p>In my programming career so far, I've spent most of my time lurking behind the scenes - working with data, APIs, and infrastructure. Very little of my time has been dedicated to making websites look the way they do. Before this week I didn't know the difference between a <a href="https://css-tricks.com/the-difference-between-id-and-class/">CSS class and id selector.</a></p>
+      <p>Welcome to the results of my learning - my personal site! (style was adapted, code was original). Right now it's pure HTML and CSS - no frameworks or syntatic sugar.</p>
+      <p>I made the site responsive since mobile is the new black or whatever. An interesting hiccup I encountered: <strong>viewport</strong>. Turns out that Apple decided they wanted a default viewing experience on iPhone to be a full-size desktop site, so it sets the default window to a zoomed-out 980px.</p>
+      <p>The solution: using the <a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html">viewport meta tag</a>. Your media queries will be useless unless your header contains the following:</p>
+      <p><pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</code></pre></p>
+      <div class="line"></div>
+      <p class="references" style="margin-bottom: 0;">References:</p>
+      <ul class="references">
+        <li><a href="http://webdesign.tutsplus.com/tutorials/quick-tip-dont-forget-the-viewport-meta-tag--webdesign-5972">http://webdesign.tutsplus.com/tutorials/quick-tip-dont-forget-the-viewport-meta-tag--webdesign-5972</a></li>
+        <li><a href="https://stackoverflow.com/questions/13002731/responsive-design-media-query-not-working-on-iphone">https://stackoverflow.com/questions/13002731/responsive-design-media-query-not-working-on-iphone</a></li>
+        <li><a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html">https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html</a></li>
+      </ul>
     </div>
   </body>
 </html>
