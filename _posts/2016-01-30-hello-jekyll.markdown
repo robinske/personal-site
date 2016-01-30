@@ -21,6 +21,6 @@ This blog post was written in [Markdown](https://daringfireball.net/projects/mar
 
 * **Environments**
 
-I can now programmatically determine actions based on the environment. This is especially useful for things like file references and linking - in production I want to link to an absolute path for my CSS file, but while developing I want it to be a relative link to my local directory. You can see how I do that [here]().
+I can now programmatically determine actions based on the environment. This is especially useful for things like file references and linking - in production I want to link to an absolute path for my CSS file, but while developing I want it to be a relative link to my local directory. You can see how I do that [here](https://github.com/robinske/personal-site/blob/master/_includes/head.html#L5).
 
 <div class="line"></div>
