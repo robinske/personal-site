@@ -1,6 +1,10 @@
 <header class="header" >
   <div class="logo">
+    {% if jekyll.environment == "production" %}
+    <a href="{{ site.url }}" title="kelley robinson">
+    {% else %}
     <a href="{{ '/index.html' | prepend:site.baseurl }}" title="kelley robinson">
+    {% endif %}
       <h1>kelley robinson</h1>
       <h2>software engineer</h2>                       
     </a>
@@ -8,23 +12,31 @@
   <div>
   <nav class="mainmenu">
     <ul>
-      {% assign pages_list = site.data.nav %}
-      {% assign group = 'navigation' %}
-      {% include pages_list %}
-      <!--
-      <li class="menu-item">
+      {% if page.active == "blog" %}
+      <li class="menu-item current">
+      {% else %}
+      <li class="menu-item" %}>
+      {% endif %}
       {% if jekyll.environment == "production" %}
       <a href="{{ site.blogurl }}">Blog</a>
       {% else %}
       <a href="{{ '/blog.html' | prepend:site.baseurl }}">Blog</a>
       {% endif %}
       </li>
+      {% if page.active == "contact" %}
       <li class="menu-item current">
+      {% else %}
+      <li class="menu-item">
+      {% endif %}
+      {% if jekyll.environment == "production" %}
+      <a href="{{ site.url }}">Contact</a>
+      {% else %}
       <a href="{{ '/index.html' | prepend:site.baseurl }}">Contact</a>
+      {% endif %}
       </li>
       <li class="menu-item">
       <a href="{{ '/robinson-resume.pdf' | prepend:site.baseurl }}">Resume</a>
-      </li>i-->
+      </li>
     </ul>
   </nav>  
   </div>  
