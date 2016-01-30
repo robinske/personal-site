@@ -19,3 +19,4 @@ github_username:  robinske
 
 # Build settings
 markdown: kramdown
+exclude: [deploy.sh, README.md]
