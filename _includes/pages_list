@@ -1,5 +1,4 @@
 {% for node in pages_list %}
-  {% if group == null or group == node.group %}
     {% if page.url == nodel.url %}
       <li class="menu-item current">
       <a href="{{node.url}}">{{node.title}}</a>
@@ -7,8 +6,5 @@
     {% else %}
       <li class="menu-item">
       <a href="{{node.url}}">{{node.title}}</a>
-    {% endif %}
   {% endif %}
 {% endfor %}
-{% assign pages_list = nil %}
-{% assign group = nil %}

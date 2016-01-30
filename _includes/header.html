@@ -8,7 +8,7 @@
   <div>
   <nav class="mainmenu">
     <ul>
-      {% assign pages_list = site.pages %}
+      {% assign pages_list = site.data.nav %}
       {% assign group = 'navigation' %}
       {% include pages_list %}
       <!--
