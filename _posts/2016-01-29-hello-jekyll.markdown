@@ -1,28 +1,26 @@
 ---
 layout:    post
 title:     "Hello, Jekyll"
-date:      2016-01-29
+date:      2016-01-30
 permalink: /posts/:title
 tags:      programming meta-blog
-references: www.google.com www.twitter.com
+active:    "blog"
 ---
 
-In my programming career so far, I've spent most of my time lurking behind the scenes - working with data, APIs, and infrastructure. Very little of my time has been dedicated to making websites look the way they do. Before this week I didn't know the difference between a [CSS class and id selector.](https://css-tricks.com/the-difference-between-id-and-class/)
+Migrating this site from ~5 static pages to a static site generator took some time, but it will provide enough convenience in updating moving forward that it was worth it. This site is now generated using [Jekyll](https://jekyllrb.com/), a Ruby project that takes a handful of text files and transforms them into a fully functioning blog or site without requiring a server to back it up.
 
-Welcome to the results of my learning - my personal site! (style was adapted, code was original). Right now it's pure HTML and CSS - no frameworks or syntatic sugar.
+I have found the most useful components so far to be:
 
-I made the site responsive since mobile is the new black or whatever. An interesting hiccup I encountered: **viewport**. Turns out that Apple decided they wanted a default viewing experience on iPhone to be a full-size desktop site, so it sets the default window to a zoomed-out 980px.
+* **Templating**
 
-The solution: using the [viewport meta tag](https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html). Your media queries will be useless unless your header contains the following:
+Being able to 'include' the site navigation in all of your files or loop through blog posts to generate a list allow you to stay DRY in the rest of your pages. This saves a lot of time and prevents complexity. 
 
-{% highlight html %}
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-{% endhighlight %}
+* **Markdown**
+
+This blog post was written in [Markdown](https://daringfireball.net/projects/markdown/) instead of raw HTML. It's also possible to include `<code>` snippets without manually escaping characters.
+
+* **Environments**
+
+I can now programmatically determine actions based on the environment. This is especially useful for things like file references and linking - in production I want to link to an absolute path for my CSS file, but while developing I want it to be a relative link to my local directory. You can see how I do that [here]().
 
 <div class="line"></div>
-<p class="references" style="margin-bottom: 0;">References:</p>
-<ul class="references">
-  <li><a href="http://webdesign.tutsplus.com/tutorials/quick-tip-dont-forget-the-viewport-meta-tag--webdesign-5972">http://webdesign.tutsplus.com/tutorials/quick-tip-dont-forget-the-viewport-meta-tag--webdesign-5972</a></li>
-  <li><a href="https://stackoverflow.com/questions/13002731/responsive-design-media-query-not-working-on-iphone">https://stackoverflow.com/questions/13002731/responsive-design-media-query-not-working-on-iphone</a></li>
-  <li><a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html">https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html</a></li>
-</ul>
