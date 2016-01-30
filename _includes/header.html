@@ -1,0 +1,31 @@
+<header class="header" >
+  <div class="logo">
+    <a href="{{ '/index.html' | prepend:site.baseurl }}" title="kelley robinson">
+      <h1>kelley robinson</h1>
+      <h2>software engineer</h2>                       
+    </a>
+  </div>
+  <div>
+  <nav class="mainmenu">
+    <ul>
+      {% assign pages_list = site.pages %}
+      {% assign group = 'navigation' %}
+      {% include pages_list %}
+      <!--
+      <li class="menu-item">
+      {% if jekyll.environment == "production" %}
+      <a href="{{ site.blogurl }}">Blog</a>
+      {% else %}
+      <a href="{{ '/blog.html' | prepend:site.baseurl }}">Blog</a>
+      {% endif %}
+      </li>
+      <li class="menu-item current">
+      <a href="{{ '/index.html' | prepend:site.baseurl }}">Contact</a>
+      </li>
+      <li class="menu-item">
+      <a href="{{ '/robinson-resume.pdf' | prepend:site.baseurl }}">Resume</a>
+      </li>i-->
+    </ul>
+  </nav>  
+  </div>  
+</header>

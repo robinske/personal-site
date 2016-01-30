@@ -1,57 +1,16 @@
-<!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="http://krobinson.me/favicon.png"/>
-    <link rel="stylesheet" href="http://krobinson.me/style/css/main.css"/>
-    <link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-    <title>kelley robinson &#8211; software engineer</title>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-73009306-1', 'auto');
-      ga('send', 'pageview');
-
-    </script>
-  </head>
-  <body>
-    <header class="header" >
-      <div class="logo">
-        <a href="http://krobinson.me" title="kelley robinson">
-          <h1>kelley robinson</h1>
-          <h2>software engineer</h2>                       
-        </a>
-      </div>
-      <div>
-      <nav class="mainmenu">
-        <ul>
-          <li class="menu-item current">
-            <a href="#">Blog</a>
-          </li>
-          <li class="menu-item">
-            <a href="http://krobinson.me">Contact</a>
-          </li>
-          <li class="menu-item">
-            <a href="http://krobinson.me/robinson-resume.pdf">Resume</a>
-          </li>
-        </ul>
-      </nav>  
-      </div>  
-    </header>
-    <div class="content">
-      <h3 class="title">Hello, Blog</h3>
-      <div class="line"></div>
-      <div class="date">January 25, 2016</div>
-      <div class="teaser">
-      <p>In my programming career so far, I've spent most of my time lurking behind the scenes - working with data, APIs, and infrastructure. Very little of my time has been dedicated to making websites look the way they do. Before this week I didn't know the difference between a <a href="https://css-tricks.com/the-difference-between-id-and-class/">CSS class and id selector.</a></p>
-      </div>
-      <a href="posts/hello-blog"><button class="read-more">Read More</button></a>
-    </div>
-  </body>
-</html>
+---
+layout: default
+title: blog
+group: "navigation"
+---
+{% for post in site.posts %}
+<div class="content">
+  <h3 class="title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
+  <div class="line"></div>
+  <div class="date">{{ post.date | date: "%B %-d, %Y" }}</div>
+  <div class="teaser">
+    {{ post.excerpt }}
+  </div>
+  <a href="{{ post.url }}"><button class="read-more">Read More</button></a>
+</div>
+{% endfor %}

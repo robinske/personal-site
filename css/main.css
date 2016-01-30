@@ -130,18 +130,6 @@ button {
 button:hover {
 	background: #066f57;
 }
-pre {
-	font-family: courier;
-	font-size: .95em;
-	word-wrap: break-word;
-	line-height: 1.6;
-	text-align: left;
-	margin: 0 auto 0 2.5%;
-}
-code {
-	background-color: #d3d3d3;
-	padding: 5px 5px 5px 5px;
-}
 .references {
 	font-size: 10px;
 	word-wrap: break-word;
