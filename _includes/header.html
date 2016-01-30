@@ -18,7 +18,7 @@
       <li class="menu-item" %}>
       {% endif %}
       {% if jekyll.environment == "production" %}
-      <a href="{{ site.blogurl }}">Blog</a>
+      <a href="http://{{ site.blogurl }}">Blog</a>
       {% else %}
       <a href="{{ '/blog.html' | prepend:site.baseurl }}">Blog</a>
       {% endif %}
@@ -35,7 +35,11 @@
       {% endif %}
       </li>
       <li class="menu-item">
+      {% if jekyll.environment == "production" %}
+      <a href="{{ site.url }}/robinson-resume.pdf">Resume</a>
+      {% else %}
       <a href="{{ '/robinson-resume.pdf' | prepend:site.baseurl }}">Resume</a>
+      {% endif %}
       </li>
     </ul>
   </nav>  

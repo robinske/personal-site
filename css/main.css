@@ -155,6 +155,15 @@ button:hover {
 .references a:hover {
 	color: #099f7d;
 }
+code {
+        font-family: courier, fixed-width;
+        width: 95%;
+        margin: 0 auto 0 auto;
+}
+pre {
+        width: 95%;
+        margin: 0 auto 0 auto;
+}
 @media screen and (max-width: 1060px) {
 	.content {
 		width: 85%;
