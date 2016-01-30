@@ -7,9 +7,9 @@ tags:      programming meta-blog
 active:    "blog"
 ---
 
-Migrating this site from ~5 static pages to a static site generator took some time, but it will provide enough convenience in updating moving forward that it was worth it. This site is now generated using [Jekyll](https://jekyllrb.com/), a Ruby project that takes a handful of text files and transforms them into a fully functioning blog or site without requiring a server to back it up.
+Migrating this site from ~5 static pages to a static site generator took some time, but it will provide enough convenience for updating that it was worth it. This site is now generated using [Jekyll](https://jekyllrb.com/), a Ruby project that takes a handful of text files and transforms them into a fully functioning blog or site without requiring a server to back it up.
 
-I have found the most useful components so far to be:
+Some of the most useful components for me:
 
 * **Templating**
 
