@@ -28,6 +28,26 @@ body {
 	color: #2f4f4f;
 	background-color: #f3f3f3;
 }
+
+pre,
+code {
+  font-size: 14px;
+  font-family: courier;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+  background-color: #eef; 
+  width: 92.5%;
+  margin: 0 auto 0 auto;
+}
+
+pre {
+  padding: 8px;
+  overflow-x: auto; }
+  pre > code {
+    border: 0;
+    padding-right: 0;
+    padding-left: 0; }
+
 .logo {
 	margin: 25px 0 50px 0;
 }
@@ -155,14 +175,14 @@ button:hover {
 .references a:hover {
 	color: #099f7d;
 }
-code {
-        font-family: courier, fixed-width;
-        width: 95%;
-        margin: 0 auto 0 auto;
-}
-pre {
-        width: 95%;
-        margin: 0 auto 0 auto;
+/**
+ * Set `margin-bottom` to maintain vertical rhythm
+ */
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+ul, ol, dl, figure,
+%vertical-rhythm {
+    margin-bottom: $spacing-unit / 2;
 }
 @media screen and (max-width: 1060px) {
 	.content {
