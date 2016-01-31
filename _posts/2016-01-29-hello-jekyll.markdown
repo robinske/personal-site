@@ -1,7 +1,7 @@
 ---
 layout:    post
 title:     "Hello, Jekyll"
-date:      2016-01-30
+date:      2016-01-29
 permalink: /posts/:title
 tags:      programming meta-blog
 active:    "blog"
