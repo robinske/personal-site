@@ -9,7 +9,7 @@ active:    "blog"
 
 It's pretty easy to [host a static site on Amazon](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html), all you have to do is copy files to an S3 bucket, update a couple of properties on the bucket, and voila! You can upload files via the GUI, but it's relatively time consuming and definitely repetitive. Naturally there is an easier way.
 
-I wrote the following script to deploy my site in one step. It manages the environments, jekyll build, and copying of files in one step. It even removes the extensions from my blog posts so that I have cleaner URL paths.
+I wrote the following [script](https://github.com/robinske/personal-site/blob/master/deploy.sh) to deploy my site in one step. It manages the environments, jekyll build, and copying of files in one step. It even removes the extensions from my blog posts so that I have cleaner URL paths.
 
 {% highlight bash %}#!/bin/bash
 
