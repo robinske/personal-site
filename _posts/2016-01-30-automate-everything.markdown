@@ -11,30 +11,28 @@ It's pretty easy to [host a static site on Amazon](https://docs.aws.amazon.com/A
 
 I wrote the following [script](https://github.com/robinske/personal-site/blob/master/deploy.sh) to deploy my site in one step. It manages the environments, jekyll build, and copying of files in one step. It even removes the extensions from my blog posts so that I have cleaner URL paths.
 
-{% highlight bash %}#!/bin/bash
+{% highlight bash %}
+#!/bin/bash
 
 # deploy.sh
 
 rm -rf _site/
-export JEKYLL_ENV="production"
-jekyll build
+JEKYLL_ENV="production" jekyll build
 
 # deploy main site
-s3cmd put -r _site/ s3://krobinson.me
-s3cmd del s3://krobinson.me/blog.html
-s3cmd del -r s3://krobinson.me/posts/
+s3cmd put -r --exclude='blog.html' --exclude='posts/*' _site/ s3://krobinson.me
 
 # deploy blog
 s3cmd put _site/blog.html s3://blog.krobinson.me
 s3cmd put _site/error.html s3://blog.krobinson.me
-s3cmd put -r _site/posts/ s3://blog.krobinson.me/posts/
 
-for POST in `ls _site/posts/`; do
+# strip extension so we can serve clean urls
+for POST in $(ls -1 _site/posts/); do
     EXT=".html"
     STRIPPED=${POST%$EXT}
-    s3cmd mv s3://blog.krobinson.me/posts/$POST \
-         s3://blog.krobinson.me/posts/$STRIPPED
+    mv "_site/posts/$POST" "_site/posts/$STRIPPED"
 done
+s3cmd put -r -m text/html _site/posts/ s3://blog.krobinson.me/posts/
 
 export JEKYLL_ENV="development"
 {% endhighlight %}
