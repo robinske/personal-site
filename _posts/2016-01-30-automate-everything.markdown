@@ -13,6 +13,8 @@ I wrote the following script to deploy my site in one step. It manages the envir
 
 {% highlight bash %}#!/bin/bash
 
+# deploy.sh
+
 rm -rf _site/
 export JEKYLL_ENV="production"
 jekyll build
@@ -21,7 +23,6 @@ jekyll build
 s3cmd put -r _site/ s3://krobinson.me
 s3cmd del s3://krobinson.me/blog.html
 s3cmd del -r s3://krobinson.me/posts/
-
 
 # deploy blog
 s3cmd put _site/blog.html s3://blog.krobinson.me
