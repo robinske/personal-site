@@ -4,6 +4,7 @@ title:     "Automate Everything"
 date:      2016-01-30
 permalink: /posts/:title
 tags:      programming meta-blog
+comments:  true
 active:    "blog"
 ---
 

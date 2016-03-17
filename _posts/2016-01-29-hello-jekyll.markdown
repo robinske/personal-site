@@ -4,6 +4,7 @@ title:     "Hello, Jekyll"
 date:      2016-01-29
 permalink: /posts/:title
 tags:      programming meta-blog
+comments:  true
 active:    "blog"
 ---
 
