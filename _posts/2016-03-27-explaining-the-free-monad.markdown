@@ -1,7 +1,7 @@
 ---
 layout:    post
 title:     "A Comprehensive Explanation of Monads without touching Category Theory"
-date:      2016-03-19
+date:      2016-03-27
 permalink: /posts/:title
 tags:      programming scala
 comments:  true
