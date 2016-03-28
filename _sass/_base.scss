@@ -183,6 +183,22 @@ button {
 button:hover {
 	background: #066f57;
 }
+blockquote:before {
+        content: '\201C';
+        font-family: Georgia, serif;
+        font-size: 40px;
+        font-weight: bold;
+        color: #999;
+                
+}
+blockquote {
+        width: 85%;
+        margin: 0 auto 10px auto;
+}
+blockquote p {
+        font-style: italic;
+        display: inline;
+}
 .references, .footnotes {
 	font-size: 10px;
 	word-wrap: break-word;
