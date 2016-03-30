@@ -147,7 +147,7 @@ def map[A, B](a: M[A])(fn: A => B): M[B] = {
 }
 {% endhighlight %}
 
-You can also define the Monoid operations `append` and `identity` by using `flatMap` and `pure`. Above, we defined the trait `Monoid` with a generic type. Here that is a function: `A => M[B]` where `A` and `B` are not fixed and can be any type. [^8]
+You can also define the Monoid operations `append` and `identity` by using `flatMap` and `pure`. Above, we defined the trait `Monoid` with a generic type. Here, that type ]is a function: `A => M[B]` where `A` and `B` are not fixed and can be any type. [^8]
 
 [^8]: It's really difficult to define this "forall" type in Scala, people have done it trying to emulate something similar in Haskell [https://stackoverflow.com/questions/7213676/forall-in-scala](https://stackoverflow.com/questions/7213676/forall-in-scala).
 
@@ -244,18 +244,18 @@ def doSomething[A](a: A): List[A] = ???
 
 (1 to 1000).toList.flatMap { i =>
   doSomething(i).flatMap { j =>
-  	doSomething(j).flatMap { k =>
-  	  doSomething(k).map { l =>
-  	  	println(l)
-  	  }
-  	}
+    doSomething(j).flatMap { k =>
+      doSomething(k).map { l =>
+        println(l)
+      }
+    }
   }
 }
 {% endhighlight %}
 
 Maybe your code doesn't have functions that look like that, but the architecture is behaving the same - you have composed a bunch of functions that are each added to the stack. If your business logic is complicated enough (in this case, maybe `doSomething` is making `n` additional function calls), and you really want to defer side effects until the very end, you might encounter `StackOverflowError`s.
 
-The type we defined above creates a nested, list-like structure that stores all of the functions. The trick is that these then have to be evaluated in a loop (or a tail recursive call). The tradeoff? Stack for Heap.
+The `Free Monad`, on the other hand, created a nested, list-like structure that stores all of the functions. The trick is that these then have to be evaluated in a loop (or a tail recursive call). The tradeoff? Stack for Heap.
 
 #### Hotel California
 
@@ -268,7 +268,7 @@ def flatten[A](c: Free[Context, A]): A = {
   @annotation.tailrec
   def step(f: Free[Context, A]): Free[Context, A] = f match {
     case Return(s)                         => f
-    case FlatMap(FlatMap(given, fn1), fn2) => step(given.flatMap(x => fn1(x).flatMap(y => fn2(y))))
+    case FlatMap(FlatMap(given, fn1), fn2) => step(given.flatMap(s1 => fn1(s1).flatMap(s2 => fn2(s2))))
     case FlatMap(Return(given), fn)        => step(fn(given))
   }
 
@@ -279,7 +279,8 @@ def flatten[A](c: Free[Context, A]): A = {
 }
 {% endhighlight %}
 
-Let's be even more explicit using some horribly non-idiomatic Scala that illustrates the loop we're performing
+Let's be even more explicit by using some horribly non-idiomatic Scala that illustrates the loop we're performing:
+
 {% highlight scala %}
 def flatten[A](c: Free[Context, A]): A = {
   var eval: List[Free[Context, A]] = List(c)
@@ -287,18 +288,20 @@ def flatten[A](c: Free[Context, A]): A = {
 
   while (eval.nonEmpty) {
     eval.head match {
-      case FlatMap(FlatMap(given, fn1), fn2) =>
-        eval = List(given.flatMap(g => fn1(g).flatMap(x => fn2(x))))
-      case FlatMap(Return(s), fn) =>
-        eval = List(fn(s))
       case Return(s) =>
         eval = eval.tail
         res = s
+      case FlatMap(FlatMap(given, fn1), fn2) =>
+        eval = List(given.flatMap(s1 => fn1(s1).flatMap(s2 => fn2(s2))))
+      case FlatMap(Return(s), fn) =>
+        eval = List(fn(s))
     }
   }
   res.asInstanceOf[A]
 }
 {% endhighlight %}
+
+## With Great Power...
 
 `Free Monads` are a powerful construct if you need multiple interpretations for outputs and effects [^12]. Once you begin to grasp the mechanics, defining multiple interpreters to evaluate the "list" of functions is a neat solution - something like a production interpreter and a test interpreter. You already have a whole slew of tools (builtin to the language) that give the benefits of `Monads` (composability, side-effect-safety) without the complexity that require blog posts like these to explain. 
 
@@ -306,7 +309,7 @@ def flatten[A](c: Free[Context, A]): A = {
 
 Even with a need for multiple interpreters and stack safety, we should be judicious in our use of these tools. I get nervous every time I find a "neat" solution in Scala, it usually means there is an easier way. Remember that the [wrong abstraction is dangerous](http://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction) and our responsibility as programmers should still be to write reuseable, maintainable code.
 
-Sound interesting? Want to convince me that your use of Free Monads is ingenious _and_ necessary? I'm talking more about this at [Scaladays](http://event.scaladays.org/scaladays-nyc-2016) this May - or send me a note on Twitter [@kelleyrobinson](https://www.twitter.com/kelleyrobinson)
+Sound interesting? Want to convince me that your use of Free Monads is ingenious *and* necessary? I'm talking more about this at [Scaladays](http://event.scaladays.org/scaladays-nyc-2016) in May - or send me a note on Twitter [@kelleyrobinson](https://www.twitter.com/kelleyrobinson)
 
 
 <div class="line"></div>
