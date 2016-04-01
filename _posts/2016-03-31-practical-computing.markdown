@@ -8,9 +8,7 @@ comments:  true
 active:    "blog"
 ---
 
-There was a gem of "practical computing" advice nested in a Fred Wilson blog post today. Full credit to `signmaalgebra` for this comprehensive overview.
-
-http://avc.com/2016/03/side-projects/#comment-2600129704
+There was a gem of "practical computing" advice nested in the comments of a Fred Wilson blog post today. Full credit to [signmaalgebra](https://disqus.com/by/sigmaalgebra/) for this comprehensive overview, included in full below. ([Original comment](http://avc.com/2016/03/side-projects/#comment-2600129704))
 
 <div class="line"></div>
 
@@ -20,7 +18,7 @@ The Internet, especially Wikipedia, should be quite good as sources.
 
 For an introduction here, consider an outline:
 
-The Core of a Computer
+#### The Core of a Computer
 
 Read a little about each of processors, processor clocks, machine instructions, main memory, memory addressing, programs, disk storage, other peripherals.
 
@@ -30,13 +28,13 @@ Get the basics of speeds, capacities, costs, principles of operation.
 
 With those basics in place, learn about cache memory, processor cores, virtual memory, and virtual machine.
 
-Operating Systems
+#### Operating Systems
 
 Likely from your usage of computers, you already know the basics of operating systems and, likely, file systems -- e.g., Microsoft's new technology file system (NTFS).
 
 The history of operating systems is huge, but for now you can concentrate on versions of Linux and/or Windows.
 
-Programming Languages
+#### Programming Languages
 
 The main programming languages are all more similar to each other than, say, French and Spanish or German and English.
 
@@ -44,7 +42,7 @@ The basics are elementary data types, elementary data structures, especially arr
 
 Then get an introduction to the basic programming statements -- if-then-else, select-when, do-while (and variations), call-return, and facilities for input and output.
 
-Object Oriented Programming
+#### Object Oriented Programming
 
 Take a cake recipe and call it an object-oriented class. Each of the ingredients in the recipe -- flour, butter, sugar, eggs, chocolate -- is a property of the class. Each operation in baking the cake -- measuring, mixing, beating, pouring, baking, cooling, etc. -- works on the properties and is a method. But, can't eat the recipe; indeed, it doesn't have even a single egg with it.
 
@@ -70,7 +68,7 @@ In the code of the Web pages, sending a session ID key to the session state stor
 
 Typically what send/receive from the session state store is just an array (list) of bytes. So, given an instance of the session state class, need to convert that instance to/from such a byte array. For this, object-oriented languages typically have a way do de/serialize between a class instance and a byte array. In particular, e.g., in what I wrote, the session state store just receives, stores, and returns byte arrays.
 
-Relational Database
+#### Relational Database
 
 Typically a program reads/writes data from/to files on a file system on a hard disk drive.
 
@@ -94,16 +92,16 @@ Maybe two programs are trying to do transactions on one database. Maybe program 
 
 For more, as at
 
-https://en.wikipedia.org/wiki/...
+[https://en.wikipedia.org/wiki/...](https://en.wikipedia.org/wiki/ACID)
 
 look up ACID
 
- In computer science, ACID (Atomicity, Consistency, Isolation, Durability) is a set of properties that guarantee that database transactions are processed reliably.
+> In computer science, ACID (Atomicity, Consistency, Isolation, Durability) is a set of properties that guarantee that database transactions are processed reliably.
 There is a special programming language for communicating with relational database called structured query language (SQL). Commonly some quite complicated database operations can be specified in a SQL statement of just a dozen or so lines.
 
 There are several relational database software products, DB/2 from IBM, SQL Server from Microsoft, MySQL from Oracle, etc.
 
-Computer Science
+#### Computer Science
 
 === Parsing
 
@@ -149,16 +147,16 @@ The current hot field of computer science is machine learning, but that is reall
 
 Computer science has a challenging, unsolved problem, P versus NP. The applied math community also regards this problem as theirs. The problem is a deep, shocking, profound question in computational complexity. On the Internet, there are plenty of introductions and as much more as you could wish.
 
-Ethernet and LAN
+#### Ethernet and LAN
 
 Learn a little about local area networks (LANs) and, from Google,
 
- A media access control address (MAC address), also called physical address, is a unique identifier assigned to network interfaces for communications on the physical network segment. MAC addresses are used as a network address for most IEEE 802 network technologies, including Ethernet and WiFi.
+> A media access control address (MAC address), also called physical address, is a unique identifier assigned to network interfaces for communications on the physical network segment. MAC addresses are used as a network address for most IEEE 802 network technologies, including Ethernet and WiFi.
 So, that's a start on how the signals on the Ethernet cable on your computer are handled.
 
 You can have a LAN switch which permits connecting many computers and other devices in one communications network.
 
-Internets and the Internet
+#### Internets and the Internet
 
 Learn about internet protocol (IP) addresses, version 4, IPv4 now and version 6, IPv6, later, routing, the domain name system (DNS), internet access providers (ISPs), static versus dynamic IP addresses, domain name registration, etc.
 
@@ -166,7 +164,7 @@ Read about transmission control protocol (TCP) and internet protocol (IP) for TC
 
 Look at the applications programming interface (API), that is, the collection of software functions can call, for TCP/IP socket communications. Maybe write a simple program that uses sockets.
 
-E-mail
+#### E-mail
 
 A first, really simple, application of TCP/IP is e-mail, e.g., with post office protocol 3 (POP3).
 
@@ -174,7 +172,7 @@ There learn about multimedia internet mail extensions (MIME) that permits sendin
 
 Move up from there to understanding hypertext transfer protocol (HTTP -- similar to e-mail) and, then, hypertext markup language (HTML). To help set colors, fonts, text sizes, etc., see how cascading style sheets (CSS) work.
 
-Gibberish
+#### Gibberish
 
 Practical computing is just awash in gibberish, e.g., of three letter acronyms (TLAs) -- e.g., ATX, EATX, EIDE, SCSI, SATA, USB, and on and on.
 
@@ -186,7 +184,7 @@ The above should be a good start.
 
 Okay, some more:
 
-Programming from 100 Feet up
+#### Programming from 100 Feet up
 
 If you have a significant piece of software to write, then use divide and conquer. To do this, look at the real problem and partition the work into pieces where hopefully the pieces are relatively independent, each piece is relatively easy to understand and test, and the pieces are relatively robust to small modifications in the original problem.
 
@@ -196,13 +194,13 @@ E.g., there is a function for calculating square root. You could write a functio
 
 The place in the program where the execution starts is commonly called the main program. Okay -- it's nice if you can have good enough problem partitioning to make the main program just dirt simple:
 
- get input
-
-do the work
-
-report the output
-
-catch any exceptional conditions and give a good message on what went wrong
+>get input
+>
+>do the work
+>
+>report the output
+>
+>catch any exceptional conditions and give a good message on what went wrong
 In the part doing the work, hopefully that will partition similarly.
 
 So, with all this partitioning, hopefully for each function, there is a really nice, simple description of what the function does.
@@ -217,7 +215,7 @@ Or, think of a text in freshman physics and regard the displayed equations as li
 
 Indeed, there may be lots of external documentation with no code at all.
 
-Typing
+#### Typing
 
 Piano playing requires hitting keys. Programming requires typing.
 
@@ -225,11 +223,11 @@ Broadly you have two choices for the target of the typing, (1) a good text edito
 
 I just use a good text editor (KEdit), but an IDE can be better in various respects.
 
-Teams
+#### Teams
 
 Significant programming projects need teams, and the team members have to coordinate. So, there is a severe management challenge. Relevant tools can be an IDE and a code repository, e.g., Github.
 
-Programming Skills
+#### Programming Skills
 
 Starting with little or no background in computing, getting proficient with a first, serious programming language can take a year of full time work.
 
@@ -237,7 +235,7 @@ There can be much more time for getting good with various specializations.
 
 One valuable approach to get past tricky issues for the first time is to get paid support from specialized experts.
 
-Database Skills
+#### Database Skills
 
 Getting good with a high end application of relational database, say, for a major bank, is a specialized, full-time job.
 
