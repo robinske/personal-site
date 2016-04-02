@@ -1,6 +1,6 @@
 ---
 layout:    post
-title:     "A Comprehensive Explanation of Monads without touching Category Theory"
+title:     "Monads are just huh? in the category of WTF"
 date:      2016-03-27
 permalink: /posts/:title
 tags:      programming scala
@@ -9,7 +9,7 @@ active:    "blog"
 
 ---
 
-Scala developers love to discuss Monads, their metaphors, and their many use cases. We joke that Monads are 'just Monoids in the category of Endofunctors', but other than being intentionally condescending, what does that mean? 
+Scala developers love to discuss Monads, their metaphors, and their many use cases. We joke that Monads are 'just Monoids in the category of Endofunctors', but other than being intentionally condescending, what does that really mean?
 
 Parts of functional programming (FP) may be built on the mathematical principles from category theory, but at its core, FP is a style of programming. This post aims to prove you don't need a PhD or be a Haskell programmer to understand these patterns. One disclaimer - the explanation does assume that you know some basics of Scala (like types, polymorphism, and traits).
 
@@ -17,11 +17,11 @@ We'll start by defining some of the most referenced components in order to defin
 
 ## Monoid
 
-A `Monoid` is a type that carries the following properties:
+A `Monoid` is any type `A` that carries the following properties:
 
-* has some `append` method that can take two instances of `A` such that it produces another, singular, instance of `A`
+* Has some `append` method that can take two instances of `A` such that it produces another, singular, instance of `A`. This method is associative; if you use it to append multiple values together, the order doesn't matter.
 
-* has some `identity` element such that performing `append` with `identity` as one of the arguments returns the other argument.
+* Has some `identity` element such that performing `append` with `identity` as one of the arguments returns the other argument.
 
 In code:
 
@@ -32,7 +32,8 @@ trait Monoid[A] {
   
   /*
    * Such that:
-   *   `append(a, identity) == append(identity, a) == a`
+   * Associativity property: `append(a, append(b,c)) == append(append(a,b),c)`
+   * Identity property: `append(a, identity) == append(identity, a) == a`
    */
 }
 {% endhighlight %}
@@ -46,19 +47,24 @@ trait Monoid[A] {
 object IntegerAddition extends Monoid[Int] {
   def append(a: Int, b: Int): Int = a + b
   def identity: Int = 0
-  // append(1, identity) == append(identity, 1) == 1
+  // Associativity: 2 + (3 + 4) == (2 + 3) + 4
+  // Identity: (1 + 0) == (0 + 1) == 1
 }
 {% endhighlight %}
 
 **Integer multiplication**
 
 {% highlight scala %}
-object IntegerMultiplication extends Monoid[Int] {
-  def append(a: Int, b: Int): Int = a * b
-  def identity: Int = 1
-  // append(2, identity) == append(identity, 2) == 2
+object FunctionComposition /* `extends Monoid[_ => _]` */ {
+  def append[A, B, C](a: A => B, b: B => C): A => C = a.andThen(b)
+  def identity[A]: A => A = a => a
+  // Associativity: (f.andThen(g.andThen(h)))(x) == ((f.andThen(g)).andThen(h))(x)
+  // Identity: identitity(f(x)) == f(identity(x)) == f(x)
 }
 {% endhighlight %}
+Even though the extension here doesn't quite compile, it's a good example of using functions as types. [^0]
+
+[^0]: It's really difficult to define this "forall" type in Scala, people have done it trying to emulate something similar in Haskell [https://stackoverflow.com/questions/7213676/forall-in-scala](https://stackoverflow.com/questions/7213676/forall-in-scala).
 
 **String concatenation**
 
@@ -66,25 +72,27 @@ object IntegerMultiplication extends Monoid[Int] {
 object StringConcat extends Monoid[String] {
   def append(a: String, b: String): String = a + b
   def identity: String = ""
-  // append("foo", identity) == append(identity, "foo") == "foo"
+  // Associativity: "foo" + ("bar" + "baz") == ("foo" + "bar") + "baz"
+  // Identity: ("foo" + "") == ("" + "foo") == "foo"
 }
 {% endhighlight %}
 
 **List concatenation**
 
 {% highlight scala %}
-object ListConcat[A] extends Monoid[List[A]] {
+class ListConcat[A] extends Monoid[List[A]] {
   def append(a: List[A], b: List[A]): List[A] = a ++ b
   def identity: List[A] = List.empty[A]
-  // append(List("bar"), identity) == append(identity, List("bar")) == List("bar")
+  // Associativity: List(1,2,3) ++ (List(4,5,6) ++ List(7,8,9)) == (List(1,2,3) ++ List(4,5,6)) ++ List(7,8,9)
+  // Identity: (List(1,2,3) ++ Nil) == (Nil ++ List(1,2,3)) == List(1,2,3)
 }
 {% endhighlight %}
 
 Monoids are a useful construct in every language. While not always explicitly defined as this type, the four examples above are ubiquitous language features.
 
-There is such a thing as the **Free Monoid**. A `Monoid` is "free" when it's defined in the simplest terms possible and when the `append` method doesn't lose any data in its result. 
+There is such a thing as a **Free Monoid**. A `Monoid` is "free" when it's defined in the simplest terms possible and when the `append` method doesn't lose any data in its result. 
 
-This is vague, but let's look at some examples. From above, `ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order (Integer addition, on the other hand, defines a special algebra for combining a numbers, losing the inputs in the result). It's important that we defined `ListConcat` with a generic type `A` - the only operations you can perform on the generic list are the `Monoid` operations (since you don't know anything about its members, if they're Strings, Ints, other complex types, or even functions). This satisfies the "simplest terms possible" clause for free-ness, and gives meaning to this technical explanation of Free Objects:
+This is vague, but let's look at some examples. From above, `ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order (Integer addition, on the other hand, defines a special algebra for combining numbers, losing the inputs in the result). It's important that we defined `ListConcat` with a generic type `A` - the only operations you can perform on the generic list are the `Monoid` operations (since you don't know anything about its members, if they're Strings, Ints, other complex types, or even functions). This satisfies the "simplest terms possible" clause for free-ness, and gives meaning to this technical explanation of Free Objects:
 
 > Informally, a free object over a set `A` can be thought of as being a "generic" algebraic structure over `A`: the only equations that hold between elements of the free object are those that follow from the defining axioms of the algebraic structure. [^1]
 
@@ -104,17 +112,24 @@ As we saw in the concatenation examples above, the `append` operation just shove
 
 ## Functors
 
-A `Functor` is a type that has implemented the `map` method.
+A `Functor` is  concept that applies to a family of types `F` with a single generic type parameter. For example, `List` is a type family, because `List[A]` is a distinct type for each distinct type `A`. A type family `F` is a `Functor` if it can define a `map` method with the following properties:
+
+* Identity: calling `map` with the `identity` function is a no-op;
+* Composition: calling `map` with a composition of functions is equivalent to composing separate calls to `map` on each function individually.
 
 {% highlight scala %}
-Trait Functor[F[_]] {
+trait Functor[F[_]] {
   def map[A, B](a: F[A])(fn: A => B): F[B]
 }
+  // Identity: map(fa)(identity) == fa
+  // Composition: map(fa)(f andThen g) == map(map(fa)(f))(g)
 {% endhighlight %}
 
-If you have experience programming in Scala, you'll know this encompasses a lot of types. `map` is a useful method because it allows you to chain operations together (commonly known as composition) and defer evaluation and side effects until you have already defined all of the business logic. [^4]
+If you have experience programming in Scala, you'll know this encompasses a lot of types. `map` is a useful method because it allows you to chain operations together (composition). Since mapped functions don't need to be executed immediately, you can also defer evaluation and side effects until the result is needed.
 
-[^4]: Implementations of `Functor` in Scala are also `Endofunctors` ('endo' meaning "internal" or "within") because the input and output parameters are always Scala Types. See: [http://www.dictionary.com/browse/endo-](http://www.dictionary.com/browse/endo-) and [http://hseeberger.github.io/blog/2010/11/25/introduction-to-category-theory-in-scala/](http://hseeberger.github.io/blog/2010/11/25/introduction-to-category-theory-in-scala/)
+Implementations of `Functors` in Scala are also `Endofunctors` ('endo' meaning "internal" or "within") because the input and output parameters are always Scala Types. [^4]
+
+[^4]: [http://www.dictionary.com/browse/endo-](http://www.dictionary.com/browse/endo-) and [http://hseeberger.github.io/blog/2010/11/25/introduction-to-category-theory-in-scala/](http://hseeberger.github.io/blog/2010/11/25/introduction-to-category-theory-in-scala/)
 
 ## Monads
 
@@ -142,8 +157,13 @@ trait Monad[M[_]] {
 With these two methods, you can define `map`:
 
 {% highlight scala %}
-def map[A, B](a: M[A])(fn: A => B): M[B] = {
-  flatMap(a){ b: A => pure(fn(b)) }
+trait Monad[M[_]] {
+  def pure[A](a: A): M[A]
+  def flatMap[A, B](a: M[A])(fn: A => M[B]): M[B]
+
+  def map[A, B](a: M[A])(fn: A => B): M[B] = {
+    flatMap(a){ b: A => pure(fn(b)) }
+  }
 }
 {% endhighlight %}
 
@@ -161,14 +181,14 @@ def append[A, B, C](f1: A => M[B], f2: B => M[C]): A => M[C] = { a: A =>
 def identity[A](a: A): M[A] = pure(a)
 {% endhighlight %}
 
-Like `Monoids` allow composition of objects (think back to string concatenation), `Monads` allow composition of functions. Building composable programs is extremely useful, it's one of the things that functional programmers love the most about all their functional-programming-ness. When we talk about composable architecture we often cite the benefits of modularity, statelessness, and deferring side effects:
+`Monoids` already allow composition of functions as we saw above. `Monads` are useful because they allow you to compose functions for **values in a context**, something that we see all over our programs (like `Lists` and `Options`). Building composable programs is extremely useful, it's one of the things that functional programmers love the most about all their functional-programming-ness. When we talk about composable architecture we often cite the benefits of modularity, statelessness, and deferring side effects:
 
 > A functional style pushes side effects to the edges: "gather information, make decisions, act."
 > A good plan in most life situations too. - Jessica Kerr [^9]
 
 [^9]: [https://twitter.com/jessitron/status/713432439746654209](https://twitter.com/jessitron/status/713432439746654209)
 
-Building systems in this manner can provide greater maintainability and code reuse, and increase understanding of complex logic by breaking it into smaller, simpler pieces. What's better is that the benefits of `Monads` are largely builtin to the Scala language whether you realize it or not. Using types like `Option` and `List` means using `Monads`, without having to do any of the complicated setup or method definitions.
+Building systems in this manner can provide greater maintainability and code reuse, and increase understanding of complex logic by breaking it into smaller, simpler pieces. What's better is that the benefits of `Monads` are largely builtin to the Scala language whether you realize it or not. Using types like `List` and `Option` means using `Monads`, without having to do any of the complicated setup or method definitions.
 
 ## The Free Monad
 
