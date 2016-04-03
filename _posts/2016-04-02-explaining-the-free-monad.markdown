@@ -9,7 +9,7 @@ active:    "blog"
 
 ---
 
-Scala developers love to discuss Monads, their metaphors, and their many use cases. We joke that Monads are 'just Monoids in the category of Endofunctors', but other than being intentionally condescending, what does that really mean?
+Scala developers love to discuss Monads, their metaphors, and their many use cases. We joke that Monads are 'just Monoids in the category of Endofunctors', but other than being condescending, what does that really mean?
 
 Parts of functional programming (FP) may be built on the mathematical principles from category theory, but at its core, FP is a style of programming. This post aims to prove you don't need a PhD or be a Haskell programmer to understand these patterns. One disclaimer - the explanation does assume that you know some basics of Scala (like types, polymorphism, and traits).
 
@@ -19,7 +19,7 @@ We'll start by defining some of the most referenced components in order to defin
 
 A `Monoid` is any type `A` that carries the following properties:
 
-* Has some `append` method that can take two instances of `A` such that it produces another, singular, instance of `A`. This method is associative; if you use it to append multiple values together, the order doesn't matter.
+* Has some `append` method that can take two instances of `A` such that it produces another, singular, instance of `A`. This method is [associative](http://www.merriam-webster.com/dictionary/associative); if you use it to append multiple values together, the order and grouping of values doesn't matter.
 
 * Has some `identity` element such that performing `append` with `identity` as one of the arguments returns the other argument.
 
@@ -52,7 +52,7 @@ object IntegerAddition extends Monoid[Int] {
 }
 {% endhighlight %}
 
-**Integer multiplication**
+**Function composition**
 
 {% highlight scala %}
 object FunctionComposition /* `extends Monoid[_ => _]` */ {
@@ -62,7 +62,7 @@ object FunctionComposition /* `extends Monoid[_ => _]` */ {
   // Identity: identitity(f(x)) == f(identity(x)) == f(x)
 }
 {% endhighlight %}
-Even though the extension here doesn't quite compile, it's a good example of using functions as types. [^0]
+The extension here wouldn't quite compile, but it's a good example of using functions as types which will be important later. [^0]
 
 [^0]: It's really difficult to define this "forall" type in Scala, people have done it trying to emulate something similar in Haskell [https://stackoverflow.com/questions/7213676/forall-in-scala](https://stackoverflow.com/questions/7213676/forall-in-scala).
 
@@ -90,26 +90,6 @@ class ListConcat[A] extends Monoid[List[A]] {
 
 Monoids are a useful construct in every language. While not always explicitly defined as this type, the four examples above are ubiquitous language features.
 
-There is such a thing as a **Free Monoid**. A `Monoid` is "free" when it's defined in the simplest terms possible and when the `append` method doesn't lose any data in its result. 
-
-This is vague, but let's look at some examples. From above, `ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order (Integer addition, on the other hand, defines a special algebra for combining numbers, losing the inputs in the result). It's important that we defined `ListConcat` with a generic type `A` - the only operations you can perform on the generic list are the `Monoid` operations (since you don't know anything about its members, if they're Strings, Ints, other complex types, or even functions). This satisfies the "simplest terms possible" clause for free-ness, and gives meaning to this technical explanation of Free Objects:
-
-> Informally, a free object over a set `A` can be thought of as being a "generic" algebraic structure over `A`: the only equations that hold between elements of the free object are those that follow from the defining axioms of the algebraic structure. [^1]
-
-[^1]: [https://en.wikipedia.org/wiki/Free_object](https://en.wikipedia.org/wiki/Free_object)
-
-## Why do we call it "Free"?
-
-> The word "free" is used in the sense of "unrestricted" rather than "zero-cost" [^2]
-
-[^2]: [https://hackage.haskell.org/package/free](https://hackage.haskell.org/package/free)
-
-As we saw in the concatenation examples above, the `append` operation just shoves the data together, "free" of interpretation of the contained data.
-
-> But still - why that specific word, "free"? ...[It] is free from any specific interpretation, or free to be interpreted in any way. [^3]
-
-[^3]: [https://softwaremill.com/free-monads/](https://softwaremill.com/free-monads/)
-
 ## Functors
 
 A `Functor` is  concept that applies to a family of types `F` with a single generic type parameter. For example, `List` is a type family, because `List[A]` is a distinct type for each distinct type `A`. A type family `F` is a `Functor` if it can define a `map` method with the following properties:
@@ -120,9 +100,9 @@ A `Functor` is  concept that applies to a family of types `F` with a single gene
 {% highlight scala %}
 trait Functor[F[_]] {
   def map[A, B](a: F[A])(fn: A => B): F[B]
-}
   // Identity: map(fa)(identity) == fa
   // Composition: map(fa)(f andThen g) == map(map(fa)(f))(g)
+}
 {% endhighlight %}
 
 If you have experience programming in Scala, you'll know this encompasses a lot of types. `map` is a useful method because it allows you to chain operations together (composition). Since mapped functions don't need to be executed immediately, you can also defer evaluation and side effects until the result is needed.
@@ -167,7 +147,7 @@ trait Monad[M[_]] {
 }
 {% endhighlight %}
 
-You can also define the Monoid operations `append` and `identity` by using `flatMap` and `pure`. Above, we defined the trait `Monoid` with a generic type. Here, that type ]is a function: `A => M[B]` where `A` and `B` are not fixed and can be any type. [^8]
+You can also define the Monoid operations `append` and `identity` by using `flatMap` and `pure`. Above, we defined the trait `Monoid` with a generic type. Here, that type ]is a function: `A => M[B]` where `A` and `B` are not fixed and can be any type. [^0]
 
 [^8]: It's really difficult to define this "forall" type in Scala, people have done it trying to emulate something similar in Haskell [https://stackoverflow.com/questions/7213676/forall-in-scala](https://stackoverflow.com/questions/7213676/forall-in-scala).
 
@@ -190,6 +170,10 @@ def identity[A](a: A): M[A] = pure(a)
 
 Building systems in this manner can provide greater maintainability and code reuse, and increase understanding of complex logic by breaking it into smaller, simpler pieces. What's better is that the benefits of `Monads` are largely builtin to the Scala language whether you realize it or not. Using types like `List` and `Option` means using `Monads`, without having to do any of the complicated setup or method definitions.
 
+## Takeaways
+
+These are complicated concepts, but hopefully [by applying the principles of FP!] we have broken it into smaller, digestable explanations. If anything is still confusing, leave me a note in the comments. The resources and references below are useful if you want to explore this more; I promised not to reference Haskell, but I especially like this [explanation using pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html).
+
 <div class="line"></div>
 
 Stay tuned for Part 2 where I'll dive into the details of the Free Monad.
@@ -198,4 +182,4 @@ Sound interesting? Want to convince me of your metaphor? I'm talking more about 
 
 <div class="line"></div>
 
-<p class="references" style="margin-bottom: 0;">References:</p>
+<p class="references" style="margin-bottom: 0;">Notes and references:</p>

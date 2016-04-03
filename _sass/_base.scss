@@ -23,7 +23,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 body {
-	font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+	font-family: 'Roboto', 'Helvetica', sans-serif;
 	font-weight: 400;
 	color: #2f4f4f;
 	background-color: #f3f3f3;
@@ -108,7 +108,7 @@ nav li {
 }
 .mainmenu {
 	font-size: 18px;
-	font-weight: 500;
+	font-weight: 700;
 	text-transform: uppercase;
 	text-align: center;
 	margin: 10px 0 50px 0;
@@ -148,7 +148,7 @@ a li .current {
 	font-size: 14px;
 }
 .content strong {
-	font-weight: bold;
+        font-weight: 700;
 }
 .content p {
 	line-height: 2.5;
@@ -165,6 +165,12 @@ a li .current {
 .teaser ul, .post ul, .teaser li, .post li {
         width: 95%;
         margin: 0 auto 3px auto;
+}
+.post li p {
+    margin-left: 3px;
+}
+ul {
+    padding-bottom: 10px;
 }
 .inlined {
         display: inline;
@@ -186,28 +192,19 @@ button {
 button:hover {
 	background: #066f57;
 }
-blockquote:before {
-        content: '\201C';
-        font-family: Georgia, serif;
-        font-size: 40px;
-        font-weight: bold;
-        color: #999;
-                
-}
 blockquote {
         width: 85%;
-        margin: 0 auto 25px auto;
-}
-blockquote p {
-        font-style: italic;
-        display: inline;
+        border-left: 10px solid #ccc;
+        padding: 5px;
+        margin: 5px auto 5px auto;
+        quotes: "\201C""\201D""\2018""\2019";
 }
 .references, .footnotes {
-	font-size: 10px;
+	font-size: 11px;
 	word-wrap: break-word;
 	text-align: left;
 	display: block;
-	margin: 0 0 15px 5%;
+	margin: 0 0 5px 2%;
 	line-height: 2;
 }
 .references a, .footnotes a {
@@ -217,7 +214,7 @@ blockquote p {
 	color: #099f7d;
 }
 .footnotes code.highlighter-rouge {
-        font-size: 10px;
+        font-size: 11px;
 }
 sup:hover {
         text-decoration: underline;
@@ -226,6 +223,9 @@ sup:hover {
 	.content {
 		width: 85%;
 	}
+        ul {
+            list-style-position: inside;
+        }
 }
 @media screen and (max-width: 480px) {
 	nav li {
