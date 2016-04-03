@@ -9,7 +9,7 @@ active:    "blog"
 
 ---
 
-Scala developers love to discuss Monads, their metaphors, and their many use cases. We joke that Monads are 'just Monoids in the category of Endofunctors', but other than being condescending, what does that really mean?
+Scala developers love to discuss Monads, their metaphors, and their many use cases. We joke that Monads are 'just Monoids in the category of Endofunctors', but other than being confusingly condescending, what does that really mean?
 
 Parts of functional programming (FP) may be built on the mathematical principles from category theory, but at its core, FP is a style of programming. This post aims to prove you don't need a PhD or be a Haskell programmer to understand these patterns. One disclaimer - the explanation does assume that you know some basics of Scala (like types, polymorphism, and traits).
 
@@ -19,7 +19,7 @@ We'll start by defining some of the most referenced components in order to defin
 
 A `Monoid` is any type `A` that carries the following properties:
 
-* Has some `append` method that can take two instances of `A` such that it produces another, singular, instance of `A`. This method is [associative](http://www.merriam-webster.com/dictionary/associative); if you use it to append multiple values together, the order and grouping of values doesn't matter.
+* Has some `append` method that can take two instances of `A` and produce another, singular, instance of `A`. This method is [associative](http://www.merriam-webster.com/dictionary/associative); if you use it to append multiple values together, the order and grouping of values doesn't matter.
 
 * Has some `identity` element such that performing `append` with `identity` as one of the arguments returns the other argument.
 
@@ -94,7 +94,8 @@ Monoids are a useful construct in every language. While not always explicitly de
 
 A `Functor` is  concept that applies to a family of types `F` with a single generic type parameter. For example, `List` is a type family, because `List[A]` is a distinct type for each distinct type `A`. A type family `F` is a `Functor` if it can define a `map` method with the following properties:
 
-* Identity: calling `map` with the `identity` function is a no-op;
+* Identity: calling `map` with the `identity` function is a no-op.
+
 * Composition: calling `map` with a composition of functions is equivalent to composing separate calls to `map` on each function individually.
 
 {% highlight scala %}
@@ -147,7 +148,7 @@ trait Monad[M[_]] {
 }
 {% endhighlight %}
 
-You can also define the Monoid operations `append` and `identity` by using `flatMap` and `pure`. Above, we defined the trait `Monoid` with a generic type. Here, that type ]is a function: `A => M[B]` where `A` and `B` are not fixed and can be any type. [^0]
+You can also define the Monoid operations `append` and `identity` by using `flatMap` and `pure`. Above, we defined the trait `Monoid` with a generic type. Here, that type is a function: `A => M[B]` where `A` and `B` are not fixed and can be any type. [^0]
 
 [^8]: It's really difficult to define this "forall" type in Scala, people have done it trying to emulate something similar in Haskell [https://stackoverflow.com/questions/7213676/forall-in-scala](https://stackoverflow.com/questions/7213676/forall-in-scala).
 
