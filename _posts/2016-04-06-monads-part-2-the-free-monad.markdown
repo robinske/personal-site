@@ -1,7 +1,7 @@
 ---
 layout:    post
 title:     "The Free Monad and its Cost"
-date:      2016-04-02
+date:      2016-04-06
 permalink: /posts/:title
 tags:      programming scala
 comments:  true
