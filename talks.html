@@ -1,0 +1,12 @@
+---
+layout: default
+title: Talks - Kelley Robinson
+active: "talks"
+---
+{% for talk in site.talks %}
+<div class="content">
+  <h4 class="title">{{ talk.title }}</h4>
+  <p class="inline">{{ talk.date | date: "%B %-d, %Y" }}</p>
+  <p>{{ talk.content }}</p>
+</div>
+{% endfor %}

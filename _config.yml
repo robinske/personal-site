@@ -16,7 +16,8 @@ blogurl: "blog.krobinson.me"
 url: "http://krobinson.me" # the base hostname & protocol for your site
 twitter_username: kelleyrobinson
 github_username:  robinske
-
+collections:
+-  talks
 # Build settings
 markdown: kramdown
 exclude: [deploy.sh, README.md]

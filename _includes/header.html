@@ -34,6 +34,17 @@
       <a href="{{ '/index.html' | prepend:site.baseurl }}">Contact</a>
       {% endif %}
       </li>
+      {% if page.active == "talks" %}
+      <li class="menu-item current">
+      {% else %}
+      <li class="menu-item">
+      {% endif %}
+      {% if jekyll.environment == "production" %}
+      <a href="{{ site.url }}">Talks</a>
+      {% else %}
+      <a href="{{ '/talks.html' | prepend:site.baseurl }}">Talks</a>
+      {% endif %}
+      </li>
       <li class="menu-item">
       {% if jekyll.environment == "production" %}
       <a href="{{ site.url }}/robinson-resume.pdf">Résumé</a>
