@@ -33,14 +33,21 @@ pre,
 code {
   font-size: 14px;
   font-family: courier;
+  width: 93%;
+  margin: 0 auto 15px auto;
+}
+pre code {
+  background-color: #eef;
+}
+code {
+  border-radius: 3px;
+  background-color: #e7e7e7; 
+  padding: 1px 5px 1px 5px;
+}
+pre {
   border: 1px solid #e8e8e8;
   border-radius: 3px;
   background-color: #eef; 
-  width: 92.5%;
-  margin: 0 auto 15px auto;
-}
-
-pre {
   padding: 8px;
   overflow-x: auto; }
   pre > code {

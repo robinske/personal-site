@@ -52,10 +52,10 @@ object IntegerAddition extends Monoid[Int] {
 }
 {% endhighlight %}
 
-**Function composition**
+<span id="fncomp">**Function composition**</span>
 
 {% highlight scala %}
-object FunctionComposition /* `extends Monoid[_ => _]` */ {
+object FunctionComposition /* extends Monoid[_ => _] */ {
   def append[A, B, C](a: A => B, b: B => C): A => C = a.andThen(b)
   def identity[A]: A => A = a => a
   // Associativity: (f.andThen(g.andThen(h)))(x) == ((f.andThen(g)).andThen(h))(x)
@@ -130,7 +130,7 @@ trait Monad[M[_]] {
 }
 {% endhighlight %}
 
-`pure` is a method that takes any type and creates the "computation builder", wrapping it in the container type. (Why some people have described monads as burritos [^7]).
+`pure` is a method that takes any type and creates the "computation builder", wrapping it in the container type or "context". (Why some people have described monads as burritos [^7]).
 
 [^7]: [https://byorgey.wordpress.com/2009/01/12/abstraction-intuition-and-the-monad-tutorial-fallacy/](https://byorgey.wordpress.com/2009/01/12/abstraction-intuition-and-the-monad-tutorial-fallacy/)
 
@@ -152,27 +152,36 @@ You can also define the Monoid operations `append` and `identity` by using `flat
 [^8]: It's really difficult to define this "forall" type in Scala, people have done it trying to emulate something similar in Haskell [https://stackoverflow.com/questions/7213676/forall-in-scala](https://stackoverflow.com/questions/7213676/forall-in-scala).
 
 {% highlight scala %}
-def append[A, B, C](f1: A => M[B], f2: B => M[C]): A => M[C] = { a: A =>
-  val bs: M[B] = f1(a)
-  val cs: M[C] = flatMap(bs) { b: B => f2(b) }
-  cs
-}
+trait Monad[M[_]] /* extends Monoid[_ => M[_]] */ {
+  def pure[A](a: A): M[A]
+  def flatMap[A, B](a: M[A])(fn: A => M[B]): M[B]
+  
+  def map[A, B](a: M[A])(fn: A => B): M[B] = {
+    flatMap(a){ b: A => pure(fn(b)) }
+  }
+  
+  def append[A, B, C](f1: A => M[B], f2: B => M[C]): A => M[C] = { a: A =>
+    val bs: M[B] = f1(a)
+    val cs: M[C] = flatMap(bs) { b: B => f2(b) }
+    cs
+  }
 
-def identity[A](a: A): M[A] = pure(a)
+  def identity[A]: A => M[A] = a => pure(a)
+}
 {% endhighlight %}
 
-`Monoids` already allow composition of functions as we saw above. `Monads` are useful because they allow you to compose functions for **values in a context**, something that we see all over our programs (like `Lists` and `Options`). Building composable programs is extremely useful, it's one of the things that functional programmers love the most about all their functional-programming-ness. When we talk about composable architecture we often cite the benefits of modularity, statelessness, and deferring side effects:
+`Monoids` already allow composition of functions as we saw [above](#fncomp). `Monads` are useful because they allow you to compose functions for **values in a context** (`M[_]`), something that we see all over our programs (like `Lists` and `Options`). Building composable programs is extremely useful, it's one of the things that functional programmers love the most about all their functional-programming-ness. When we talk about composable architecture we often cite the benefits of modularity, statelessness, and deferring side effects:
 
 > A functional style pushes side effects to the edges: "gather information, make decisions, act."
 > A good plan in most life situations too. - Jessica Kerr [^9]
 
 [^9]: [https://twitter.com/jessitron/status/713432439746654209](https://twitter.com/jessitron/status/713432439746654209)
 
-Building systems in this manner can provide greater maintainability and code reuse, and increase understanding of complex logic by breaking it into smaller, simpler pieces. What's better is that the benefits of `Monads` are largely builtin to the Scala language whether you realize it or not. Using types like `List` and `Option` means using `Monads`, without having to do any of the complicated setup or method definitions.
+Building systems in this manner can provide greater maintainability and code reuse, and increase understanding of complex logic by breaking it into smaller, simpler pieces. What's better is that the benefits of `Monads` are largely builtin to the Scala language whether you realize it or not. Using types like `List` and `Option` means using `Monads`, without having to do any of the tedious setup or method definitions.
 
 ## Takeaways
 
-These are complicated concepts, but hopefully [by applying the principles of FP!] we have broken it into smaller, digestable explanations. If anything is still confusing, leave me a note in the comments. The resources and references below are useful if you want to explore this more; I promised not to reference Haskell, but I especially like this [explanation using pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html).
+These are complicated concepts, but hopefully ( by applying the principles of FP! ) we have broken it into smaller, digestable explanations. If anything is still confusing, leave me a note in the comments. The resources and references below are useful if you want to explore this more; I promised not to reference Haskell, but I especially like this [explanation using pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html).
 
 <div class="line"></div>
 
