@@ -152,7 +152,7 @@ You can also define the Monoid operations `append` and `identity` by using `flat
 [^8]: It's really difficult to define this "forall" type in Scala, people have done it trying to emulate something similar in Haskell [https://stackoverflow.com/questions/7213676/forall-in-scala](https://stackoverflow.com/questions/7213676/forall-in-scala).
 
 {% highlight scala %}
-trait Monad[M[_]] /* extends Monoid[_ => M[_]] */ {
+trait Monad[M[_]] { // extends Monoid[_ => M[_]]
   def pure[A](a: A): M[A]
   def flatMap[A, B](a: M[A])(fn: A => M[B]): M[B]
   
@@ -167,6 +167,10 @@ trait Monad[M[_]] /* extends Monoid[_ => M[_]] */ {
   }
 
   def identity[A]: A => M[A] = a => pure(a)
+  
+  // And the laws apply!
+  // Associativity: flatMap(pure(a), x => flatMap(f(x), g)) == flatMap(flatMap(pure(a), f), g)
+  // Identity: flatMap(pure(a), f) == flatMap(f(x), pure) == f(x)
 }
 {% endhighlight %}
 
