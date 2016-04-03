@@ -1,7 +1,7 @@
 ---
 layout:    post
 title:     "The Free Monad and its Cost"
-date:      2016-04-06
+date:      2016-04-02
 permalink: /posts/:title
 tags:      programming scala
 comments:  true
@@ -9,13 +9,41 @@ active:    "blog"
 
 ---
 
-This is the second part to my series on explaining `Monads` for non type-theorists - [read Part One here](#link)
+This is the second part to my series on explaining `Monads` for non type-theorists. [Read Part One here](http://blog.krobinson.me/posts/explaining-monads).
 
 <div class="line"></div>
 
+I had heard a lot of things about the `Free Monad` and never really understood what it was, so decided to do some research that led me here. Without the energy or desire to learn category theory, I wanted to understand the mechanics within the Scala ecosystem and the reasoning behind its use.
+
+## Be Free
+
+A quick refresh on `Monoids`:
+{% highlight scala %}
+trait Monoid[A] {
+  def append(a: A, b: A): A
+  def identity: A
+  
+  /*
+   * Such that:
+   * Associativity property: `append(a, append(b,c)) == append(append(a,b),c)`
+   * Identity property: `append(a, identity) == append(identity, a) == a`
+   */
+}
+{% endhighlight %}
 There is such a thing as a **Free Monoid**. A `Monoid` is "free" when it's defined in the simplest terms possible and when the `append` method doesn't lose any data in its result. 
 
-This is vague, but let's look at some examples. From above, `ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order (Integer addition, on the other hand, defines a special algebra for combining numbers, losing the inputs in the result). It's important that we defined `ListConcat` with a generic type `A` - the only operations you can perform on the generic list are the `Monoid` operations (since you don't know anything about its members, if they're Strings, Ints, other complex types, or even functions). This satisfies the "simplest terms possible" clause for free-ness, and gives meaning to this technical explanation of Free Objects:
+This is vague, but let's look at some examples:
+
+{% highlight scala %}
+class ListConcat[A] extends Monoid[List[A]] {
+  def append(a: List[A], b: List[A]): List[A] = a ++ b
+  def identity: List[A] = List.empty[A]
+  // Associativity: List(1,2,3) ++ (List(4,5,6) ++ List(7,8,9)) == (List(1,2,3) ++ List(4,5,6)) ++ List(7,8,9)
+  // Identity: (List(1,2,3) ++ Nil) == (Nil ++ List(1,2,3)) == List(1,2,3)
+}
+{% endhighlight %}
+
+`ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order (Integer addition, on the other hand, defines a special algebra for combining numbers, losing the inputs in the result). It's important that we defined `ListConcat` with a generic type `A` - the only operations you can perform on the generic list are the `Monoid` operations (since you don't know anything about its members, if they're Strings, Ints, other complex types, or even functions). This satisfies the "simplest terms possible" clause for free-ness, and gives meaning to this technical explanation of Free Objects:
 
 > Informally, a free object over a set `A` can be thought of as being a "generic" algebraic structure over `A`: the only equations that hold between elements of the free object are those that follow from the defining axioms of the algebraic structure. [^1]
 
@@ -27,7 +55,7 @@ This is vague, but let's look at some examples. From above, `ListConcat` is "fre
 
 [^2]: [https://hackage.haskell.org/package/free](https://hackage.haskell.org/package/free)
 
-As we saw in the concatenation examples above, the `append` operation just shoves the data together, "free" of interpretation of the contained data.
+As we saw in the concatenation example above, the `append` operation just shoves the data together, "free" of interpretation of the contained data.
 
 > But still - why that specific word, "free"? ...[It] is free from any specific interpretation, or free to be interpreted in any way. [^3]
 
@@ -37,40 +65,38 @@ As we saw in the concatenation examples above, the `append` operation just shove
 
 Let's think now about what would make a `Monad` "free". We know we want the simplest definition possible, free from interpretation, without losing data.
 
-The `append` definition we used for `Monad` above won’t work, since we lose `f1` and `f2` and essentially create some `f3`. Instead, we’re have to concatenate or chain the functions in a list-like structure to preserve the data. You can think of the `Free Monad` like a `Functor`, except it doesn't know how to `flatten`: [^10]
-
-{% highlight scala %}
-def flatten[A](ffa: F[F[A]]): F[A] = ???
-{% endhighlight %}
-
-[^10]: `flatten` also known as `join` [https://www.youtube.com/watch?v=T4956GI-6Lw](https://www.youtube.com/watch?v=T4956GI-6Lw)
+The `append` definition we used for `Monad` above won’t work, since we lose `f1` and `f2` and essentially create some `f3`. Instead, we’re have to concatenate or chain the functions in a list-like structure to preserve the data.
 
 We can illustrate this by building the following types: [^11]
 
 [^11]: [https://github.com/davidhoyt/kool-aid](https://github.com/davidhoyt/kool-aid)
 
 {% highlight scala %}
-sealed trait Free[F[_], A] { self =>
-  def map[B](fn: A => B): Free[F, B] = 
-    flatMap(a => Return(fn(a)))
-  
-  def flatMap[B](fn: A => Free[F, B]): Free[F, B] =
-    FlatMap(self, (a: A) => fn(a))
+sealed trait Free[F[_], A] {
+  def map[B](free: Free[F, A])(fn: A => B): Free[F, B] =
+    flatMap(free)(a => Return(fn(a)))
+
+  def flatMap[B](free: Free[F, A])(fn: A => Free[F, B]): Free[F, B] =
+    FlatMap(free, (a: A) => fn(a))
 }
 
 case class Return[F[_], A](given: A) extends Free[F, A]
+
 case class FlatMap[F[_], A, B](given: Free[F, A], fn: A => Free[F, B]) extends Free[F, B]
 {% endhighlight %}
+
+We need these classes (`Return` and `FlatMap`) to capture and store the functions as we append Monads together. Remember, if we want to stay "free" we can't evaluate any of the functions in the append step.
 
 You might start to see how we can now encode computations as data and chain the operations together in something like:
 
 {% highlight scala %}
-sealed trait Context
+sealed trait Context[A]
+val id = Return[Context, String]("")
 
 val result: Free[Context, String] =
-  Return[Context, String]("chain") flatMap { chain =>
-    Return[Context, String]("these") flatMap { these =>
-      Return[Context, String]("together") map { together =>
+  id.flatMap(Return[Context, String]("chain")) { a =>
+    id.flatMap(Return[Context, String]("these")) { b =>
+      id.map(Return[Context, String]("together")) { c =>
         s"$a $b $c"
       }
     }
@@ -122,45 +148,37 @@ The `Free Monad`, on the other hand, created a nested, list-like structure that 
 
 #### Hotel California
 
-We've entered the `Monad`, but how do we leave? All of this "free from interpretation" has to come due at some point, and that point is in defining the interpreter[s]. These interpreters are the missing `flatten` operation mentioned above. 
+We've entered the `Monad`, but how do we leave? All of this "free from interpretation" has to come due at some point, and that point is in defining the interpreter(s). These interpreters will "run" the monad, possibly with side effects, producing the result.
 
 An example of an interpreter for the above problem:
 
 {% highlight scala %}
-def flatten[A](c: Free[Context, A]): A = {
-  @annotation.tailrec
-  def step(f: Free[Context, A]): Free[Context, A] = f match {
-    case Return(s)                         => f
-    case FlatMap(FlatMap(given, fn1), fn2) => step(given.flatMap(s1 => fn1(s1).flatMap(s2 => fn2(s2))))
-    case FlatMap(Return(given), fn)        => step(fn(given))
-  }
-
-  step(c) match {
-    case Return(s)          => s
-    case FlatMap(given, fn) => flatten(fn(flatten(given)))
-  }
+@annotation.tailrec
+def run(f: Free[Context, String]): String = f match {
+  case Return(s)                         => s
+  case FlatMap(FlatMap(given, fn1), fn2) => run(given.flatMap(s1 => fn1(s1).flatMap(s2 => fn2(s2))))
+  case FlatMap(Return(given), fn)        => run(fn(given))
 }
 {% endhighlight %}
 
-Let's be even more explicit by using some horribly non-idiomatic Scala that illustrates the loop we're performing:
+Let's be even more explicit and use a while loop to illustrate what we're doing:
 
 {% highlight scala %}
-def flatten[A](c: Free[Context, A]): A = {
-  var eval: List[Free[Context, A]] = List(c)
-  var res: Any = null
+def run(c: Free[Context, String]): String = {
+  var eval: Free[Context, String] = c
 
-  while (eval.nonEmpty) {
-    eval.head match {
+  while (true) {
+    eval match {
       case Return(s) =>
-        eval = eval.tail
-        res = s
+        return s
       case FlatMap(FlatMap(given, fn1), fn2) =>
-        eval = List(given.flatMap(s1 => fn1(s1).flatMap(s2 => fn2(s2))))
+        eval = given.flatMap(s1 => fn1(s1).flatMap(s2 => fn2(s2)))
       case FlatMap(Return(s), fn) =>
-        eval = List(fn(s))
+        eval = fn(s)
     }
   }
-  res.asInstanceOf[A]
+
+  throw new AssertionError("Unreachable")
 }
 {% endhighlight %}
 
@@ -179,4 +197,4 @@ Sound interesting? Want to convince me that your use of Free Monads is ingenious
 
 <div class="line"></div>
 
-<p class="references" style="margin-bottom: 0;">References:</p>
+<p class="references" style="margin-bottom: 0;">Notes and references:</p>
