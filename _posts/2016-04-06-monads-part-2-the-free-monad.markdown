@@ -9,13 +9,13 @@ active:    "blog"
 
 ---
 
-This is the second part to my series on explaining `Monads` for non type-theorists. [Read Part One here](http://blog.krobinson.me/posts/explaining-monads).
+This is the follow up post to my explanation of `Monads` for non type-theorists. [Read part one here](http://blog.krobinson.me/posts/explaining-monads).
 
 <div class="line"></div>
 
-I had heard a lot of things about the `Free Monad` and never really understood what it was, so decided to do some research that led me here. Without the energy or desire to learn category theory, I wanted to understand the mechanics within the Scala ecosystem and the reasoning behind its use.
+I had heard a lot of things about the `Free Monad` and never really understood what it was, so decided to do some research that led me here. Without the energy or desire to learn category theory, I wanted to grasp the mechanics within the Scala ecosystem and the reasoning behind its use. Again, we start with Monoids...
 
-## Be Free
+## Free Monoids
 
 A quick refresh on `Monoids`:
 {% highlight scala %}
@@ -38,18 +38,18 @@ This is vague, but let's look at some examples:
 class ListConcat[A] extends Monoid[List[A]] {
   def append(a: List[A], b: List[A]): List[A] = a ++ b
   def identity: List[A] = List.empty[A]
-  // Associativity: List(1,2,3) ++ (List(4,5,6) ++ List(7,8,9)) == (List(1,2,3) ++ List(4,5,6)) ++ List(7,8,9)
-  // Identity: (List(1,2,3) ++ Nil) == (Nil ++ List(1,2,3)) == List(1,2,3)
 }
 {% endhighlight %}
 
-`ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order (Integer addition, on the other hand, defines a special algebra for combining numbers, losing the inputs in the result). It's important that we defined `ListConcat` with a generic type `A` - the only operations you can perform on the generic list are the `Monoid` operations (since you don't know anything about its members, if they're Strings, Ints, other complex types, or even functions). This satisfies the "simplest terms possible" clause for free-ness, and gives meaning to this technical explanation of Free Objects:
+`ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order (Integer addition, on the other hand, defines a special algebra for combining numbers, losing the inputs in the result). 
+
+It's also important that we defined `ListConcat` with a generic type `A` - the only operations we can perform on the generic list are the `Monoid` operations (since you don't know anything about its members, if they're Strings, Ints, other complex types, or even functions). This satisfies the "simplest terms possible" clause for free-ness, and gives meaning to this technical explanation of Free Objects:
 
 > Informally, a free object over a set `A` can be thought of as being a "generic" algebraic structure over `A`: the only equations that hold between elements of the free object are those that follow from the defining axioms of the algebraic structure. [^1]
 
 [^1]: [https://en.wikipedia.org/wiki/Free_object](https://en.wikipedia.org/wiki/Free_object)
 
-## Why do we call it "Free"?
+## So why do we call it "Free"?
 
 > The word "free" is used in the sense of "unrestricted" rather than "zero-cost" [^2]
 
@@ -184,11 +184,11 @@ def run(c: Free[Context, String]): String = {
 
 ## With Great Power...
 
-`Free Monads` are a powerful construct if you need multiple interpretations for outputs and effects [^12]. Once you begin to grasp the mechanics, defining multiple interpreters to evaluate the "list" of functions is a neat solution - something like a production interpreter and a test interpreter. You already have a whole slew of tools (builtin to the language) that give the benefits of `Monads` (composability, side-effect-safety) without the complexity that require blog posts like these to explain. 
+`Free Monads` are a powerful construct if you need multiple interpretations for outputs and effects [^12]. Once you begin to grasp the mechanics, defining multiple interpreters to evaluate the "list" of functions is a neat solution - something like a production interpreter and a test interpreter. 
 
 [^12]: David Hoyt has some examples of using multiple interpreters by defining a more [extendable flatten](https://github.com/davidhoyt/kool-aid/blob/master/free/src/main/scala/sbtb/koolaid/fun/free/package.scala) he calls `runFree`. Rob Norris also uses `Free` heavily in his JDBC library Doobie [https://github.com/tpolecat/doobie](https://github.com/tpolecat/doobie)
 
-Even with a need for multiple interpreters and stack safety, we should be judicious in our use of these tools. I get nervous every time I find a "neat" solution in Scala, it usually means there is an easier way. Remember that the [wrong abstraction is dangerous](http://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction) and our responsibility as programmers should still be to write reuseable, maintainable code.
+Even with a need for multiple interpreters and stack safety, we should be judicious in our use of these tools. I get nervous every time I find a "neat" solution in Scala, it usually means there is an easier way. You already have a whole slew of tools (builtin to the language) that give the benefits of `Monads` (composability, side-effect-safety) without the complexity that require blog posts like these to explain. Remember that the [wrong abstraction is dangerous](http://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction) and our responsibility as programmers should still be to write reuseable, maintainable code. 
 
 <div class="line"></div>
 
