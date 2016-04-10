@@ -184,9 +184,9 @@ def runLoop(c: Free[Context, String]): String = {
 
 ## With Great Power...
 
-`Free Monads` are a powerful construct if you need multiple interpretations for outputs and effects [^12]. Once you begin to grasp the mechanics, defining multiple interpreters to evaluate the "list" of functions is a neat solution - something like a production interpreter and a test interpreter. 
+`Free Monads` are a powerful construct if you need multiple interpretations for outputs and effects [^5]. Once you begin to grasp the mechanics, defining multiple interpreters to evaluate the "list" of functions is a neat solution - something like a production interpreter and a test interpreter. 
 
-[^12]: David Hoyt has some examples of using multiple interpreters by defining a more [extendable flatten](https://github.com/davidhoyt/kool-aid/blob/master/free/src/main/scala/sbtb/koolaid/fun/free/package.scala) he calls `runFree`. Rob Norris also uses `Free` heavily in his JDBC library Doobie [https://github.com/tpolecat/doobie](https://github.com/tpolecat/doobie)
+[^5]: David Hoyt has some examples of using [multiple interpreters](https://github.com/davidhoyt/kool-aid/blob/master/free/src/main/scala/sbtb/koolaid/fun/free/package.scala). Rob Norris also uses `Free` heavily in his JDBC library Doobie [https://github.com/tpolecat/doobie](https://github.com/tpolecat/doobie)
 
 Even with a need for multiple interpreters and stack safety, we should be judicious in our use of these tools. I get nervous every time I find a "neat" solution in Scala, it usually means there is an easier way. You already have a whole slew of tools (builtin to the language) that give the benefits of `Monads` (composability, side-effect-safety) without the complexity that require blog posts like these to explain. Remember that the [wrong abstraction is dangerous](http://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction) and our responsibility as programmers should still be to write reuseable, maintainable code. 
 
