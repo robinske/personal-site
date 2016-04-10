@@ -1,7 +1,7 @@
 ---
 layout:    post
 title:     "The Free Monad and its Cost"
-date:      2016-04-06
+date:      2016-04-04
 permalink: /posts/:title
 tags:      programming scala
 comments:  true
@@ -10,6 +10,8 @@ active:    "blog"
 ---
 
 This is the follow up post to my explanation of `Monads` for non type-theorists. [Read part one here](http://blog.krobinson.me/posts/explaining-monads).
+
+Code examples can be found here: [https://github.com/robinske/monad-examples](https://github.com/robinske/monad-examples)
 
 <div class="line"></div>
 
@@ -65,23 +67,22 @@ As we saw in the concatenation example above, the `append` operation just shoves
 
 Let's think now about what would make a `Monad` "free". We know we want the simplest definition possible, free from interpretation, without losing data.
 
-The `append` [definition](http://blog.krobinson.me/posts/explaining-monads#monads) we originally used for `Monad` won’t work, since we lose `f1` and `f2` and essentially create some `f3`. Instead, we’re have to concatenate or chain the functions in a list-like structure to preserve the data.
+The `append` definition we used for `Monad` [in the last post](http://blog.krobinson.me/posts/explaining-monads#monads) won’t work, since we lose information about the input functions and essentially create some special return function. Instead, we’re have to concatenate or chain the functions in a list-like structure to preserve the data.
 
 We can illustrate this by building the following types: [^4]
 
 [^4]: [https://github.com/davidhoyt/kool-aid](https://github.com/davidhoyt/kool-aid)
 
 {% highlight scala %}
-sealed trait Free[F[_], A] {
-  def map[B](free: Free[F, A])(fn: A => B): Free[F, B] =
-    flatMap(free)(a => Return(fn(a)))
+sealed trait Free[F[_], A] { self =>
+  def map[B](fn: A => B): Free[F, B] =
+    flatMap(a => Return(fn(a)))
 
-  def flatMap[B](free: Free[F, A])(fn: A => Free[F, B]): Free[F, B] =
-    FlatMap(free, (a: A) => fn(a))
+  def flatMap[B](fn: A => Free[F, B]): Free[F, B] =
+    FlatMap(self, (a: A) => fn(a))
 }
 
 case class Return[F[_], A](given: A) extends Free[F, A]
-
 case class FlatMap[F[_], A, B](given: Free[F, A], fn: A => Free[F, B]) extends Free[F, B]
 {% endhighlight %}
 
@@ -91,12 +92,11 @@ You might start to see how we can now encode computations as data and chain the 
 
 {% highlight scala %}
 sealed trait Context[A]
-val id = Return[Context, String]("")
 
-val result: Free[Context, String] =
-  id.flatMap(Return[Context, String]("chain")) { a =>
-    id.flatMap(Return[Context, String]("these")) { b =>
-      id.map(Return[Context, String]("together")) { c =>
+val free: Free[Context, String] =
+  Return[Context, String]("chain").flatMap { a =>
+    Return[Context, String]("these").flatMap { b =>
+      Return[Context, String]("together").map { c =>
         s"$a $b $c"
       }
     }
@@ -164,7 +164,7 @@ def run(f: Free[Context, String]): String = f match {
 Let's be even more explicit and use a while loop to illustrate what we're doing:
 
 {% highlight scala %}
-def run(c: Free[Context, String]): String = {
+def runLoop(c: Free[Context, String]): String = {
   var eval: Free[Context, String] = c
 
   while (true) {

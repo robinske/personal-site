@@ -15,6 +15,8 @@ Parts of functional programming (FP) may be built on the mathematical principles
 
 We'll start by defining some of the most referenced components in order to define Monads. We also explore why Monadic design is useful, why it's dangerous, and discuss some tradeoffs of using these types.
 
+Code examples used can be found here: [https://github.com/robinske/monad-examples](https://github.com/robinske/monad-examples)
+
 ## Monoid
 
 A `Monoid` is any type `A` that carries the following properties:
