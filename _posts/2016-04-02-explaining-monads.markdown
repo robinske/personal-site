@@ -190,7 +190,7 @@ These are complicated concepts, but hopefully ( by applying the principles of FP
 
 <div class="line"></div>
 
-Stay tuned for Part 2 where I'll dive into the details of the Free Monad.
+[Check out Part 2 where I dive into the details of the Free Monad.](http://blog.krobinson.me/posts/monads-part-2-the-free-monad)
 
 Sound interesting? Want to convince me of your metaphor? I'm talking more about this at [Scaladays](http://event.scaladays.org/scaladays-nyc-2016) in May - or send me a note on Twitter [@kelleyrobinson](https://www.twitter.com/kelleyrobinson)
 

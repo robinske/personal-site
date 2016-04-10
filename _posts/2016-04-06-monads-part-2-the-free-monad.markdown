@@ -65,11 +65,11 @@ As we saw in the concatenation example above, the `append` operation just shoves
 
 Let's think now about what would make a `Monad` "free". We know we want the simplest definition possible, free from interpretation, without losing data.
 
-The `append` definition we used for `Monad` above won’t work, since we lose `f1` and `f2` and essentially create some `f3`. Instead, we’re have to concatenate or chain the functions in a list-like structure to preserve the data.
+The `append` [definition](http://blog.krobinson.me/posts/explaining-monads#monads) we originally used for `Monad` won’t work, since we lose `f1` and `f2` and essentially create some `f3`. Instead, we’re have to concatenate or chain the functions in a list-like structure to preserve the data.
 
-We can illustrate this by building the following types: [^11]
+We can illustrate this by building the following types: [^4]
 
-[^11]: [https://github.com/davidhoyt/kool-aid](https://github.com/davidhoyt/kool-aid)
+[^4]: [https://github.com/davidhoyt/kool-aid](https://github.com/davidhoyt/kool-aid)
 
 {% highlight scala %}
 sealed trait Free[F[_], A] {
