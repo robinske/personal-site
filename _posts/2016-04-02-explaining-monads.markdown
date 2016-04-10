@@ -39,7 +39,7 @@ trait Monoid[A] {
 {% endhighlight %}
 
 
-####Examples
+#### Examples
 
 **Integer addition**
 
