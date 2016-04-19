@@ -21,7 +21,7 @@ Code examples used can be found here: [https://github.com/robinske/monad-example
 
 A `Monoid` is any type `A` that carries the following properties:
 
-* Has some `append` method that can take two instances of `A` and produce another, singular, instance of `A`. This method is [associative](http://www.merriam-webster.com/dictionary/associative); if you use it to append multiple values together, the order and grouping of values doesn't matter.
+* Has some `append` method that can take two instances of `A` and produce another, singular, instance of `A`. This method is [associative](http://www.merriam-webster.com/dictionary/associative); if you use it to append multiple values together, the grouping of values doesn't matter.
 
 * Has some `identity` element such that performing `append` with `identity` as one of the arguments returns the other argument.
 
@@ -66,7 +66,7 @@ object FunctionComposition /* extends Monoid[_ => _] */ {
 {% endhighlight %}
 The extension here wouldn't quite compile, but it's a good example of using functions as types which will be important later. [^0]
 
-[^0]: It's really difficult to define this "forall" type in Scala, people have done it trying to emulate something similar in Haskell [https://stackoverflow.com/questions/7213676/forall-in-scala](https://stackoverflow.com/questions/7213676/forall-in-scala).
+[^0]: It's really difficult to define a syntax in Scala that allows `A` and `B` to be any type. People have done it trying to copy something similar in Haskell [https://stackoverflow.com/questions/7213676/forall-in-scala](https://stackoverflow.com/questions/7213676/forall-in-scala) but that boilerplate isn't necessary here to show the concepts.
 
 **String concatenation**
 
