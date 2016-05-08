@@ -9,8 +9,8 @@
 title: Kelley Robinson
 email: hello@krobinson.me
 description: > # this means to ignore newlines until "baseurl:"
-  Software engineer, amateur chef, and professional organizer.
-  Currently working with data and infrastructure at Sharethrough.
+  Software engineer, amateur chef. Likes automating, organizing, creating.
+  Currently working with data and infrastructure at Sharethrough in San Francisco.
 baseurl: "" # the subpath of your site, e.g. /blog
 blogurl: "blog.krobinson.me"
 url: "http://krobinson.me" # the base hostname & protocol for your site
