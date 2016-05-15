@@ -203,8 +203,13 @@ blockquote {
         width: 85%;
         border-left: 10px solid #ccc;
         padding: 5px;
-        margin: 5px auto 5px auto;
+        margin: 5px auto 20px auto;
         quotes: "\201C""\201D""\2018""\2019";
+}
+.twitter-tweet {
+    width: 100%;
+    margin: 15px auto 15px auto;
+    padding-bottom: 10px;
 }
 .references, .footnotes {
 	font-size: 11px;
