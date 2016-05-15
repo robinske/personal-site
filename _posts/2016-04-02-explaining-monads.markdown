@@ -192,6 +192,8 @@ Sound interesting? Want to convince me of your metaphor? I'm talking more about 
 
 <div class="line"></div>
 
+Slides from my Scala Days talk:
+
 <iframe src="//www.slideshare.net/slideshow/embed_code/key/fKRooAbi7ZLXam" width="595" height="485" frameborder="0" align="center" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin: 0 auto 5px auto; max-width: 100%; display:block;" allowfullscreen> </iframe> <div style="margin-bottom:5px; text-align: center;"> <strong> <a href="//www.slideshare.net/KelleyRobinson1/why-the-free-monad-isnt-free-61836547" title="Why The Free Monad isn&#x27;t Free" target="_blank">Why The Free Monad isn&#x27;t Free</a> </strong></div>
 
 <div class="line"></div>
