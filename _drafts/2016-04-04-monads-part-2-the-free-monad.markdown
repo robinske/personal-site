@@ -9,27 +9,24 @@ active:    "blog"
 
 ---
 
-This is the follow up post to my explanation of `Monads` for non type-theorists. [Read part one here](http://blog.krobinson.me/posts/explaining-monads).
+This is the follow up post in to my explanation of `Monads` for Scala developers. [Read part one here](http://blog.krobinson.me/posts/explaining-monads).
 
 Code examples can be found here: [https://github.com/robinske/monad-examples](https://github.com/robinske/monad-examples)
 
 <div class="line"></div>
 
-I had heard a lot of things about the `Free Monad` and never really understood what it was, so decided to do some research that led me here. Without the energy or desire to learn category theory, I wanted to grasp the mechanics within the Scala ecosystem and the reasoning behind its use. Again, we start with Monoids...
+I had heard a lot of things about the `Free Monad` and never really understood what it was, so did the research that led me here. Without the energy or desire to learn category theory, I wanted to grasp the mechanics within the Scala ecosystem and the reasoning behind its use. Again, we start with Monoids...
 
 ## Free Monoids
 
 A quick refresh on `Monoids`:
 {% highlight scala %}
 trait Monoid[A] {
+
   def append(a: A, b: A): A
+
   def identity: A
-  
-  /*
-   * Such that:
-   * Associativity property: `append(a, append(b,c)) == append(append(a,b),c)`
-   * Identity property: `append(a, identity) == append(identity, a) == a`
-   */
+
 }
 {% endhighlight %}
 There is such a thing as a **Free Monoid**. A `Monoid` is "free" when it's defined in the simplest terms possible and when the `append` method doesn't lose any data in its result. 
@@ -38,8 +35,11 @@ This is vague, but let's look at some examples:
 
 {% highlight scala %}
 class ListConcat[A] extends Monoid[List[A]] {
+
   def append(a: List[A], b: List[A]): List[A] = a ++ b
+
   def identity: List[A] = List.empty[A]
+
 }
 {% endhighlight %}
 
@@ -75,51 +75,71 @@ We can illustrate this by building the following types: [^4]
 
 {% highlight scala %}
 sealed trait Free[F[_], A] { self =>
-  def map[B](fn: A => B): Free[F, B] =
-    flatMap(a => Return(fn(a)))
 
   def flatMap[B](fn: A => Free[F, B]): Free[F, B] =
     FlatMap(self, (a: A) => fn(a))
+
+  def pure[T](a: T): Free[F, T] = Return(a)
+
+  def map[B](fn: A => B): Free[F, B] =
+    flatMap(a => pure(fn(a)))
+
 }
 
 case class Return[F[_], A](given: A) extends Free[F, A]
-case class FlatMap[F[_], A, B](given: Free[F, A], fn: A => Free[F, B]) extends Free[F, B]
+
+case class Suspend[F[_], A](fn: F[A]) extends Free[F, A]
+
+case class FlatMap[F[_], A, B](free: Free[F, A], fn: A => Free[F, B]) extends Free[F, B]
 {% endhighlight %}
 
-We need these classes (`Return` and `FlatMap`) to capture and store the functions as we append Monads together. Remember, if we want to stay "free" we can't evaluate any of the functions in the append step.
+We need these classes (`Return`, `Suspend`, and `FlatMap`) to capture and store the functions as we chain our Free Monads together. Remember, if we want to stay "free" we can't evaluate any of the functions as we're doing this.
+
+Let's build out an example. Here we have a Free Monad for actions on a Todo list:
+
+{% highlight scala %}
+sealed trait Todo[A]
+case class NewTask[A](task: A) extends Todo[A]
+case class CompleteTask[A](task: A) extends Todo[A]
+case class GetTasks[A](default: A) extends Todo[A]
+
+object Todo {
+  def newTask[A](task: A): Free[Todo, A] = Suspend(NewTask(task))
+  def completeTask[A](task: A): Free[Todo, A] = Suspend(CompleteTask(task))
+  def getTasks[A](default: A): Free[Todo, A] = Suspend(GetTasks(default))
+}
+{% endhighlight %}
 
 You might start to see how we can now encode computations as data and chain the operations together in something like:
 
 {% highlight scala %}
-sealed trait Context[A]
-
-val free: Free[Context, String] =
-  Return[Context, String]("chain").flatMap { a =>
-    Return[Context, String]("these").flatMap { b =>
-      Return[Context, String]("together").map { c =>
-        s"$a $b $c"
-      }
-    }
-  }
+val todos: Free[Todo, Map[String, Boolean]] =
+  for {
+    _    <- newTask("Go to scala days")
+    _    <- newTask("Write a novel")
+    _    <- newTask("Meet Tina Fey")
+    _    <- completeTask("Go to scala days")
+    tsks <- getTasks(default = Map.empty[String, Boolean])
+  } yield tsks
 {% endhighlight %}
 
-This is an arbitrary example (and you should never use the `Free Monad` to do string concatenation), but let's look at the resulting data structure:
+Neat! Now you can chain your functions together using a for-comprehension. Keep in mind that nothing has happened yet. We're "lifting" our actions into the free structures, building up a data structure to be evaluated later. Let's look at the resulting data structure:
 
 {% highlight scala %}
-$ result
-Free[Context,String] = FlatMap(Return(chain),<function1>)
-{% endhighlight %}
-
-Expanded this would look like:
-
-{% highlight scala %}
-FlatMap[Context, String, String](
-  Return[Context, String]("chain"), a => FlatMap[Context, String, String](
-    Return[Context, String]("these"), b => FlatMap[Context, String, String](
-      Return[Context, String]("together"), c => Return[Context, String](s"$a $b $c")
+val todosExpanded: Free[Todo, Map[String, Boolean]] =
+  FlatMap(
+    Suspend(NewTask("Go to scala days")), (a: String) =>
+    FlatMap(
+      Suspend(NewTask("Write a novel")), (b: String) =>
+      FlatMap(
+        Suspend(NewTask("Meet Tina Fey")), (c: String) =>
+        FlatMap(
+          Suspend(CompleteTask("Go to scala days")), (d: String) =>
+          Suspend(GetTasks(default = Map.empty))
+        )
+      )
     )
   )
-)
 {% endhighlight %}
 
 Now you can see the "list-like" data structure that is preserving the functions as we chain them together. 
@@ -129,12 +149,10 @@ What's the point of using the `Free Monad`? `Monads` have the ability to `flatMa
 
 Imagine, though, a nested flatMap: 
 {% highlight scala %}
-def doSomething[A](a: A): List[A] = ???
-
 (1 to 1000).toList.flatMap { i =>
   doSomething(i).flatMap { j =>
-    doSomething(j).flatMap { k =>
-      doSomething(k).map { l =>
+    doSomethingElse(j).flatMap { k =>
+      doAnotherThing(k).map { l =>
         println(l)
       }
     }
@@ -142,45 +160,39 @@ def doSomething[A](a: A): List[A] = ???
 }
 {% endhighlight %}
 
-Maybe your code doesn't have functions that look like that, but the architecture is behaving the same - you have composed a bunch of functions that are each added to the stack. If your business logic is complicated enough (in this case, maybe `doSomething` is making `n` additional function calls), and you really want to defer side effects until the very end, you might encounter `StackOverflowError`s.
+Maybe your code doesn't have functions that look like that, but the architecture is behaving the same - you have composed a bunch of functions that are each added to the stack. If your business logic is complicated enough (in this case, maybe the `doSomething` functions are making `n` additional function calls), you might encounter `StackOverflowError`s.
 
-The `Free Monad`, on the other hand, created a nested, list-like structure that stores all of the functions. The trick is that these then have to be evaluated in a loop (or a tail recursive call). The tradeoff? Stack for Heap.
+The `Free Monad`, on the other hand, created a nested, list-like structure that stores all of the functions on the _heap_. The trick is that these then have to be evaluated in a loop (or a tail recursive call). 
+
+**The tradeoff? Stack for Heap.**
 
 #### Hotel California
 
-We've entered the `Monad`, but how do we leave? All of this "free from interpretation" has to come due at some point, and that point is in defining the interpreter(s). These interpreters will "run" the monad, possibly with side effects, producing the result.
+We've entered the `Monad`, but how do we leave? All of this "free from interpretation" has to come due at some point, and that point is in defining the interpreter(s). These interpreters will evaluate the monad, possibly with side effects, producing the result.
 
-An example of an interpreter for the above problem:
-
-{% highlight scala %}
-@annotation.tailrec
-def run(f: Free[Context, String]): String = f match {
-  case Return(s)                         => s
-  case FlatMap(FlatMap(given, fn1), fn2) => run(given.flatMap(s1 => fn1(s1).flatMap(s2 => fn2(s2))))
-  case FlatMap(Return(given), fn)        => run(fn(given))
-}
-{% endhighlight %}
-
-Let's be even more explicit and use a while loop to illustrate what we're doing:
+We can define our run function as follows:
 
 {% highlight scala %}
-def runLoop(c: Free[Context, String]): String = {
-  var eval: Free[Context, String] = c
-
-  while (true) {
-    eval match {
-      case Return(s) =>
-        return s
-      case FlatMap(FlatMap(given, fn1), fn2) =>
-        eval = given.flatMap(s1 => fn1(s1).flatMap(s2 => fn2(s2)))
-      case FlatMap(Return(s), fn) =>
-        eval = fn(s)
-    }
+def runFree[F[_], G[_]: Monad, A](f: Free[F, A])(transform: FunctorTransformer[F, G]): G[A] = {
+  @annotation.tailrec
+  def tailThis(free: Free[F, A]): Free[F, A] = free match {
+    case FlatMap(FlatMap(fr, fn1), fn2) => tailThis(fr.flatMap(a1 => fn1(a1).flatMap(a2 => fn2(a2))))
+    case FlatMap(Return(a), fn)         => tailThis(fn(a))
+    case _                              => free
   }
 
-  throw new AssertionError("Unreachable")
+  val G = Monad[G] // uses implicit objects in constructor
+
+  tailThis(f) match {
+    case Return(a)                => G.pure(a)
+    case Suspend(fa)              => transform(fa)
+    case FlatMap(Suspend(fa), fn) => G.flatMap(transform(fa)){ a => runFree(fn(a))(transform) }
+    case _                        => throw new AssertionError("Unreachable")
+  }
 }
 {% endhighlight %}
+
+We use the `FunctorTransformer` to take our input context and transform it into its result.
 
 ## With Great Power...
 
@@ -194,6 +206,9 @@ Even with a need for multiple interpreters and stack safety, we should be judici
 
 Sound interesting? Want to convince me that your use of Free Monads is ingenious *and* necessary? I'm talking more about this at [Scaladays](http://event.scaladays.org/scaladays-nyc-2016) in May - or send me a note on Twitter [@kelleyrobinson](https://www.twitter.com/kelleyrobinson)
 
+<div class="line"></div>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/fKRooAbi7ZLXam" width="595" height="485" frameborder="0" align="center" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin: 0 auto 5px auto; max-width: 100%; display:block;" allowfullscreen> </iframe> <div style="margin-bottom:5px; text-align: center;"> <strong> <a href="//www.slideshare.net/KelleyRobinson1/why-the-free-monad-isnt-free-61836547" title="Why The Free Monad isn&#x27;t Free" target="_blank">Why The Free Monad isn&#x27;t Free</a> </strong></div>
 
 <div class="line"></div>
 
