@@ -43,7 +43,7 @@ class ListConcat[A] extends Monoid[List[A]] {
 }
 {% endhighlight %}
 
-`ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order (Integer addition, on the other hand, defines a special algebra for combining numbers, losing the inputs in the result). 
+`ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order ([Integer addition](http://localhost:4000/posts/explaining-monads#examples), on the other hand, defines a special algebra for combining numbers, losing the inputs in the result). 
 
 It's also important that we defined `ListConcat` with a generic type `A` - the only operations we can perform on the generic list are the `Monoid` operations (since you don't know anything about its members, if they're Strings, Ints, other complex types, or even functions). This satisfies the "simplest terms possible" clause for free-ness, and gives meaning to this technical explanation of Free Objects:
 
@@ -71,7 +71,7 @@ The `append` definition we used for `Monad` [in the last post](http://blog.krobi
 
 We can illustrate this by building the following types: [^4]
 
-[^4]: [https://github.com/davidhoyt/kool-aid](https://github.com/davidhoyt/kool-aid)
+[^4]: [https://github.com/robinske/monad-examples/blob/master/src/main/scala/me/krobinson/Free.scala](https://github.com/robinske/monad-examples/blob/master/src/main/scala/me/krobinson/Free.scala)
 
 {% highlight scala %}
 sealed trait Free[F[_], A] { self =>
@@ -103,11 +103,12 @@ case class NewTask[A](task: A) extends Todo[A]
 case class CompleteTask[A](task: A) extends Todo[A]
 case class GetTasks[A](default: A) extends Todo[A]
 
-object Todo {
-  def newTask[A](task: A): Free[Todo, A] = Suspend(NewTask(task))
-  def completeTask[A](task: A): Free[Todo, A] = Suspend(CompleteTask(task))
-  def getTasks[A](default: A): Free[Todo, A] = Suspend(GetTasks(default))
-}
+def newTask[A](task: A): Free[Todo, A] = Suspend(NewTask(task))
+
+def completeTask[A](task: A): Free[Todo, A] = Suspend(CompleteTask(task))
+
+def getTasks[A](default: A): Free[Todo, A] = Suspend(GetTasks(default))
+
 {% endhighlight %}
 
 You might start to see how we can now encode computations as data and chain the operations together in something like:
@@ -144,28 +145,6 @@ val todosExpanded: Free[Todo, Map[String, Boolean]] =
 
 Now you can see the "list-like" data structure that is preserving the functions as we chain them together. 
 
-#### Monads vs. Free Monads
-What's the point of using the `Free Monad`? `Monads` have the ability to `flatMap`, so we could compose functions for days to achieve a similar end result.
-
-Imagine, though, a nested flatMap: 
-{% highlight scala %}
-(1 to 1000).toList.flatMap { i =>
-  doSomething(i).flatMap { j =>
-    doSomethingElse(j).flatMap { k =>
-      doAnotherThing(k).map { l =>
-        println(l)
-      }
-    }
-  }
-}
-{% endhighlight %}
-
-Maybe your code doesn't have functions that look like that, but the architecture is behaving the same - you have composed a bunch of functions that are each added to the stack. If your business logic is complicated enough (in this case, maybe the `doSomething` functions are making `n` additional function calls), you might encounter `StackOverflowError`s.
-
-The `Free Monad`, on the other hand, created a nested, list-like structure that stores all of the functions on the _heap_. The trick is that these then have to be evaluated in a loop (or a tail recursive call). 
-
-**The tradeoff? Stack for Heap.**
-
 #### Hotel California
 
 We've entered the `Monad`, but how do we leave? All of this "free from interpretation" has to come due at some point, and that point is in defining the interpreter(s). These interpreters will evaluate the monad, possibly with side effects, producing the result.
@@ -192,21 +171,104 @@ def runFree[F[_], G[_]: Monad, A](f: Free[F, A])(transform: FunctorTransformer[F
 }
 {% endhighlight %}
 
-We use the `FunctorTransformer` to take our input context and transform it into its result.
+We use the `FunctorTransformer` to take our input context and transform it into its result. This is what enables us to have a generic run function and define multiple interpretations.
+
+{% highlight scala %}
+trait FunctorTransformer[F[_], G[_]] {
+  def apply[A](f: F[A]): G[A]
+}
+{% endhighlight %}
+
+You might also hear this called a `natural transformation` or see it defined using this symbolic operator: `~>`. In the interest of being explicit I called it a functor transformer.
+
+It's important that the transformed functor, `G`, is also a `Monad` so we can use it to flatMap. That's because we want to stop execution in the chain if our transformation "fails".
+
+Here's an example of a test interpreter we can define for our Todo list:
+{% highlight scala %}
+case object ActionTestInterpreter extends FunctorTransformer[Todo, Id] {
+  var actions: List[Todo[String]] = List.empty
+  def apply[A](a: Todo[A]): Id[A] = {
+    a match {
+      case NewTask(task) =>
+        actions = actions :+ NewTask(task.toString)
+        task
+      case CompleteTask(task) =>
+        actions = actions :+ CompleteTask(task.toString)
+        task
+      case GetTasks(default) =>
+        actions = actions :+ GetTasks("")
+        default
+    }
+  }
+}
+{% endhighlight %}
+
+And now we can run this and test against a list of expected actions:
+
+{% highlight scala %}
+describe("Free") {
+  it("should evaluate todos with an action evaluator") {
+    runFree(todos)(ActionTestEvaluator)
+
+    val expected: List[Todo[String]] =
+      List(
+        NewTask("Go to scala days"),
+        NewTask("Write a novel"),
+        NewTask("Meet Tina Fey"),
+        CompleteTask("Go to scala days"),
+        GetTasks("")
+      )
+
+    ActionTestEvaluator.actions shouldBe expected
+  }
+}
+{% endhighlight %}
+
+Play around with the code and build your own interpreters using by [forking this repo](https://github.com/robinske/monad-examples).
+
+#### Monads vs. Free Monads
+What's the point of using the `Free Monad`? `Monads` have the ability to `flatMap`, so we could compose functions for days to achieve a similar end result.
+
+**1) Stack safety**
+
+Imagine, though, a nested flatMap: 
+{% highlight scala %}
+(1 to 1000).toList.flatMap { i =>
+  doSomething(i).flatMap { j =>
+    doSomethingElse(j).flatMap { k =>
+      doAnotherThing(k).map { l =>
+        println(l)
+      }
+    }
+  }
+}
+{% endhighlight %}
+
+Maybe your code doesn't have functions that look like that, but the architecture is behaving the same - you have composed a bunch of functions that are each added to the stack. If your business logic is complicated enough (in this case, maybe the `doSomething` functions are recursive or making `n` additional function calls), you might encounter `StackOverflowError`s.
+
+The `Free Monad`, on the other hand, created a nested, list-like structure that stores all of the functions on the _heap_. The trick is that these then have to be evaluated in a loop (or a tail recursive call). 
+
+The tradeoff? Stack for Heap.
+
+**2) Multiple interpreters**
+
+Because we're chaining the data together without any interpretation, we can later define multiple interpreters to handle our Free Monad. This could be something like a [test](https://github.com/robinske/monad-examples/blob/master/src/test/scala/me/krobinson/Spec.scala#L26) and [production](https://github.com/robinske/monad-examples/blob/master/src/main/scala/me/krobinson/FreeExamples.scala#L16) interpreter.
+
+**3) Defer side effects**
+
+We're deferring execution and interpretation by defining the DSL (domain specific language) to represent our data (the Todo list classes). We don't do anything with that until we define and run the interpreters, which means that handling of side effects is deferred until the interpretation stage at the very end.
 
 ## With Great Power...
 
-`Free Monads` are a powerful construct if you need multiple interpretations for outputs and effects [^5]. Once you begin to grasp the mechanics, defining multiple interpreters to evaluate the "list" of functions is a neat solution - something like a production interpreter and a test interpreter. 
-
-[^5]: David Hoyt has some examples of using [multiple interpreters](https://github.com/davidhoyt/kool-aid/blob/master/free/src/main/scala/sbtb/koolaid/fun/free/package.scala). Rob Norris also uses `Free` heavily in his JDBC library Doobie [https://github.com/tpolecat/doobie](https://github.com/tpolecat/doobie)
-
-Even with a need for multiple interpreters and stack safety, we should be judicious in our use of these tools. I get nervous every time I find a "neat" solution in Scala, it usually means there is an easier way. You already have a whole slew of tools (builtin to the language) that give the benefits of `Monads` (composability, side-effect-safety) without the complexity that require blog posts like these to explain. Remember that the [wrong abstraction is dangerous](http://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction) and our responsibility as programmers should still be to write reuseable, maintainable code. 
+`Free Monads` are a powerful construct, but even with their benefits, we should be judicious in our use of these tools. I get nervous every time I find a "neat" solution in Scala, it usually means there is an easier way. We already have a whole slew of tools (builtin to the language) that give the benefits of `Monads` (composability, side-effect-safety) without the complexity that require blog posts like these to explain. Remember that the [wrong abstraction is dangerous](http://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction) and our responsibility as programmers should still be to write reuseable, maintainable code. In short, more [#blueskyscala](https://twitter.com/search?q=%23blueskyscala&src=typd)!
 
 <div class="line"></div>
 
 Sound interesting? Want to convince me that your use of Free Monads is ingenious *and* necessary? I'm talking more about this at [Scala Days](http://event.scaladays.org/scaladays-nyc-2016) in May - or send me a note on Twitter [@kelleyrobinson](https://www.twitter.com/kelleyrobinson)
 
 <div class="line"></div>
+
+Slides from my Scala Days talk:
 
 <iframe src="//www.slideshare.net/slideshow/embed_code/key/fKRooAbi7ZLXam" width="595" height="485" frameborder="0" align="center" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin: 0 auto 5px auto; max-width: 100%; display:block;" allowfullscreen> </iframe> <div style="margin-bottom:5px; text-align: center;"> <strong> <a href="//www.slideshare.net/KelleyRobinson1/why-the-free-monad-isnt-free-61836547" title="Why The Free Monad isn&#x27;t Free" target="_blank">Why The Free Monad isn&#x27;t Free</a> </strong></div>
 
