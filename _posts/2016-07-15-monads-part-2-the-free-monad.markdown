@@ -15,7 +15,7 @@ Code examples can be found here: [https://github.com/robinske/monad-examples](ht
 
 <div class="line"></div>
 
-I had heard a lot of things about the `Free Monad` and never really understood what it was, so did the research that led me here. Without the energy or desire to learn category theory, I wanted to grasp the mechanics within the Scala ecosystem and the reasoning behind its use. Again, we start with Monoids...
+I had heard a lot of things about the `Free Monad` and never really understood what it was, so did the research that led me here. I wanted to grasp the mechanics within the Scala ecosystem and the reasoning behind its use. Again, we start with Monoids...
 
 ## Free Monoids
 
@@ -116,11 +116,11 @@ You might start to see how we can now encode computations as data and chain the 
 {% highlight scala %}
 val todos: Free[Todo, Map[String, Boolean]] =
   for {
-    _    <- newTask("Go to scala days")
-    _    <- newTask("Write a novel")
-    _    <- newTask("Meet Tina Fey")
-    _    <- completeTask("Go to scala days")
-    tsks <- getTasks(default = Map.empty[String, Boolean])
+    _     <- newTask("Go to scala days")
+    _     <- newTask("Write a novel")
+    _     <- newTask("Meet Tina Fey")
+    _     <- completeTask("Go to scala days")
+    tasks <- getTasks(default = Map.empty[String, Boolean])
   } yield tsks
 {% endhighlight %}
 
@@ -244,7 +244,7 @@ Imagine, though, a nested flatMap:
 }
 {% endhighlight %}
 
-Maybe your code doesn't have functions that look like that, but the architecture is behaving the same - you have composed a bunch of functions that are each added to the stack. If your business logic is complicated enough (in this case, maybe the `doSomething` functions are recursive or making `n` additional function calls), you might encounter `StackOverflowError`s.
+Over the course of your programs you'll build up something similar - you have composed a bunch of functions that are each added to the stack. If your business logic is complicated enough (in this case, maybe the `doSomething` functions are recursive or making `n` additional function calls), you might encounter `StackOverflowError`s.
 
 The `Free Monad`, on the other hand, created a nested, list-like structure that stores all of the functions on the _heap_. The trick is that these then have to be evaluated in a loop (or a tail recursive call). 
 
@@ -260,11 +260,13 @@ We're deferring execution and interpretation by defining the DSL (domain specifi
 
 ## With Great Power...
 
-`Free Monads` are a powerful construct, but even with their benefits, we should be judicious in our use of these tools. I get nervous every time I find a "neat" solution in Scala, it usually means there is an easier way. We already have a whole slew of tools (builtin to the language) that give the benefits of `Monads` (composability, side-effect-safety) without the complexity that require blog posts like these to explain. Remember that the [wrong abstraction is dangerous](http://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction) and our responsibility as programmers should still be to write reuseable, maintainable code. In short, more [#blueskyscala](https://twitter.com/search?q=%23blueskyscala&src=typd)!
+`Free Monads` are a powerful construct, but even with their benefits, we should be judicious in our use of these tools. I get nervous every time I find a "neat" solution in Scala, it usually means there is an easier way. We already have a whole slew of tools (builtin to the language) that give the benefits of `Monads` (composability, side effect management) without the complexity that require blog posts like these to explain. Remember that the [wrong abstraction is dangerous](http://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction) and our responsibility as programmers should still be to write reuseable, maintainable code. In short, more [#blueskyscala](https://twitter.com/search?q=%23blueskyscala&src=typd)!
 
 <div class="line"></div>
 
-Sound interesting? Want to convince me that your use of Free Monads is ingenious *and* necessary? I'm talking more about this at [Scala Days](http://event.scaladays.org/scaladays-nyc-2016) in May - or send me a note on Twitter [@kelleyrobinson](https://www.twitter.com/kelleyrobinson)
+If you're interested in learning more I talked about this at Scala Days in May, you can watch the video below!
+
+<iframe width="595" height="345" src="https://www.youtube.com/embed/U0lK0hnbc4U" frameborder="0" align="center" marginwidth="0" marginheight="0" style="border:1px solid #CCC; border-width:1px; margin: 0 auto 5px auto; max-width: 100%; display:block;" allowfullscreen></iframe>
 
 <div class="line"></div>
 
