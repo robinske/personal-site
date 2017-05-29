@@ -23,6 +23,17 @@
       <a href="{{ '/blog.html' | prepend:site.baseurl }}">Blog</a>
       {% endif %}
       </li>
+      {% if page.active == "talks" %}
+      <li class="menu-item current">
+      {% else %}
+      <li class="menu-item" %}>
+      {% endif %}
+      {% if jekyll.environment == "production" %}
+      <a href="http://{{ site.talksurl }}">Talks</a>
+      {% else %}
+      <a href="{{ '/talks.html' | prepend:site.baseurl }}">Talks</a>
+      {% endif %}
+      </li>
       {% if page.active == "contact" %}
       <li class="menu-item current">
       {% else %}

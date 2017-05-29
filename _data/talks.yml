@@ -1,0 +1,58 @@
+- title: Why the Free Monad Isn't Free
+  notes: This talk is my most popular. I spent a lot of time researching and preparing this talk in order to present the material in a way that was accessible to everyone, and I'm really proud of the result.
+  abstract: Scala developers love to discuss Monads, their metaphors, and their many use cases. Recognizing that monadic design and development patterns have their place, this talk will discuss the price of implementing the Free Monad in your code - spoiler alert - it's not free. We will define the Free Monad (without using complicated category theory!) and give you the confidence to know when it is and is not the answer in your code. We will also discuss some alternatives and their tradeoffs in maintainability, performance and design.
+  video: https://www.youtube.com/watch?v=U0lK0hnbc4U
+  slides: https://www.slideshare.net/KelleyRobinson1/why-the-free-monad-isnt-free-61836547 
+  reactions:
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">and <a href="https://twitter.com/odersky">@odersky</a> thanks <a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> for &quot;the clearest explanation of these concepts that I&#39;ve ever seen.&quot; <a href="https://twitter.com/hashtag/scaladays?src=hash">#scaladays</a></p>&mdash; lgdean (@lgdean) <a href="https://twitter.com/lgdean/status/730114765062836224">May 10, 2016</a></blockquote>
+
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> Enjoyed your talk - my favourite of the conference so far</p>&mdash; Noel (@noelmarkham) <a href="https://twitter.com/noelmarkham/status/730117148765499396">May 10, 2016</a></blockquote>
+
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> your Free monad talk is brilliant! Well articulated concepts! Thank you!</p>&mdash; John Azariah (@johnazariah) <a href="https://twitter.com/johnazariah/status/859176292851171328">May 1, 2017</a></blockquote>
+
+  conferences:
+    - name: Scala Days New York 2016
+      website: http://event.scaladays.org/scaladays-nyc-2016
+
+    - name: Curry On Rome 2016
+      website: http://curry-on.org/2016/
+
+    - name: Code Mesh 2016
+      website: http://www.codemesh.io/
+
+    - name: LX Scala 2017
+      website: http://www.lxscala.com/
+
+- title: Demystifying Scala
+  notes: This talk was fun to write and give, and it sparks a lot of great conversation at multi-language conferences.
+  abstract: >
+    It’s functional, it’s object oriented, it’s everything you never knew you wanted and more! Scala has been growing in popularity over the last 15 years and has now taken off in a variety of applications ranging from data science to distributed systems to messaging and the web. You’ve been curious about this language, and now is your chance to learn more. 
+    
+    Whether you’re a seasoned programmer or a beginner, a veteran on the JVM or just had to google that acronym, this talk will provide an introduction to the Scala language, why people use it, and why you might be interested in learning more. We’ll walk through the pros and cons of the language ecosystem and give you a practical look at how to get started.
+  video: https://conf-assets.s3.eu-central-1.amazonaws.com/uploads/videos/conference_3/39/original/Demystifying_Scala-by_%20Kelley_Robinson.mp4?etag=%22579f83d9c9219314cc129b3cf9bff133%22
+  slides: https://www.slideshare.net/KelleyRobinson1/demystifying-scala-75567791
+  conferences:
+    - name: GOTO Chicago 2017
+      website: gotochgo.com
+
+  reactions:
+    - quote: "\"I do a lot of these events and that was the best delivery I have seen in a long time\" - The Event Photographer, Sarah"
+
+- title: Functional Programming Essentials
+  notes: The message of this talk is something I feel very strongly about, that FP should be accessible, that jargon should be limited, and that the community is what shapes a language. I'm still searching for a catchier title...
+  abstract: >
+    Scala is often touted as a tool for Functional Programming, but Functional Programming (FP) itself is left to differing and opinionated definitions by many of its practitioners. FP is a well defined approach to writing programs that we will uncover in this talk. It is a style that long predates Scala and many of the modern abstractions that are often referred to as "essential" tools.
+
+    We will walk through the origins of FP, providing historical context through Lisp and the research that brought us this paradigm. We'll define what FP is and what it is not, looking at how tools like purity and immutability enable the expressions at the heart of FP.
+
+    Finally we'll talk about practical approaches to Functional Programming in Scala, how you can and why you would use this style in your everyday work. This will _not_ be a talk about monads and type systems, but give you a pragmatic look at how to separate the syntactic sugar from the underlying principles.
+
+  video: "#"
+  slides: https://www.slideshare.net/KelleyRobinson1/functional-programming-essentials
+  conferences:
+    - name: Scala Days 2017 (Chicago and Copenhagen)
+      website: http://event.scaladays.org/
+
+  reactions:
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> heard you where a good speaker. Checked out your talk.  So glad I did.  You are killing it ! <a href="https://twitter.com/hashtag/scaladays?src=hash">#scaladays</a></p>&mdash; Matt (@MattAndruff) <a href="https://twitter.com/MattAndruff/status/855084776973365251">April 20, 2017</a></blockquote>
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Thabkyou <a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> for that awesome talk. I&#39;m far more interested now in FP. You da best! <a href="https://twitter.com/hashtag/scaladays?src=hash">#scaladays</a></p>&mdash; JGutierrez (@JGCortazar) <a href="https://twitter.com/JGCortazar/status/855097662454075393">April 20, 2017</a></blockquote>

@@ -1,0 +1,56 @@
+---
+layout: default
+title: Talks - Kelley Robinson
+active: "talks"
+---
+
+<div class="content">
+  <h4>Hello!</h4>
+  <div class="teaser">
+    <p>I started public speaking at small events around 2013, and started doing larger conference talks in 2016. Some of the things I like to talk about include Scala, Functional Programming, building teams, how programmers learn and develop, and how programming communities thrive.</p>
+    <p>I'm currently based in San Francisco, and excited to travel for speaking engagements. My schedule is limited however, so more notice is better if I would have to travel far.</p>
+    <p>When I'm submitting to a CFP or thinking about attending a conference, these are the things I look for:</p>
+    <ul>
+      <li>Does your conference have a Code of Conduct and a plan to enforce it?</li>
+      <li>Are past or invited speakers people I admire?</li>
+      <li>Does the conference cover speaker travel & hotel?</li>
+      <li>Does the conference support <a href="https://www.thestrangeloop.com/opportunity.html">diversity programs</a>, or initiatives to make <a href="https://twitter.com/OssAnna16/status/865584129085026306">new attendees feel welcome?</a></li>
+      <li>Will the talks be recorded (in a way that I could share with people that can't attend?)</li>
+    </ul>
+    <p>Please get in touch if you are looking for speakers at your event! I'm happy to prepare a new talk or give one that has been tested before. Below you can find some of my recent talks.</p>
+  </div>
+</div>
+
+{% for talk in site.data.talks %}
+<div class="content">
+  <h4>{{ talk.title }}</h4>
+  <div class="line"></div>
+  <div class="teaser">
+    <p>{{ talk.notes }}</p>
+    <p><strong><a href="{{ talk.video }}">Video</a> | <a href="{{ talk.slides }}">Slides</a></strong></p>
+    <p><strong>Abstract</strong></p>
+    <p>{{ talk.abstract }}</p>
+    <p><strong>Conferences</strong></p>
+    <ul>
+    {% for conf in talk.conferences %}
+    <li><a href="{{ conf.website }}">{{ conf.name }}</a></li>
+    {% endfor %}
+    </ul>
+    {% if talk.reactions != null %}<p><strong>Reactions</strong></p>{% endif %}
+    {% for reaction in talk.reactions %}
+      <p>{{ reaction.quote }}</p>
+      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}
+
+</div>
+<div class="content" id="bio">
+  <h4>Speaker Bio</h4>
+  <div class="teaser">
+    <p><strong><a href="{{ site.data.about.headshot }}">Headshot</a></strong></p>
+    <p>{{ site.data.about.bio }}</p>
+  </div>
+</div>
+
