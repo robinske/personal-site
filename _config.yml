@@ -13,6 +13,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Currently working with data and infrastructure at Sharethrough in San Francisco.
 baseurl: "" # the subpath of your site, e.g. /blog
 blogurl: "blog.krobinson.me"
+talksurl: "talks.krobinson.me"
 url: "http://krobinson.me" # the base hostname & protocol for your site
 twitter_username: kelleyrobinson
 github_username:  robinske
