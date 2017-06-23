@@ -23,6 +23,27 @@
     - name: LX Scala 2017
       website: http://www.lxscala.com/
 
+- title: Functional Programming Essentials
+  notes: The message of this talk is something I feel very strongly about, that FP should be accessible, that jargon should be limited, and that the community is what shapes a language. I'm still searching for a catchier title...
+  abstract: >
+    Scala is often touted as a tool for Functional Programming, but Functional Programming (FP) itself is left to differing and opinionated definitions by many of its practitioners. FP is a well defined approach to writing programs that we will uncover in this talk. It is a style that long predates Scala and many of the modern abstractions that are often referred to as "essential" tools.
+
+    We will walk through the origins of FP, providing historical context through Lisp and the research that brought us this paradigm. We'll define what FP is and what it is not, looking at how tools like purity and immutability enable the expressions at the heart of FP.
+
+    Finally we'll talk about practical approaches to Functional Programming in Scala, how you can and why you would use this style in your everyday work. This will _not_ be a talk about monads and type systems, but give you a pragmatic look at how to separate the syntactic sugar from the underlying principles.
+
+  video: https://www.youtube.com/watch?v=Yc6nJZK39mU
+  slides: https://www.slideshare.net/KelleyRobinson1/forget-what-you-think-you-know-redefining-functional-programming-for-scala-76584004
+  conferences:
+    - name: Scala Days 2017 (Chicago and Copenhagen)
+      website: http://event.scaladays.org/
+
+  reactions:
+    - quote: <blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">This was a really good talk. Important content, very well presented. I tip my hat to <a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a></p>&mdash; colorless green idea (@dkrentzlin) <a href="https://twitter.com/dkrentzlin/status/870577009122054145">June 2, 2017</a></blockquote>
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Brilliant talk by <a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> on the essence of FP. Enlightening historical perspective as well! <a href="https://twitter.com/hashtag/ScalaDays?src=hash">#ScalaDays</a> <a href="https://t.co/tE7ABKocs3">pic.twitter.com/tE7ABKocs3</a></p>&mdash; Jean-Philippe Pellet (@jp_pellet) <a href="https://twitter.com/jp_pellet/status/870560723293929472">June 2, 2017</a></blockquote>
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> heard you where a good speaker. Checked out your talk.  So glad I did.  You are killing it ! <a href="https://twitter.com/hashtag/scaladays?src=hash">#scaladays</a></p>&mdash; Matt (@MattAndruff) <a href="https://twitter.com/MattAndruff/status/855084776973365251">April 20, 2017</a></blockquote>
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Thabkyou <a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> for that awesome talk. I&#39;m far more interested now in FP. You da best! <a href="https://twitter.com/hashtag/scaladays?src=hash">#scaladays</a></p>&mdash; JGutierrez (@JGCortazar) <a href="https://twitter.com/JGCortazar/status/855097662454075393">April 20, 2017</a></blockquote>
+
 - title: Demystifying Scala
   notes: This talk was fun to write and give, and it sparks a lot of great conversation at multi-language conferences.
   abstract: >
@@ -34,25 +55,3 @@
   conferences:
     - name: GOTO Chicago 2017
       website: gotochgo.com
-
-  reactions:
-    - quote: "\"I do a lot of these events and that was the best delivery I have seen in a long time\" - The Event Photographer, Sarah"
-
-- title: Functional Programming Essentials
-  notes: The message of this talk is something I feel very strongly about, that FP should be accessible, that jargon should be limited, and that the community is what shapes a language. I'm still searching for a catchier title...
-  abstract: >
-    Scala is often touted as a tool for Functional Programming, but Functional Programming (FP) itself is left to differing and opinionated definitions by many of its practitioners. FP is a well defined approach to writing programs that we will uncover in this talk. It is a style that long predates Scala and many of the modern abstractions that are often referred to as "essential" tools.
-
-    We will walk through the origins of FP, providing historical context through Lisp and the research that brought us this paradigm. We'll define what FP is and what it is not, looking at how tools like purity and immutability enable the expressions at the heart of FP.
-
-    Finally we'll talk about practical approaches to Functional Programming in Scala, how you can and why you would use this style in your everyday work. This will _not_ be a talk about monads and type systems, but give you a pragmatic look at how to separate the syntactic sugar from the underlying principles.
-
-  video: "#"
-  slides: https://www.slideshare.net/KelleyRobinson1/functional-programming-essentials
-  conferences:
-    - name: Scala Days 2017 (Chicago and Copenhagen)
-      website: http://event.scaladays.org/
-
-  reactions:
-    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> heard you where a good speaker. Checked out your talk.  So glad I did.  You are killing it ! <a href="https://twitter.com/hashtag/scaladays?src=hash">#scaladays</a></p>&mdash; Matt (@MattAndruff) <a href="https://twitter.com/MattAndruff/status/855084776973365251">April 20, 2017</a></blockquote>
-    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Thabkyou <a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> for that awesome talk. I&#39;m far more interested now in FP. You da best! <a href="https://twitter.com/hashtag/scaladays?src=hash">#scaladays</a></p>&mdash; JGutierrez (@JGCortazar) <a href="https://twitter.com/JGCortazar/status/855097662454075393">April 20, 2017</a></blockquote>
