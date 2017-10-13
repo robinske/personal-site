@@ -124,7 +124,7 @@ a li .current {
 	color: #099f7d;
 	border-bottom: dotted 1px;
 }
-.line {
+.line, hr {
 	width: 95%;
 	margin: 20px auto 20px auto;
 	border-bottom: dotted 1px #099f7d;
@@ -263,4 +263,11 @@ sup:hover {
 		top: 0px;
 		margin: 0 auto 20px auto;
 	}
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+hr {
+
 }
