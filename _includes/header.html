@@ -3,7 +3,7 @@
     {% if jekyll.environment == "production" %}
     <a href="{{ site.url }}" title="kelley robinson">
     {% else %}
-    <a href="{{ '/index.html' | prepend:site.baseurl }}" title="kelley robinson">
+    <a href="{{ '/index' | prepend:site.baseurl }}" title="kelley robinson">
     {% endif %}
       <h1>kelley robinson</h1>
       <h2>software engineer</h2>                       
@@ -20,7 +20,7 @@
       {% if jekyll.environment == "production" %}
       <a href="http://{{ site.blogurl }}">Blog</a>
       {% else %}
-      <a href="{{ '/blog.html' | prepend:site.baseurl }}">Blog</a>
+      <a href="{{ '/blog' | prepend:site.baseurl }}">Blog</a>
       {% endif %}
       </li>
       {% if page.active == "talks" %}
@@ -31,7 +31,7 @@
       {% if jekyll.environment == "production" %}
       <a href="http://{{ site.talksurl }}">Talks</a>
       {% else %}
-      <a href="{{ '/talks.html' | prepend:site.baseurl }}">Talks</a>
+      <a href="{{ '/talks' | prepend:site.baseurl }}">Talks</a>
       {% endif %}
       </li>
       {% if page.active == "contact" %}
@@ -42,7 +42,7 @@
       {% if jekyll.environment == "production" %}
       <a href="{{ site.url }}">Contact</a>
       {% else %}
-      <a href="{{ '/index.html' | prepend:site.baseurl }}">Contact</a>
+      <a href="{{ '/index' | prepend:site.baseurl }}">Contact</a>
       {% endif %}
       </li>
       <li class="menu-item">
