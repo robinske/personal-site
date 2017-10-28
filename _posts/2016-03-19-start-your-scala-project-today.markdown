@@ -2,7 +2,6 @@
 layout:    post
 title:     "Create Your Scala Project Today"
 date:      2016-03-19
-permalink: /posts/:title
 tags:      programming scala
 comments:  true
 active:    "blog"
@@ -118,4 +117,3 @@ If you're new to Scala and have no idea where to start, here are some ideas to e
 * Turn this into a web-application
 * Consume an API ([http://www.timeapi.org/](http://www.timeapi.org/))
 * As always, write more tests!
-

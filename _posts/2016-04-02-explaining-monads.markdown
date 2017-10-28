@@ -2,14 +2,13 @@
 layout:    post
 title:     "Monads are just WTF in the category of huh?"
 date:      2016-04-02
-permalink: /posts/:title
 tags:      programming scala
 comments:  true
 active:    "blog"
 
 ---
 
-Scala developers love to discuss Monads, their metaphors, and their many use cases. 
+Scala developers love to discuss Monads, their metaphors, and their many use cases.
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">burritos are just tacoids in the category of enchiladafunctors</p>&mdash; Richard Minerich (@rickasaurus) <a href="https://twitter.com/rickasaurus/status/705134684427128833">March 2, 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -109,7 +108,7 @@ For all practical purposes, implementations of `Functors` in Scala are also `End
 
 [^5]: [https://stackoverflow.com/questions/44965/what-is-a-monad](https://stackoverflow.com/questions/44965/what-is-a-monad)
 
-We've established that we don't have to be mathematicians to do this, so let's take a look at the practical implementation details. 
+We've established that we don't have to be mathematicians to do this, so let's take a look at the practical implementation details.
 
 A `Monad` is a type that has implemented the `pure` and `flatMap` [^6] methods.
 
@@ -155,11 +154,11 @@ trait Monad[M[_]] extends Functor[M] /* with Monoid[_ => M[_]] */ {
   def pure[A](a: A): M[A]
 
   def flatMap[A, B](a: M[A])(fn: A => M[B]): M[B]
-  
+
   def map[A, B](a: M[A])(fn: A => B): M[B] = {
     flatMap(a){ b: A => pure(fn(b)) }
   }
-  
+
   def append[A, B, C](f1: A => M[B], f2: B => M[C]): A => M[C] = { a: A =>
     val bs: M[B] = f1(a)
     val cs: M[C] = flatMap(bs) { b: B => f2(b) }
@@ -167,7 +166,7 @@ trait Monad[M[_]] extends Functor[M] /* with Monoid[_ => M[_]] */ {
   }
 
   def identity[A]: A => M[A] = a => pure(a)
-  
+
 }
 {% endhighlight %}
 

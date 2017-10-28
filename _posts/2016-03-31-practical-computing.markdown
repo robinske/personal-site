@@ -2,7 +2,6 @@
 layout:    post
 title:     "Practical Computing"
 date:      2016-03-31
-permalink: /posts/:title
 tags:      programming 
 comments:  true
 active:    "blog"
@@ -242,4 +241,3 @@ Getting good with a high end application of relational database, say, for a majo
 One valuable approach to get past tricky issues for the first time is to get paid support from specialized experts.
 
 Go for it!
-

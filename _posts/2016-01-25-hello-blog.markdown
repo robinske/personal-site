@@ -2,7 +2,6 @@
 layout:    post
 title:     "Hello, Blog"
 date:      2016-01-25
-permalink: /posts/:title
 tags:      programming meta-blog
 active:    "blog"
 ---

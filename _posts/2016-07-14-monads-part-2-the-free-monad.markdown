@@ -2,7 +2,6 @@
 layout:    post
 title:     "The Free Monad and its Cost"
 date:      2016-07-14
-permalink: /posts/:title
 tags:      programming scala
 comments:  true
 active:    "blog"
@@ -29,7 +28,7 @@ trait Monoid[A] {
 
 }
 {% endhighlight %}
-There is such a thing as a **Free Monoid**. A `Monoid` is "free" when it's defined in the simplest terms possible and when the `append` method doesn't lose any data in its result. 
+There is such a thing as a **Free Monoid**. A `Monoid` is "free" when it's defined in the simplest terms possible and when the `append` method doesn't lose any data in its result.
 
 This is vague, but let's look at some examples:
 
@@ -43,7 +42,7 @@ class ListConcat[A] extends Monoid[List[A]] {
 }
 {% endhighlight %}
 
-`ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order ([Integer addition](http://localhost:4000/posts/explaining-monads#examples), on the other hand, defines a special algebra for combining numbers, losing the inputs in the result). 
+`ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order ([Integer addition](http://localhost:4000/posts/explaining-monads#examples), on the other hand, defines a special algebra for combining numbers, losing the inputs in the result).
 
 It's also important that we defined `ListConcat` with a generic type `A` - the only operations we can perform on the generic list are the `Monoid` operations (since you don't know anything about its members, if they're Strings, Ints, other complex types, or even functions). This satisfies the "simplest terms possible" clause for free-ness, and gives meaning to this technical explanation of Free Objects:
 
@@ -143,7 +142,7 @@ val todosExpanded: Free[Todo, Map[String, Boolean]] =
   )
 {% endhighlight %}
 
-Now you can see the "list-like" data structure that is preserving the functions as we chain them together. 
+Now you can see the "list-like" data structure that is preserving the functions as we chain them together.
 
 #### Hotel California
 
@@ -231,7 +230,7 @@ What's the point of using the `Free Monad`? `Monads` have the ability to `flatMa
 
 **1) Stack safety**
 
-Imagine, though, a nested flatMap: 
+Imagine, though, a nested flatMap:
 {% highlight scala %}
 (1 to 1000).toList.flatMap { i =>
   doSomething(i).flatMap { j =>
@@ -246,7 +245,7 @@ Imagine, though, a nested flatMap:
 
 Over the course of your programs you'll build up something similar - you have composed a bunch of functions that are each added to the stack. If your business logic is complicated enough (in this case, maybe the `doSomething` functions are recursive or making `n` additional function calls), you might encounter `StackOverflowError`s.
 
-The `Free Monad`, on the other hand, created a nested, list-like structure that stores all of the functions on the _heap_. The trick is that these then have to be evaluated in a loop (or a tail recursive call). 
+The `Free Monad`, on the other hand, created a nested, list-like structure that stores all of the functions on the _heap_. The trick is that these then have to be evaluated in a loop (or a tail recursive call).
 
 The tradeoff? Stack for Heap.
 

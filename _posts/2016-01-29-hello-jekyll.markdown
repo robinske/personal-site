@@ -2,7 +2,6 @@
 layout:    post
 title:     "Hello, Jekyll"
 date:      2016-01-29
-permalink: /posts/:title
 tags:      programming meta-blog
 comments:  true
 active:    "blog"
@@ -14,7 +13,7 @@ Some of the most useful components for me:
 
 * **Templating**
 
-Being able to 'include' the site navigation in all of your files or loop through blog posts to generate a list allow you to stay DRY in the rest of your pages. This saves a lot of time and prevents complexity. 
+Being able to 'include' the site navigation in all of your files or loop through blog posts to generate a list allow you to stay DRY in the rest of your pages. This saves a lot of time and prevents complexity.
 
 * **Markdown**
 

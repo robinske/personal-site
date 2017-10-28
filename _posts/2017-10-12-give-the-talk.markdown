@@ -2,7 +2,6 @@
 layout:    post
 title:     "Why You Should Give That Conference Talk"
 date:      2017-10-12
-permalink: /posts/:title
 tags:      programming speaking conferences cfp
 comments:  true
 active:    "blog"
@@ -13,15 +12,15 @@ Last week I encouraged a friend to give a conference talk about some tooling he 
 
 “I feel like Netflix already owns that space. I can’t give something more interesting than they can,” he replied.
 
-The thing is, most people don’t work at Netflix or at companies with that kind of scale and resources. While I've marveled at some of the problems engineers at large companies like Netflix [have tackled](https://www.youtube.com/watch?v=Q4nniyAarbs), many of their case studies have been impractical in relation to my own work. 
+The thing is, most people don’t work at Netflix or at companies with that kind of scale and resources. While I've marveled at some of the problems engineers at large companies like Netflix [have tackled](https://www.youtube.com/watch?v=Q4nniyAarbs), many of their case studies have been impractical in relation to my own work.
 
-This same friend offered me a ton of guidance when I was working on a similar project at my last job, and I *knew* it would be valuable to others as a conference talk, but here he was insisting it wasn't a good idea. 
+This same friend offered me a ton of guidance when I was working on a similar project at my last job, and I *knew* it would be valuable to others as a conference talk, but here he was insisting it wasn't a good idea.
 
-I've talked with a lot of folks who have considered giving a conference talk but haven't yet made the leap. This post addresses 3 of the most common justifications I hear from people and offers reasons why you're just the person to give the next great conference talk. 
+I've talked with a lot of folks who have considered giving a conference talk but haven't yet made the leap. This post addresses 3 of the most common justifications I hear from people and offers reasons why you're just the person to give the next great conference talk.
 
 ## 1. “I don’t know what I would talk about.”
 
-A challenge to be sure, but you absolutely have something to share. There are a few strategies you can use to settle on a topic. Once you find a conference you want to speak at[^1], check out their CFP[^2] ([here are](https://www.thestrangeloop.com/cfp.html) [some examples](http://cfp.rubyconf.org/events/rubyconf2017)). I've noticed more established conferences giving more guidance on what they're looking for and often offerering help to new speakers in crafting a talk idea and proposal -- take advantage of this! Submitting early can also allow conference organizers to give feedback and help you craft a better proposal before the deadline. Some conferences will even give [talk suggestions](https://www.alterconf.com/news/having-trouble-coming-talk-ideas)! 
+A challenge to be sure, but you absolutely have something to share. There are a few strategies you can use to settle on a topic. Once you find a conference you want to speak at[^1], check out their CFP[^2] ([here are](https://www.thestrangeloop.com/cfp.html) [some examples](http://cfp.rubyconf.org/events/rubyconf2017)). I've noticed more established conferences giving more guidance on what they're looking for and often offerering help to new speakers in crafting a talk idea and proposal -- take advantage of this! Submitting early can also allow conference organizers to give feedback and help you craft a better proposal before the deadline. Some conferences will even give [talk suggestions](https://www.alterconf.com/news/having-trouble-coming-talk-ideas)!
 
 If the CFP leaves you uninspired or undecided, there are a lot of questions you can ask yourself in order to narrow down a topic idea, like these from [Eric Mann](https://ttmm.io/biz/choose-a-conference-topic/):
 
@@ -43,7 +42,7 @@ For a more in depth workshop style approach, set aside 30 minutes and follow alo
 
 ![Wrong!](https://media.giphy.com/media/l1IY5J4Cfw8JLi40M/giphy.gif)
 
-First, you don't need to be an expert on a topic to give a great talk on that topic. One of my first conference talks was about [Free Monads](https://www.youtube.com/watch?v=U0lK0hnbc4U). I was not and am still not the leading authority on Free Monads or the theory that comes with understanding that abstraction. However, most talks on the subject were so advanced that no one could grasp the concept. My talk ended up being well received because I tailored it to a more beginner audience, and was able to better empathize with the people learning. 
+First, you don't need to be an expert on a topic to give a great talk on that topic. One of my first conference talks was about [Free Monads](https://www.youtube.com/watch?v=U0lK0hnbc4U). I was not and am still not the leading authority on Free Monads or the theory that comes with understanding that abstraction. However, most talks on the subject were so advanced that no one could grasp the concept. My talk ended up being well received because I tailored it to a more beginner audience, and was able to better empathize with the people learning.
 
 Additionally, potential speakers often underestimate their own knowledge and overestimate the knowledge of everyone else. Chances are if you learned something in the last year, at least 50% of a conference's attendees don't know that concept yet either.
 
@@ -55,7 +54,7 @@ Especially for a new speaker, there is going to be a significant time investment
 
 [^3]: i.e. lightning talk vs 45 minute session, case study vs live coding demonstration.
 
-The benefits of speaking at conferences, in my opinion, outweigh the time commitment. Speak with your employer about how they support conference speaking: will they cover expenses for travel? Will you have to take PTO to give a talk? Is it ok for you to work on your talk during work hours? When I first started speaking I didn’t set these expectations with my employer, so I spent many weekends and a good chunk of my spare time writing and rehearsing my talks. Many employers will (and should!) support conference speaking because of the positive branding and recruiting potential -- I know my last company got at least a few inbound applications because of conference talks I gave. Besides, many of the skills you develop through conference speaking will also make you a better employee. 
+The benefits of speaking at conferences, in my opinion, outweigh the time commitment. Speak with your employer about how they support conference speaking: will they cover expenses for travel? Will you have to take PTO to give a talk? Is it ok for you to work on your talk during work hours? When I first started speaking I didn’t set these expectations with my employer, so I spent many weekends and a good chunk of my spare time writing and rehearsing my talks. Many employers will (and should!) support conference speaking because of the positive branding and recruiting potential -- I know my last company got at least a few inbound applications because of conference talks I gave. Besides, many of the skills you develop through conference speaking will also make you a better employee.
 
 Some of the benefits I've enjoyed include:
 
@@ -93,7 +92,7 @@ One of the best parts about speaking at conferences is that people will strike u
 
 ## The speaker doth protest too much
 
-Hopefully you're convinced that you have something to say and that the investment is worth it. There are many excellent resources for getting talks accepted and giving great conference talks, which I won't covere here but have included links to resources for this below. 
+Hopefully you're convinced that you have something to say and that the investment is worth it. There are many excellent resources for getting talks accepted and giving great conference talks, which I won't covere here but have included links to resources for this below.
 
 If you want someone to review a talk idea or proposal, I'm happy to be a sounding board! You *can* do this, you *should* do this, and GOOD LUCK!
 
