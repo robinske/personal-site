@@ -31,7 +31,7 @@ If the CFP leaves you uninspired or undecided, there are a lot of questions you 
 For a more in depth workshop style approach, set aside 30 minutes and follow along [Lucy Bain's amazing process for generating proposal ideas](http://lucybain.com/blog/2016/conference-proposal-ideas/) with questions like:
 
 * What’s something you work with fairly regularly and understand 80% of, but not 100%?
-* What’s your hobby? What lessons are shared between your hobby and your job?process she wrote about on her blog:
+* What’s your hobby? What lessons are shared between your hobby and your job?
 
 [^1]: Two newsletters for finding conferences: [techspeak.email](https://techspeak.email/) and [theweeklycfp.com](http://theweeklycfp.com/)
 
