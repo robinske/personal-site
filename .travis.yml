@@ -5,8 +5,10 @@ rvm:
 install: gem install jekyll
 script: jekyll build
 
-before-deploy:
-  install: pip install s3cmd
+before_deploy:
+  install:
+    - pip install s3cmd
+    - gem install jekyll
 
 deploy:
   provider: script
