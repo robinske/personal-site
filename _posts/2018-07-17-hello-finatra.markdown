@@ -26,9 +26,9 @@ Requirements:
 
 In a terminal window type:
 
-```
+{% highlight bash %}
 sbt new robinske/hello-finatra.g8
-```
+{% endhighlight %}
 
 You can name your project anything you like, but avoid using numbers or dashes.
 
@@ -38,15 +38,15 @@ You can name your project anything you like, but avoid using numbers or dashes.
 
 Navigate into your directory, in my case:
 
-```
+{% highlight bash %}
 cd finatra_demo
-```
+{% endhighlight %}
 
 Then run using SBT:
 
-```
+{% highlight bash %}
 sbt run
-```
+{% endhighlight %}
 
 Finatra will start on [port 8888](http://localhost:8888/hello?name=Kelley):
 
