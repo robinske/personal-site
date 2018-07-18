@@ -1,6 +1,6 @@
 # personal-site 
 
-https://travis-ci.org/robinske/personal-site.svg?branch=master
+![travis ci build status](https://travis-ci.org/robinske/personal-site.svg?branch=master)
 
 http://krobinson.me
 
