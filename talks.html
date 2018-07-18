@@ -5,18 +5,16 @@ active: "talks"
 ---
 
 <div class="content">
-  <h4>Hello!</h4>
+  <h4>Hello! I'm Kelley.</h4>
   <div class="teaser">
-    <p>Some of the things I like to talk about include Security, data engineering, Scala, Spark, Functional Programming, how programmers learn and develop, and how programming communities thrive.</p>
-    <p>When submitting to a CFP, I look for conferences that have thought about the following:</p>
-    <ul>
-      <li>Is there a Code of Conduct and a plan to enforce it?</li>
-      <li>Are past or invited speakers people I admire?</li>
-      <li>Does the conference cover speaker travel & hotel?</li>
-      <li>Does the conference support <a href="https://www.thestrangeloop.com/opportunity.html">diversity programs</a>, or initiatives to make <a href="https://twitter.com/OssAnna16/status/865584129085026306">new attendees feel welcome?</a></li>
-      <li>Will the talks be recorded (in a way that I could share with people that can't attend?)</li>
-    </ul>
+    <p><img src="https://s3-us-west-1.amazonaws.com/krobinson.me/images/air-quotes-cropped.jpg"></p>
+    <p>I'm a Security Advocate and Developer Evangelist for Twilio and Authy. Some of the things I like to talk about include Two-factor authentication, identity management, security UX, data engineering, Spark, how programmers learn and develop, and how programming communities thrive.</p>
     <p>Please get in touch if you are looking for speakers at your event! I'm happy to prepare a new talk or give one that has been tested before. Below you can find some of my recent talks.</p>
+  </div>
+  <h4 id="bio">Speaker Bio</h4>
+  <div class="teaser">
+    <p><strong><a href="{{ site.data.about.headshot }}">Headshot</a></strong></p>
+    <p>{{ site.data.about.bio }}</p>
   </div>
 </div>
 
@@ -26,7 +24,7 @@ active: "talks"
   <div class="line"></div>
   <div class="teaser">
     <p>{{ talk.notes }}</p>
-    <p><strong><a href="{{ talk.video }}">Video</a> | <a href="{{ talk.slides }}">Slides</a></strong></p>
+    <p>{% if talk.video != null %}<strong><a href="{{ talk.video }}">Video</a> | </strong>{% endif %}{% if talk.slides != null %}<strong><a href="{{ talk.slides }}">Slides</a></strong>{% endif %}</p>
     <p><strong>Abstract</strong></p>
     <p>{{ talk.abstract }}</p>
     <p><strong>Conferences</strong></p>
@@ -35,20 +33,6 @@ active: "talks"
     <li><a href="{{ conf.website }}">{{ conf.name }}</a></li>
     {% endfor %}
     </ul>
-    {% if talk.reactions != null %}<p><strong>Reactions</strong></p>{% endif %}
-    {% for reaction in talk.reactions %}
-      <p>{{ reaction.quote }}</p>
-      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-    {% endfor %}
   </div>
 </div>
 {% endfor %}
-
-</div>
-<div class="content" id="bio">
-  <h4>Speaker Bio</h4>
-  <div class="teaser">
-    <p><strong><a href="{{ site.data.about.headshot }}">Headshot</a></strong></p>
-    <p>{{ site.data.about.bio }}</p>
-  </div>
-</div>
