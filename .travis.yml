@@ -6,9 +6,8 @@ install: gem install jekyll
 script: jekyll build
 
 before_deploy:
-  install:
-    - pip install s3cmd
-    - gem install jekyll
+  - pip install s3cmd
+  - gem install jekyll
 
 deploy:
   provider: script
