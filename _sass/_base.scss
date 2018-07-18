@@ -11,8 +11,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -41,13 +41,13 @@ pre code {
 }
 code {
   border-radius: 3px;
-  background-color: #e7e7e7; 
+  background-color: #e7e7e7;
   padding: 1px 5px 1px 5px;
 }
 pre {
   border: 1px solid #e8e8e8;
   border-radius: 3px;
-  background-color: #eef; 
+  background-color: #eef;
   padding: 8px;
   overflow-x: auto; }
   pre > code {
@@ -73,7 +73,7 @@ a:hover {
 	font-family: 'Allura', cursive, sans-serif;
 	font-size: 70px;
 	text-align: center;
-	margin-bottom: -20px;
+	margin-bottom: -28px;
 }
 .logo h2 {
 	font-size: 12px;
@@ -267,7 +267,4 @@ sup:hover {
 img {
     max-width: 100%;
     height: auto;
-}
-hr {
-
 }

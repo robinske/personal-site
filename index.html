@@ -4,11 +4,26 @@ title: Kelley Robinson
 active: "contact"
 ---
 
-<div class="content centered">
-  <h3 class="title">Contact</h1>
+<div class="content">
+  <h4>Hello! I'm Kelley.</h4>
+  <div class="teaser">
+    <p><img src="https://s3-us-west-1.amazonaws.com/krobinson.me/images/air-quotes-cropped.jpg"></p>
+    <p>I'm a Security Advocate and Developer Evangelist for Twilio and Authy. You can find my writing
+      {% if jekyll.environment == "production" %}
+        <a href="http://{{ site.blogurl }}">here</a>
+      {% else %}
+        <a href="{{ '/blog' | prepend:site.baseurl }}">here</a>
+      {% endif %}
+      and on the <a href="https://www.twilio.com/blog/author/krobinson">Twilio blog</a>. Please get in touch if you have questions, want to chat about security, or have extra tickets to a live showing of SNL 😃. I'm not currently looking for new opportunities.
+  </div>
   <div class="line"></div>
-  <p><a href="mailto:hello@krobinson.me">hello@krobinson.me</a></p>
-  <p><a href="http://www.twitter.com/kelleyrobinson">@kelleyrobinson</a></p>
-  <p><a href="http://linkedin.com/in/kelleyrobinson">linkedin.com/in/kelleyrobinson</a></p>
-  <p><a href="http://github.com/robinske">github.com/robinske</a></p>
+  <h4 class="title">Contact</h1>
+  <div class="teaser">
+    <ul>
+      <li><a href="mailto:hello@krobinson.me">hello@krobinson.me</a></li>
+      <li><a href="http://www.twitter.com/kelleyrobinson">@kelleyrobinson</a></li>
+      <li><a href="http://linkedin.com/in/kelleyrobinson">linkedin.com/in/kelleyrobinson</a></li>
+      <li><a href="http://github.com/robinske">github.com/robinske</a></li>
+    </ul>
+  </div>
 </div>
