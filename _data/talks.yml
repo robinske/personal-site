@@ -48,12 +48,8 @@
     - name: SciPyLadies Meetup June 2018
       website: https://twitter.com/jkru/status/1006363491773509633
 
-    - name: Scala Days New York 2018
-      website: https://na.scaladays.org/schedule/analyzing-pwned-passwords-with-apache-spark
-
-    - name: Scala Days Berlin 2018
-      website: https://eu.scaladays.org/lect-6948-analyzing-pwned-passwords-with-apache-spark.html
-
+    - name: Scala Days 2018 (New York and Berlin)
+      website: https://scaladays.org
 
 - title: Why the Free Monad Isn't Free
   abstract: Scala developers love to discuss Monads, their metaphors, and their many use cases. Recognizing that monadic design and development patterns have their place, this talk will discuss the price of implementing the Free Monad in your code - spoiler alert - it's not free. We will define the Free Monad (without using complicated category theory!) and give you the confidence to know when it is and is not the answer in your code. We will also discuss some alternatives and their tradeoffs in maintainability, performance and design.
