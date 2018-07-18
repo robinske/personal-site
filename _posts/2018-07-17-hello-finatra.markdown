@@ -48,9 +48,7 @@ Then run using SBT:
 sbt run
 {% endhighlight %}
 
-Finatra will start on [port 8888](http://localhost:8888/hello?name=Kelley):
-
-![image](https://user-images.githubusercontent.com/3673341/39088806-9a32425e-456d-11e8-92c0-54742486282f.png)
+Finatra will start on [port 8888](http://localhost:8888/hello?name=Kelley).
 
 Hooray!
 
