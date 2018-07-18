@@ -1,0 +1,17 @@
+language: ruby
+rvm:
+  - 2.4.1
+
+install: gem install jekyll
+script: jekyll build
+
+exclude: [vendor]
+
+before-deploy:
+  install: pip install s3cmd
+
+deploy:
+  provider: script
+  script: bash deploy.sh
+  on:
+    branch: master
