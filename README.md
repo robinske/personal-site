@@ -1,5 +1,7 @@
 # personal-site 
 
+https://travis-ci.org/robinske/personal-site.svg?branch=master
+
 http://krobinson.me
 
 Built with HTML, CSS, and [Jekyll](https://jekyllrb.com).
