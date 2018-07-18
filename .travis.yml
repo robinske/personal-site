@@ -1,6 +1,6 @@
-language: ruby
-rvm:
-  - 2.4.1
+language: python
+python:
+  - 3.6.4
 
 install: gem install jekyll
 script: jekyll build
@@ -8,8 +8,8 @@ script: jekyll build
 before_deploy:
   - gem install jekyll
   - pip install --upgrade pip
-  - pip install six==1.11.0
-  - pip install s3cmd==2.0.2
+  - pip install 'six==1.11.0'
+  - pip install 's3cmd==2.0.2'
 
 deploy:
   provider: script
