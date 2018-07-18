@@ -34,7 +34,7 @@ You can name your project anything you like, but avoid using numbers or dashes.
 
 ![image](https://user-images.githubusercontent.com/3673341/39088781-36029586-456d-11e8-9940-28fa04a7bfed.png)
 
-### Running 'Hello World'
+## Running 'Hello World'
 
 Navigate into your directory, in my case:
 
