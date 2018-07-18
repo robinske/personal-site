@@ -1,5 +1,7 @@
 #!/bin/bash
 
+gem install jekyll
+
 rm -rf _site/
 JEKYLL_ENV="production" jekyll build
 

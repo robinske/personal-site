@@ -1,15 +1,15 @@
 language: python
 python:
-  - 3.6.4
+  - 3.6
 
 install: gem install jekyll
 script: jekyll build
 
 before_deploy:
-  - gem install jekyll
   - pip install --upgrade pip
   - pip install 'six==1.11.0'
   - pip install 's3cmd==2.0.2'
+  - gem install jekyll
 
 deploy:
   provider: script
