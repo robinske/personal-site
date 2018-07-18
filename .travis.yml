@@ -10,7 +10,8 @@ script: jekyll build
 
 before_deploy:
   - gem install jekyll
-  - pip install --upgrade s3cmd
+  - pip3 install -U six==1.11.0
+  - pip3 install -U s3cmd==2.0.2
 
 deploy:
   provider: script
