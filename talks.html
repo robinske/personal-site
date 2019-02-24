@@ -23,7 +23,17 @@ active: "talks"
   <div class="line"></div>
   <div class="teaser">
     <p>{{ talk.notes }}</p>
-    <p>{% if talk.video != null %}<strong><a href="{{ talk.video }}">Video</a> | </strong>{% endif %}{% if talk.slides != null %}<strong><a href="{{ talk.slides }}">Slides</a></strong>{% endif %}</p>
+    <p>
+      {% if talk.video != null %}
+        <strong><a href="{{ talk.video }}">Video</a> | </strong>
+      {% endif %}
+      {% if talk.blog != null %}
+        <strong><a href="{{ talk.blog }}">Blog Post</a> | </strong>
+      {% endif %}
+      {% if talk.slides != null %}
+        <strong><a href="{{ talk.slides }}">Slides</a></strong>
+      {% endif %}
+    </p>
     <p><strong>Abstract</strong></p>
     <p>{{ talk.abstract }}</p>
     <p><strong>Conferences</strong></p>

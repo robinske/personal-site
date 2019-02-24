@@ -2,16 +2,18 @@
 title: Kelley Robinson
 email: hello@krobinson.me
 description: >
-  Developer. Writer. Educator. Likes automating, organizing, cooking, creating.
-  Security advocate for Twilio & Authy. University of Michigan alum.
+  Developer. Writer. Educator. Likes automating, organizing, cooking, creating. Security advocate for Twilio & Authy. University of Michigan alum.
 baseurl: ""
 blogurl: "blog.krobinson.me"
 talksurl: "talks.krobinson.me"
-url: "http://krobinson.me"
+url: "https://krobinson.me"
 twitter_username: kelleyrobinson
 github_username:  robinske
 
 # Build settings
 markdown: kramdown
-exclude: [deploy.sh, README.md]
+exclude: 
+  - Gemfile
+  - Gemfile.lock
+  - README.md
 permalink: /posts/:title/
