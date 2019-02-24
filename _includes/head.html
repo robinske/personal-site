@@ -1,12 +1,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" type="image/png" href="{{ site.url }}/favicon.png"/>
-  {% if jekyll.environment == "production" %}
-  <link rel="stylesheet" href="{{ site.url }}/css/main.css"/>
-  {% else %}
-  <link rel="stylesheet" href="{{ '/css/main.css' | prepend:site.baseurl }}"/>
-  {% endif %}
+  <link rel="shortcut icon" type="image/png" href="{{ site.baseurl }}/favicon.png"/>
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css"/>
   <link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>

@@ -1,13 +1,7 @@
 <header class="header" >
   <div class="logo">
-    {% if jekyll.environment == "production" %}
-    <a href="{{ site.url }}" title="kelley robinson">
-    {% else %}
-    <a href="{{ '/index' | prepend:site.baseurl }}" title="kelley robinson">
-    {% endif %}
-      <h1>kelley robinson</h1>
-      <h2 style="padding-left: 75px;">developer | writer | educator</h2>
-    </a>
+    <h1>kelley robinson</h1>
+    <h2 style="padding-left: 75px;">developer | writer | educator</h2>
   </div>
   <div>
   <nav class="mainmenu">
@@ -17,33 +11,21 @@
       {% else %}
       <li class="menu-item" %}>
       {% endif %}
-      {% if jekyll.environment == "production" %}
-      <a href="http://{{ site.blogurl }}">Blog</a>
-      {% else %}
-      <a href="{{ '/blog' | prepend:site.baseurl }}">Blog</a>
-      {% endif %}
+      <a href="/blog">Blog</a>
       </li>
       {% if page.active == "talks" %}
       <li class="menu-item current">
       {% else %}
       <li class="menu-item" %}>
       {% endif %}
-      {% if jekyll.environment == "production" %}
-      <a href="http://{{ site.talksurl }}">Talks</a>
-      {% else %}
-      <a href="{{ '/talks' | prepend:site.baseurl }}">Talks</a>
-      {% endif %}
+      <a href="/talks">Talks</a>
       </li>
       {% if page.active == "contact" %}
       <li class="menu-item current">
       {% else %}
       <li class="menu-item">
       {% endif %}
-      {% if jekyll.environment == "production" %}
-      <a href="{{ site.url }}">Contact</a>
-      {% else %}
-      <a href="{{ '/index' | prepend:site.baseurl }}">Contact</a>
-      {% endif %}
+      <a href="/">Contact</a>
       </li>
     </ul>
   </nav>
