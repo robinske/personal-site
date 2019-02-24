@@ -1,11 +1,9 @@
 # personal-site 
 
-![travis ci build status](https://travis-ci.org/robinske/personal-site.svg?branch=master)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f83708eb-cf6d-40f4-b17d-54af68b48ff3/deploy-status)](https://app.netlify.com/sites/musing-jones-553932/deploys)
 
-http://krobinson.me
+https://krobinson.me
 
-Built with HTML, CSS, and [Jekyll](https://jekyllrb.com).
+Built with [Jekyll](https://jekyllrb.com).
 
-Hosting on AWS using [S3 static website hosting](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
-
-One-step deploy written in bash using [s3cmd](http://s3tools.org/s3cmd)
+Hosted on [Netlify](https://netlify.com).
