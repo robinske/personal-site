@@ -8,7 +8,7 @@ active:    "blog"
 
 ---
 
-This is the follow up post in to my explanation of `Monads` for Scala developers. [Read part one here](http://blog.krobinson.me/posts/explaining-monads).
+This is the follow up post in to my explanation of `Monads` for Scala developers. [Read part one here](https://www.krobinson.me/blog/explaining-monads/).
 
 Code examples can be found here: [https://github.com/robinske/monad-examples](https://github.com/robinske/monad-examples)
 
@@ -42,7 +42,7 @@ class ListConcat[A] extends Monoid[List[A]] {
 }
 {% endhighlight %}
 
-`ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order ([Integer addition](http://localhost:4000/posts/explaining-monads#examples), on the other hand, defines a special algebra for combining numbers, losing the inputs in the result).
+`ListConcat` is "free" - we still have the individual elements of each input list after we've concatenated them. We didn't perform any fancier combinations on the elements given other than throwing them together in sequential order ([Integer addition](https://www.krobinson.me/blog/explaining-monads/#examples), on the other hand, defines a special algebra for combining numbers, losing the inputs in the result).
 
 It's also important that we defined `ListConcat` with a generic type `A` - the only operations we can perform on the generic list are the `Monoid` operations (since you don't know anything about its members, if they're Strings, Ints, other complex types, or even functions). This satisfies the "simplest terms possible" clause for free-ness, and gives meaning to this technical explanation of Free Objects:
 
@@ -66,7 +66,7 @@ As we saw in the concatenation example above, the `append` operation just shoves
 
 Let's think now about what would make a `Monad` "free". We know we want the simplest definition possible, free from interpretation, without losing data.
 
-The `append` definition we used for `Monad` [in the last post](http://blog.krobinson.me/posts/explaining-monads#monads) won’t work, since we lose information about the input functions and essentially create some special return function. Instead, we’re have to concatenate or chain the functions in a list-like structure to preserve the data.
+The `append` definition we used for `Monad` [in the last post](https://www.krobinson.me/blog/explaining-monads/#monads) won’t work, since we lose information about the input functions and essentially create some special return function. Instead, we’re have to concatenate or chain the functions in a list-like structure to preserve the data.
 
 We can illustrate this by building the following types: [^4]
 
