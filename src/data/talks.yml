@@ -1,0 +1,168 @@
+- title: What if we had TLS for phone calls? An introduction to SHAKEN/STIR
+  abstract: >
+    If you've noticed a surge in unwanted robocalls from your own area code in the last few years, you're not alone. The way telephony systems are set up today, anyone can spoof a call or a text from any number. With an estimated 85 billion spam calls globally, it's time to address the problem.
+
+    This talk will discuss the latest advancements with STIR (Secure Telephone Identity Revisited) and SHAKEN (Signature-based Handling of Asserted information using toKENs), new tech standards that use well accepted public key cryptography methods to validate caller identification. We'll discuss the path and challenges to getting this implemented industry wide, where this tech will fall short, and what we can do to limit exposure to call spam and fraud in the meantime.
+  slides: https://www.slideshare.net/KelleyRobinson1/intro-to-shakenstir
+  video: https://www.youtube.com/watch?v=7PTT7Gzg9-4
+  conferences:
+    - name: Shmoocon 2020
+      website: https://www.shmoocon.org/
+    - name: OWASP AppSec California 2020
+      website: https://2020.appseccalifornia.org
+
+- title: Designing customer account recovery in a 2FA world
+  abstract: >
+    You've built login for your application—and even added 2FA—but what happens when a customer upgrades their phone, loses their device, or otherwise gets locked out of their account? This session will show how to accommodate account recovery when the user has 2FA enabled while minimizing account takeover and support overhead.
+
+    At Twilio, we provide a free consumer 2FA service via the Authy App. We've spent over seven years thinking about account recovery, refining the process, and designing our system to balance the support burden with necessary friction. During that time I've tracked dozens of other account recovery procedures to learn how everyone from utility companies to crypto startups attempt to re-verify identity when life happens. This talk will look at that research and outline best practices you can use depending on your industry and customer risk profile.
+
+    Security keys and app based authentication are great until the user loses the device but SMS 2FA is too insecure to use as the only account recovery mechanism. Since phone support is commonly used for account recovery, we'll highlight how to build guardrails for your call center agents to minimize costs and delight customers. You'll leave understanding the trade-offs of mechanisms for 2FA recovery (like government ID verification, forced waiting periods, security questions) and debating the value of recovery tokens.
+  slides: https://www.slideshare.net/KelleyRobinson1/designing-customer-account-recovery-in-a-2fa-world
+  conferences:
+    - name: Northsec 2020
+      website: https://www.nsec.io/
+    - name: Identiverse 2020
+      website: https://identiverse.com/
+
+- title: 2FA in 2020 and Beyond
+  abstract: >
+    Security professionals agree: SMS based Two-factor Authentication (2FA) is insecure, yet thousands of companies still employ this method to secure their customer-facing applications. This talk will look at the evolution of authentication and provide a data driven analysis of the tradeoffs between the different types of factors available. Join us as we explore the modern landscape of 2FA and debate the relative merits of SMS and its alternatives.
+
+    We'll dive into a detailed comparison of methods like SMS, Soft Tokens, Push Authentication, and WebAuthn. From cryptographic security strength to end-user experience, we will break down the benefits and downsides for the different methods and provide guidance for choosing the right methods for your business. Finally, we'll walk through some real world examples of how different organizations implemented 2FA and provide a framework for threat modeling customer authentication.
+  slides: https://www.slideshare.net/KelleyRobinson1/2fa-in-2020-and-beyond
+  video: https://www.youtube.com/watch?v=6_PO1LXS5Qw
+  conferences:
+    - name: BSides SF 2020
+      website: https://bsidessf.org/
+    - name: GOTO Chicago 2020
+      website: https://gotochgo.com/
+    
+- title: Contact Center Authentication
+  abstract: >
+    You've built login for your application—maybe you even have 2FA—but what happens when a customer calls the support number listed on your website or product?
+
+    Security teams and app developers have thought a lot about online authentication, but we haven't applied the same rigor to designing systems for authenticating over the phone. At Twilio, product and engineering teams have spent the last year thinking about this problem and how to make the experience better for both the customer and the call center agent. In that time, I've called dozens of contact centers to learn about how everyone from startups to Fortune 50 companies attempt to identify and authenticate the end user. This talk will take a look at that research and outline best practices you can use in your own call centers. You'll leave the session understanding what information should be made available to the agent and what kind of product features you can build into your web or mobile application that can facilitate phone authentication.
+  blog: https://www.twilio.com/blog/learned-about-security-from-calling-35-contact-centers
+  slides: https://www.slideshare.net/KelleyRobinson1/contact-center-authentication
+  video: https://www.youtube.com/watch?v=mJWEvjY3p1Y
+  conferences:
+    - name: BSides SF 2019
+      website: https://bsidessf.org
+    - name: OWASP AppSec California 2019
+      website: https://2019.appseccalifornia.org/
+
+
+- title: Practical Cryptography
+  abstract: >
+    From TLS to authentication, "crypto" is used for a lot more than just currencies. In 2018 security should be part of every engineer's toolkit and cryptography is a foundation we can master together. This talk will dive into modern cryptography theory, the math behind how it works, and its everyday use cases. By looking at the origins of cryptography we'll follow the progression of methods and algorithms as humans and computers evolved.
+
+    You'll leave understanding the difference between symmetric and asymmetric cryptography, why you would have a public and private key, and how those get used in a variety of applications. This will *not* be a talk about bitcoin, but will dive into how cryptography helps secure anonymous transactions and keeps your identity and data safe.
+  blog: https://www.twilio.com/blog/what-is-public-key-cryptography
+  video: https://pyvideo.org/pygotham-2018/practical-cryptography.html
+  slides: https://www.slideshare.net/KelleyRobinson1/practical-cryptography-96563520
+  conferences:
+    - name: GOTO Chicago 2019
+      website: https://gotochgo.com/
+    - name: Twilio SIGNAL 2018
+      website: https://signal.twilio.com/
+    - name: PyGotham 2018
+      website: https://2018.pygotham.org/
+
+- title: 2FA, WTF?
+  abstract: >
+    In an age when a new data breach is revealed with frightening regularity, developers have a responsibility to secure our applications' user data more than ever. But fear not, YOU have the power to deter the hackers!
+
+    You may recognize Two-factor Authentication (2FA) as an additional safeguard for protecting accounts, but do you really know how it works? This talk will show you how to implement One Time Passwords (including what's happening under the hood of those expiring tokens) and even provide a legitimate use case for QR codes! You'll come away recognizing the different approaches to implementing a 2FA solution and have a better understanding of the one that's right for your application. Together, we'll make the web a more secure place.
+  video: https://www.youtube.com/watch?v=Kx9jYdtO-vg
+  slides: https://www.slideshare.net/KelleyRobinson1/2fa-otp-wtf
+  conferences:
+    - name: DC ISSA Meetup May 2019
+    - name: PyBay 2018
+      website: https://pybay.com/
+    - name: SF Python Meetup December 2017
+    
+- title: Analyzing Pwned Passwords with Apache Spark
+  abstract: >
+    Apache Spark aims to solve the problem of working with large scale distributed data -- and with access to over 500 million leaked passwords we have a lot of data to dig through.
+
+    Advancements in the API make running Spark with Scala, Python, or even SQL smoother and faster than ever. This talk will introduce you to Spark and the new way to run queries on structured, distributed data by looking at breached credentials. We'll walk through how to get started with Spark and discuss the tradeoffs for using different abstractions provided by the framework. With the help of live code, we'll find patterns in the password data and look at how you can encourage your users to be more secure. You will see how easy and fast it is to both explore and process data using Spark SQL and leave with the tools to get started with your own distributed data...and a password manager.
+  blog: https://www.twilio.com/blog/2018/06/analyzing-pwned-passwords-with-apache-spark.html
+  video: https://www.youtube.com/watch?v=3HjjxP0-uFE&t=1s
+  slides: https://www.slideshare.net/KelleyRobinson1/analyzing-pwned-passwords-with-spark-and-scala-97393299
+  reactions:
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">.<a href="https://twitter.com/kelleyrobinson?ref_src=twsrc%5Etfw">@kelleyrobinson</a> <a href="https://twitter.com/twilio?ref_src=twsrc%5Etfw">@twilio</a> is rocking the stage with her fantastic talk &quot;Analyzing Pwned Passwords with Apache Spark&quot; at <a href="https://twitter.com/hashtag/ScalaDaya?src=hash&amp;ref_src=twsrc%5Etfw">#ScalaDaya</a> right now. <a href="https://t.co/qdnahPjGJF">pic.twitter.com/qdnahPjGJF</a></p>&mdash; Scala Days (@scaladays) <a href="https://twitter.com/scaladays/status/1009463584664023041?ref_src=twsrc%5Etfw">June 20, 2018</a></blockquote>
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Great talk by <a href="https://twitter.com/kelleyrobinson?ref_src=twsrc%5Etfw">@kelleyrobinson</a> live coding with <a href="https://twitter.com/hashtag/spark?src=hash&amp;ref_src=twsrc%5Etfw">#spark</a> to analyze <a href="https://twitter.com/haveibeenpwned?ref_src=twsrc%5Etfw">@haveibeenpwned</a> datasets<br><br>After removing 20k passwords containing swear words, the most common passwords are ... 🤯 oh my!<a href="https://twitter.com/hashtag/GOTOchgo?src=hash&amp;ref_src=twsrc%5Etfw">#GOTOchgo</a> <a href="https://t.co/UZ0hmDkBr5">pic.twitter.com/UZ0hmDkBr5</a></p>&mdash; Francesc (@francesc) <a href="https://twitter.com/francesc/status/989597277508554752?ref_src=twsrc%5Etfw">April 26, 2018</a></blockquote>
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Great talk on passwords and Spark by <a href="https://twitter.com/kelleyrobinson?ref_src=twsrc%5Etfw">@kelleyrobinson</a> <a href="https://twitter.com/hashtag/SciPyLadies?src=hash&amp;ref_src=twsrc%5Etfw">#SciPyLadies</a> <a href="https://t.co/YsPl7svJiA">pic.twitter.com/YsPl7svJiA</a></p>&mdash; Anna Widiger 🇷🇺🇩🇪🇺🇸 (@widiger_anna) <a href="https://twitter.com/widiger_anna/status/1006368692723056646?ref_src=twsrc%5Etfw">June 12, 2018</a></blockquote>
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Got an opportunity to meet and hear the wonderful <a href="https://twitter.com/kelleyrobinson?ref_src=twsrc%5Etfw">@kelleyrobinson</a> speak earlier today! Thank you for all your guidance and insights! <a href="https://twitter.com/hashtag/SheInspiresMe?src=hash&amp;ref_src=twsrc%5Etfw">#SheInspiresMe</a>⁠ ⁠ <a href="https://twitter.com/hashtag/SciPyLadies?src=hash&amp;ref_src=twsrc%5Etfw">#SciPyLadies</a> <a href="https://twitter.com/pyladiessf?ref_src=twsrc%5Etfw">@pyladiessf</a> <a href="https://twitter.com/JoinTheFlock?ref_src=twsrc%5Etfw">@JoinTheFlock</a> <a href="https://t.co/FmXZoHumyH">pic.twitter.com/FmXZoHumyH</a></p>&mdash; Prathyusha (@pcharagondla) <a href="https://twitter.com/pcharagondla/status/1006426385458462720?ref_src=twsrc%5Etfw">June 12, 2018</a></blockquote>
+
+  conferences:
+    - name: GrrCon 2018
+      website: http://grrcon.com/
+
+    - name: GOTO Chicago 2018
+      website: https://gotochgo.com/2018/sessions/457
+
+    - name: SF OWASP Meetup July 2018
+      website: https://www.meetup.com/Bay-Area-OWASP/events/252283865/?rv=ea1_v2&_xtd=gatlbWFpbF9jbGlja9oAJDJjNTA0OWMwLTlhYzctNDVlYy1hZjU0LTVlYjIxMzM3ODZjZA
+
+    - name: SciPyLadies Meetup June 2018
+      website: https://twitter.com/jkru/status/1006363491773509633
+
+    - name: Scala Days 2018 (New York and Berlin)
+      website: https://scaladays.org
+
+- title: Why the Free Monad Isn't Free
+  abstract: Scala developers love to discuss Monads, their metaphors, and their many use cases. Recognizing that monadic design and development patterns have their place, this talk will discuss the price of implementing the Free Monad in your code - spoiler alert - it's not free. We will define the Free Monad (without using complicated category theory!) and give you the confidence to know when it is and is not the answer in your code. We will also discuss some alternatives and their tradeoffs in maintainability, performance and design.
+  video: https://www.youtube.com/watch?v=U0lK0hnbc4U
+  slides: https://www.slideshare.net/KelleyRobinson1/why-the-free-monad-isnt-free-61836547
+  reactions:
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">and <a href="https://twitter.com/odersky">@odersky</a> thanks <a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> for &quot;the clearest explanation of these concepts that I&#39;ve ever seen.&quot; <a href="https://twitter.com/hashtag/scaladays?src=hash">#scaladays</a></p>&mdash; lgdean (@lgdean) <a href="https://twitter.com/lgdean/status/730114765062836224">May 10, 2016</a></blockquote>
+
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> Enjoyed your talk - my favourite of the conference so far</p>&mdash; Noel (@noelmarkham) <a href="https://twitter.com/noelmarkham/status/730117148765499396">May 10, 2016</a></blockquote>
+
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> your Free monad talk is brilliant! Well articulated concepts! Thank you!</p>&mdash; John Azariah (@johnazariah) <a href="https://twitter.com/johnazariah/status/859176292851171328">May 1, 2017</a></blockquote>
+
+  conferences:
+    - name: Scala Days New York 2016
+      website: http://event.scaladays.org/scaladays-nyc-2016
+
+    - name: Curry On Rome 2016
+      website: http://curry-on.org/2016/
+
+    - name: Code Mesh 2016
+      website: http://www.codemesh.io/
+
+    - name: LX Scala 2017
+      website: http://www.lxscala.com/
+
+- title: Demystifying Scala
+  abstract: >
+    It’s functional, it’s object oriented, it’s everything you never knew you wanted and more! Scala has been growing in popularity over the last 15 years and has now taken off in a variety of applications ranging from data science to distributed systems to messaging and the web. You’ve been curious about this language, and now is your chance to learn more.
+
+    Whether you’re a seasoned programmer or a beginner, a veteran on the JVM or just had to google that acronym, this talk will provide an introduction to the Scala language, why people use it, and why you might be interested in learning more. We’ll walk through the pros and cons of the language ecosystem and give you a practical look at how to get started.
+  video: https://conf-assets.s3.eu-central-1.amazonaws.com/uploads/videos/conference_3/39/original/Demystifying_Scala-by_%20Kelley_Robinson.mp4?etag=%22579f83d9c9219314cc129b3cf9bff133%22
+  slides: https://www.slideshare.net/KelleyRobinson1/demystifying-scala-75567791
+  conferences:
+    - name: GOTO Chicago 2017
+      website: gotochgo.com
+
+- title: Functional Programming Essentials
+  abstract: >
+    Scala is often touted as a tool for Functional Programming, but Functional Programming (FP) itself is left to differing and opinionated definitions by many of its practitioners. FP is a well defined approach to writing programs that we will uncover in this talk. It is a style that long predates Scala and many of the modern abstractions that are often referred to as "essential" tools.
+
+    We will walk through the origins of FP, providing historical context through Lisp and the research that brought us this paradigm. We'll define what FP is and what it is not, looking at how tools like purity and immutability enable the expressions at the heart of FP.
+
+    Finally we'll talk about practical approaches to Functional Programming in Scala, how you can and why you would use this style in your everyday work. This will _not_ be a talk about monads and type systems, but give you a pragmatic look at how to separate the syntactic sugar from the underlying principles.
+
+  video: https://www.youtube.com/watch?v=Yc6nJZK39mU
+  slides: https://www.slideshare.net/KelleyRobinson1/forget-what-you-think-you-know-redefining-functional-programming-for-scala-76584004
+  conferences:
+    - name: Scala Days 2017 (Chicago and Copenhagen)
+      website: http://event.scaladays.org/
+
+  reactions:
+    - quote: <blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">This was a really good talk. Important content, very well presented. I tip my hat to <a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a></p>&mdash; colorless green idea (@dkrentzlin) <a href="https://twitter.com/dkrentzlin/status/870577009122054145">June 2, 2017</a></blockquote>
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Brilliant talk by <a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> on the essence of FP. Enlightening historical perspective as well! <a href="https://twitter.com/hashtag/ScalaDays?src=hash">#ScalaDays</a> <a href="https://t.co/tE7ABKocs3">pic.twitter.com/tE7ABKocs3</a></p>&mdash; Jean-Philippe Pellet (@jp_pellet) <a href="https://twitter.com/jp_pellet/status/870560723293929472">June 2, 2017</a></blockquote>
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> heard you where a good speaker. Checked out your talk.  So glad I did.  You are killing it ! <a href="https://twitter.com/hashtag/scaladays?src=hash">#scaladays</a></p>&mdash; Matt (@MattAndruff) <a href="https://twitter.com/MattAndruff/status/855084776973365251">April 20, 2017</a></blockquote>
+    - quote: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Thabkyou <a href="https://twitter.com/kelleyrobinson">@kelleyrobinson</a> for that awesome talk. I&#39;m far more interested now in FP. You da best! <a href="https://twitter.com/hashtag/scaladays?src=hash">#scaladays</a></p>&mdash; JGutierrez (@JGCortazar) <a href="https://twitter.com/JGCortazar/status/855097662454075393">April 20, 2017</a></blockquote>
