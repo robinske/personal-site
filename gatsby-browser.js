@@ -1,4 +1,5 @@
 // custom typefaces
+import "typeface-allura"
 import "typeface-montserrat"
 import "typeface-merriweather"
 

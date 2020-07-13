@@ -1,9 +1,7 @@
 ---
-layout:    post
 title:     "Hello, Blog"
 date:      2016-01-25
 tags:      programming meta-blog
-active:    "blog"
 ---
 
 In my programming career so far, I've spent most of my time lurking behind the scenes - working with data, APIs, and infrastructure. Very little of my time has been dedicated to making websites look the way they do. Before this week I didn't know the difference between a [CSS class and id selector.](https://css-tricks.com/the-difference-between-id-and-class/)

@@ -1,10 +1,7 @@
 ---
-layout:    post
 title:     "Hello, Jekyll"
 date:      2016-01-29
 tags:      programming meta-blog
-comments:  true
-active:    "blog"
 ---
 
 Migrating this site from ~5 static pages to a static site generator took some time, but it will provide enough convenience for updating that it was worth it. This site is now generated using [Jekyll](https://jekyllrb.com/), a Ruby project that takes a handful of text files and transforms them into a fully functioning blog or site without requiring a server to back it up.

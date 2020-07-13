@@ -1,10 +1,7 @@
 ---
-layout:    post
 title:     "Automate Everything"
 date:      2016-01-30
 tags:      programming meta-blog
-comments:  true
-active:    "blog"
 ---
 
 It's pretty easy to [host a static site on Amazon](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html), all you have to do is copy files to an S3 bucket, update a couple of properties on the bucket, and voila! You can upload files via the GUI, but it's relatively time consuming and definitely repetitive. Naturally there is an easier way.

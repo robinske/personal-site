@@ -1,10 +1,7 @@
 ---
-layout:    post
 title:     "Create Your Scala Project Today"
 date:      2016-03-19
 tags:      programming scala
-comments:  true
-active:    "blog"
 ---
 
 I created a base Scala application repository so that I didn't have to do it every time I started a new project.

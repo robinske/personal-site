@@ -3,50 +3,36 @@ import { Link } from "gatsby"
 
 import { rhythm, scale } from "../utils/typography"
 
-const Layout = ({ location, title, children }) => {
-  const rootPath = `${__PATH_PREFIX__}/`
-  let header
+const Layout = ({ title, children }) => {
+  const header = (
+    <h1
+      style={{
+        ...scale(1.7),
+        fontFamily: `Allura, sans-serif`,
+        marginBottom: rhythm(1.5),
+        marginTop: 0,
+      }}
+    >
+      <Link
+        style={{
+          boxShadow: `none`,
+          color: `inherit`,
+        }}
+        to={`/`}
+      >
+        {title}
+      </Link>
+    </h1>
+  )
 
-  if (location.pathname === rootPath) {
-    header = (
-      <h1
-        style={{
-          ...scale(1.5),
-          marginBottom: rhythm(1.5),
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h1>
-    )
-  } else {
-    header = (
-      <h3
-        style={{
-          fontFamily: `Montserrat, sans-serif`,
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h3>
-    )
-  }
+  const tabs = (
+    <div>
+      <Link to={`/`}>Blog</Link>
+      {` | `}
+      <Link to={`/talks`}>Talks</Link>
+    </div>
+  )
+
   return (
     <div
       style={{
@@ -57,8 +43,11 @@ const Layout = ({ location, title, children }) => {
       }}
     >
       <header>{header}</header>
-      <main>{children}</main>
-      <footer>
+      <main>{tabs} {children}</main>
+      <footer 
+        style={{
+          marginTop: rhythm(2),
+        }}>
         © {new Date().getFullYear()}
       </footer>
     </div>

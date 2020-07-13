@@ -1,10 +1,7 @@
 ---
-layout:    post
 title:     "Practical Computing"
 date:      2016-03-31
 tags:      programming 
-comments:  true
-active:    "blog"
 ---
 
 There was a gem of "practical computing" advice nested in the comments of a Fred Wilson blog post today. I'm including this here for ease of reference, since I get asked for information sources like this often. Full credit to [signmaalgebra](https://disqus.com/by/sigmaalgebra/) for this comprehensive overview, included in full below. ([Original comment](http://avc.com/2016/03/side-projects/#comment-2600129704))

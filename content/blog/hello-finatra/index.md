@@ -1,10 +1,7 @@
 ---
-layout:    post
 title:     "Hello Finatra - An Introduction to Giter8 Templates"
 date:      2018-07-17
 tags:      programming
-comments:  true
-active:    "blog"
 ---
 
 [Giter8 templates](http://www.foundweekends.org/giter8/) are an amazing tool for spinning up new Scala projects quickly. I recently [created a template](https://github.com/robinske/hello-finatra.g8/blob/master/README.markdown) for a lightweight [Finatra](https://github.com/twitter/finatra) API.
@@ -32,7 +29,7 @@ sbt new robinske/hello-finatra.g8
 
 You can name your project anything you like, but avoid using numbers or dashes.
 
-![image](https://user-images.githubusercontent.com/3673341/39088781-36029586-456d-11e8-9940-28fa04a7bfed.png)
+![image](terminal-hello.png)
 
 ## Running 'Hello World'
 

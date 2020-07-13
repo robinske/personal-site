@@ -1,10 +1,7 @@
 ---
-layout:    post
 title:     "The Free Monad and its Cost"
 date:      2016-07-14
 tags:      programming scala
-comments:  true
-active:    "blog"
 ---
 
 This is the follow up post in to my explanation of `Monads` for Scala developers. [Read part one here](https://www.krobinson.me/blog/explaining-monads/).

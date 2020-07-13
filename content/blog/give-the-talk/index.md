@@ -1,10 +1,7 @@
 ---
-layout:    post
 title:     "Why You Should Give That Conference Talk"
 date:      2017-10-12
 tags:      programming speaking conferences cfp
-comments:  true
-active:    "blog"
 ---
 
 Last week I encouraged a friend to give a conference talk about some tooling he had built, but was met with mild protest.

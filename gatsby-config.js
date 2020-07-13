@@ -1,11 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: `krobinson.me`,
+    title: `kelley robinson`,
+    description: `Kelley is a developer, writer, and educator living in Brooklyn.`,
     author: {
       name: `Kelley Robinson`,
-      summary: `lives in Brooklyn.`,
+      bio: `Kelley works on the Account Security team at Twilio, helping developers manage and secure customer identity in their software applications. Previously she worked in a variety of API platform and data engineering roles at startups. Her research focuses on authentication user experience and design trade-offs for different risk profiles and 2FA channels. She believes in the power of good documentation and is passionate about making security accessible to new audiences. Kelley lives in Brooklyn, is an avid home chef, and spends too much time on Twitter.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://krobinson.me`,
     social: {
       twitter: `kelleyrobinson`,
@@ -74,6 +74,13 @@ module.exports = {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
+      },
+    },
+    `gatsby-transformer-yaml`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `./src/data/`,
       },
     },
   ],

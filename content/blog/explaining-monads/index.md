@@ -1,10 +1,7 @@
 ---
-layout:    post
 title:     "Monads are just WTF in the category of huh?"
 date:      2016-04-02
 tags:      programming scala
-comments:  true
-active:    "blog"
 ---
 
 Scala developers love to discuss Monads, their metaphors, and their many use cases.
