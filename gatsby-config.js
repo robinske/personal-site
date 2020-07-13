@@ -4,7 +4,7 @@ module.exports = {
     description: `Kelley is a developer, writer, and educator living in Brooklyn.`,
     author: {
       name: `Kelley Robinson`,
-      bio: `Kelley works on the Account Security team at Twilio, helping developers manage and secure customer identity in their software applications. Previously she worked in a variety of API platform and data engineering roles at startups. Her research focuses on authentication user experience and design trade-offs for different risk profiles and 2FA channels. She believes in the power of good documentation and is passionate about making security accessible to new audiences. Kelley lives in Brooklyn, is an avid home chef, and spends too much time on Twitter.`,
+      bio: `Kelley works on the Account Security team at Twilio, helping developers manage and secure customer identity in their software applications. Previously she worked in a variety of API platform and data engineering roles at startups. Her research focuses on authentication user experience and design trade-offs for different risk profiles and 2FA channels. She believes in the power of good documentation and is passionate about making security accessible to new audiences. Kelley lives in Brooklyn, is an avid home cook, and spends too much time on Twitter.`,
     },
     siteUrl: `https://krobinson.me`,
     social: {
