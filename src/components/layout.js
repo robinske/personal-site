@@ -27,9 +27,9 @@ const Layout = ({ title, children }) => {
 
   const tabs = (
     <div>
-      <Link to={`/`}>Blog</Link>
+      <Link to={`/`} style={{ textDecoration: 'none' }}>Blog</Link>
       {` | `}
-      <Link to={`/talks`}>Talks</Link>
+      <Link to={`/talks`} style={{ textDecoration: 'none' }}>Talks</Link>
     </div>
   )
 
