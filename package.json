@@ -25,6 +25,7 @@
     "gatsby-transformer-remark": "^2.8.20",
     "gatsby-transformer-sharp": "^2.5.7",
     "gatsby-transformer-yaml": "^2.4.10",
+    "highlight.js": ">=9.18.2",
     "jpeg-js": ">=0.4.0",
     "lodash": ">=4.17.19",
     "prismjs": "^1.21.0",
