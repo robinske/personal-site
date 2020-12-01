@@ -56,12 +56,11 @@ module.exports = {
         trackingId: `UA-73009306-1`,
       },
     },
-    `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `K. Robinson's Blog`,
+        short_name: `K. Robinson`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
