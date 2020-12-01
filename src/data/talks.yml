@@ -19,6 +19,7 @@
 
     Security keys and app based authentication are great until the user loses the device but SMS 2FA is too insecure to use as the only account recovery mechanism. Since phone support is commonly used for account recovery, we'll highlight how to build guardrails for your call center agents to minimize costs and delight customers. You'll leave understanding the trade-offs of mechanisms for 2FA recovery (like government ID verification, forced waiting periods, security questions) and debating the value of recovery tokens.
   slides: https://www.slideshare.net/KelleyRobinson1/designing-customer-account-recovery-in-a-2fa-world
+  video: q0Tll2fNR2s
   conferences:
     - name: Northsec 2020
       website: https://www.nsec.io/
