@@ -1,3 +1,7 @@
+- title: What is 2FA?
+  abstract: >
+    Authentication needs to be usable for it to be successful. Unfortunately, passwords are pretty insecure. Not only do some users choose guessable passwords but they tend to use them all over the internet as well. 2FA adds an extra layer of security by requiring at least two types of authentication. Like all security, authentication is all about finding the right balance between usability and friction. In this video Kelley walks through the why's and how's behind 2FA, some data around implementation stats, and the different options for adding 2FA to your applications.
+  video: yms-4tqhNfs
 - title: What if we had TLS for phone calls? An introduction to SHAKEN/STIR
   abstract: >
     If you've noticed a surge in unwanted robocalls from your own area code in the last few years, you're not alone. The way telephony systems are set up today, anyone can spoof a call or a text from any number. With an estimated 85 billion spam calls globally, it's time to address the problem.
