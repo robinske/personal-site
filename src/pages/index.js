@@ -3,45 +3,70 @@ import { Link, graphql } from 'gatsby';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import { rhythm } from '../utils/typography';
-import ExternalLink from '../components/external-link';
 
-const BlogIndex = ({ data, location }) => {
+const TalkIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title;
-  const posts = data.allMarkdownRemark.edges;
+  const talks = data.allTalksYaml.edges;
+
+  const kebabTitle = (str) =>
+    str &&
+    str
+      .match(
+        /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
+      )
+      .map((x) => x.toLowerCase())
+      .join('-');
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="Blog posts" />
-      <p>
-        {`You can find more of my writing on the `}
-        <ExternalLink to={'https://www.twilio.com/blog/author/krobinson'}>
-          Twilio blog
-        </ExternalLink>
-        {`.`}
-      </p>
-      {posts.map(({ node }) => {
-        const title = node.frontmatter.title || node.fields.slug;
+      <SEO title="Talks" />
+      <h2>Talks</h2>
+      {talks.map(({ node }) => {
+        const key = kebabTitle(node.title);
+
         return (
-          <article key={node.fields.slug} style={{ marginTop: `60px` }}>
+          <article key={`talk-` + key}>
             <header>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
+              <Link style={{ color: 'black' }} to={'#' + key}>
+                <h3 id={key}>{node.title}</h3>
+              </Link>
             </header>
             <section>
+              {node.video !== null && (
+                <iframe
+                  src={'https://www.youtube.com/embed/' + node.video}
+                  title={node.video}
+                  width="560"
+                  height="315"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              )}
+              <p>
+                <Link to={node.slides}>Slides</Link>
+                {node.video !== null && ` | `}
+                {node.video !== null && (
+                  <Link to={'https://www.youtube.com/watch?v=' + node.video}>
+                    Video
+                  </Link>
+                )}
+              </p>
               <p
                 dangerouslySetInnerHTML={{
-                  __html: node.excerpt,
+                  __html: node.abstract,
                 }}
               />
+              <h4>Conferences</h4>
+              <ul>
+                {node.conferences.map(({ name, website }) => {
+                  return (
+                    <li>
+                      <Link to={website}>{name}</Link>
+                    </li>
+                  );
+                })}
+              </ul>
             </section>
           </article>
         );
@@ -50,26 +75,29 @@ const BlogIndex = ({ data, location }) => {
   );
 };
 
-export default BlogIndex;
+export default TalkIndex;
 
 export const pageQuery = graphql`
   query {
     site {
       siteMetadata {
         title
+        author {
+          name
+          bio
+        }
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allTalksYaml {
       edges {
         node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            tags
+          title
+          abstract
+          slides
+          video
+          conferences {
+            name
+            website
           }
         }
       }

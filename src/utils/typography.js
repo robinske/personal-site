@@ -1,9 +1,10 @@
 import Typography from 'typography';
-import { MOBILE_MEDIA_QUERY } from 'typography-breakpoint-constants';
 
 import gray from 'gray-percentage';
 
 export const green = '#099976';
+
+const MOBILE_MEDIA_QUERY = '@media only screen and (max-width:480px)';
 
 const options = {
   baseFontSize: '16px',
