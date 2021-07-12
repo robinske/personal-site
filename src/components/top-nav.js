@@ -70,7 +70,7 @@ const TopNav = () => {
             style={{ display: `block`, marginRight: rhythm(1 / 3) }}
           />
         </ExternalLink>
-        <ExternalLink to="https://instagram.com/kelley_cooks__">
+        <ExternalLink to="https://instagram.com/kelley.cooks">
           <InstagramLogo style={{ display: `block` }} />
         </ExternalLink>
       </SocialIcons>
