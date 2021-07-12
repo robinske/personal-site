@@ -29,8 +29,8 @@ const Divider = () => {
 
 const TopNav = () => {
   const navItems = [
-    { name: 'Blog', slug: '/' },
-    { name: 'Talks', slug: '/talks' },
+    { name: 'Talks', slug: '/' },
+    { name: 'Blog', slug: '/blog' },
     { name: 'About', slug: '/about' },
   ];
 
