@@ -25,6 +25,8 @@
     "gatsby-transformer-remark": "^4.6.0",
     "gatsby-transformer-sharp": "^3.9.0",
     "gatsby-transformer-yaml": "^3.9.0",
+    "graphql": "^15.4.0",
+    "graphql-compose": "^7.25.0",
     "highlight.js": ">=11.1.0",
     "jpeg-js": "^0.4.3",
     "prismjs": "^1.24.1",
@@ -37,8 +39,6 @@
     "typeface-merriweather": "1.1.13",
     "typeface-montserrat": "1.1.13",
     "typography": "^0.16.21",
-    "graphql": "^15.4.0",
-    "graphql-compose": "^7.25.0",
     "webpack": "^5.24.2"
   },
   "devDependencies": {

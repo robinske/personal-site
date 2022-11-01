@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link, graphql } from 'gatsby';
+import React from "react";
+import { Link, graphql } from "gatsby";
 
-import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Layout from "../components/layout";
+import SEO from "../components/seo";
 
 const TalkIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title;
@@ -15,7 +15,7 @@ const TalkIndex = ({ data, location }) => {
         /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
       )
       .map((x) => x.toLowerCase())
-      .join('-');
+      .join("-");
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -27,14 +27,14 @@ const TalkIndex = ({ data, location }) => {
         return (
           <article key={`talk-` + key}>
             <header>
-              <Link style={{ color: 'black' }} to={'#' + key}>
+              <Link style={{ color: "black" }} to={"#" + key}>
                 <h3 id={key}>{node.title}</h3>
               </Link>
             </header>
             <section>
               {node.video !== null && (
                 <iframe
-                  src={'https://www.youtube.com/embed/' + node.video}
+                  src={"https://www.youtube.com/embed/" + node.video}
                   title={node.video}
                   width="560"
                   height="315"
@@ -47,7 +47,7 @@ const TalkIndex = ({ data, location }) => {
                 <Link to={node.slides}>Slides</Link>
                 {node.video !== null && ` | `}
                 {node.video !== null && (
-                  <Link to={'https://www.youtube.com/watch?v=' + node.video}>
+                  <Link to={"https://www.youtube.com/watch?v=" + node.video}>
                     Video
                   </Link>
                 )}
@@ -57,16 +57,20 @@ const TalkIndex = ({ data, location }) => {
                   __html: node.abstract,
                 }}
               />
-              <h4>Conferences</h4>
-              <ul>
-                {node.conferences.map(({ name, website }) => {
-                  return (
-                    <li>
-                      <Link to={website}>{name}</Link>
-                    </li>
-                  );
-                })}
-              </ul>
+              {node.conferences && (
+                <div>
+                  <h4>Conferences</h4>
+                  <ul>
+                    {node.conferences.map(({ name, website }) => {
+                      return (
+                        <li>
+                          <Link to={website}>{name}</Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
             </section>
           </article>
         );
