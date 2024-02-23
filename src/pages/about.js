@@ -1,9 +1,9 @@
-import React from 'react';
-import { graphql } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import React from "react";
+import { graphql } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
 
-import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Layout from "../components/layout";
+import SEO from "../components/seo";
 
 const TalkIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title;
@@ -14,7 +14,7 @@ const TalkIndex = ({ data, location }) => {
       <div>{data.site.siteMetadata.author.bio}</div>
       <GatsbyImage
         image={{ ...data.headshot.childImageSharp.gatsbyImageData }}
-        style={{ width: '100%', borderRadius: 8, marginTop: 10 }}
+        style={{ width: "100%", borderRadius: 8, marginTop: 10 }}
       />
     </Layout>
   );
@@ -35,7 +35,11 @@ export const pageQuery = graphql`
     }
     headshot: file(relativePath: { eq: "assets/profile-pic-wide.jpeg" }) {
       childImageSharp {
-        gatsbyImageData(layout: FULL_WIDTH)
+        gatsbyImageData(
+          layout: FULL_WIDTH
+          placeholder: DOMINANT_COLOR
+          formats: [AUTO, PNG]
+        )
       }
     }
   }

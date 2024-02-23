@@ -1,15 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import { Link } from 'gatsby';
+import { Link } from "gatsby";
 
-import ExternalLink from './external-link';
-import { rhythm } from '../utils/typography';
-import InstagramLogo from '../../static/instagram.svg';
-import TwitterLogo from '../../static/twitter.svg';
+import ExternalLink from "./external-link";
+import { rhythm } from "../utils/typography";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const FlexDiv = styled('div')`
+const FlexDiv = styled("div")`
   display: flex;
 `;
 
@@ -29,9 +27,9 @@ const Divider = () => {
 
 const TopNav = () => {
   const navItems = [
-    { name: 'Talks', slug: '/' },
-    { name: 'Blog', slug: '/blog' },
-    { name: 'About', slug: '/about' },
+    { name: "Talks", slug: "/" },
+    { name: "Blog", slug: "/blog" },
+    { name: "About", slug: "/about" },
   ];
 
   const navSize = navItems.length;
@@ -64,16 +62,7 @@ const TopNav = () => {
       }}
     >
       <FlexDiv>{navLinks}</FlexDiv>
-      <SocialIcons>
-        <ExternalLink to="https://twitter.com/kelleyrobinson">
-          <TwitterLogo
-            style={{ display: `block`, marginRight: rhythm(1 / 3) }}
-          />
-        </ExternalLink>
-        <ExternalLink to="https://instagram.com/kelley.cooks">
-          <InstagramLogo style={{ display: `block` }} />
-        </ExternalLink>
-      </SocialIcons>
+      <SocialIcons></SocialIcons>
     </nav>
   );
 };

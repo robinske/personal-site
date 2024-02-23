@@ -1,7 +1,35 @@
+- title: Protecting your phone verification flow from fraud & abuse
+  abstract: >
+    SMS pumping causes inflated traffic to your app with the intent to make money and not to steal information. Unfortunately this means you might be hit with higher than expected bills from your telecom provider if your application isn’t designed to prevent it.
+
+    Learn what SMS pumping is, how it compares to similar attacks like IRSF, and how fraudsters profit from this tactic. You’ll learn strategies to prevent the attack and improve your phone verification workflow in the process, ensuring all of the benefits of phone number verification without unintended expenses.
+  video: hy87SDisO3A
+  slides: https://www.slideshare.net/KelleyRobinson1/protecting-your-phone-verification-flow-from-fraud-abuse
+  conferences:
+    - name: Authenticate 2022
+      website: https://www.authenticatecon.com/
+
 - title: What is 2FA?
   abstract: >
     Authentication needs to be usable for it to be successful. Unfortunately, passwords are pretty insecure. Not only do some users choose guessable passwords but they tend to use them all over the internet as well. 2FA adds an extra layer of security by requiring at least two types of authentication. Like all security, authentication is all about finding the right balance between usability and friction. In this video Kelley walks through the why's and how's behind 2FA, some data around implementation stats, and the different options for adding 2FA to your applications.
   video: yms-4tqhNfs
+
+- title: Designing customer account recovery in a 2FA world
+  abstract: >
+    You've built login for your application—and even added 2FA—but what happens when a customer upgrades their phone, loses their device, or otherwise gets locked out of their account? This session will show how to accommodate account recovery when the user has 2FA enabled while minimizing account takeover and support overhead.
+
+    At Twilio, we provide a free consumer 2FA service via the Authy App. We've spent over seven years thinking about account recovery, refining the process, and designing our system to balance the support burden with necessary friction. During that time I've tracked dozens of other account recovery procedures to learn how everyone from utility companies to crypto startups attempt to re-verify identity when life happens. This talk will look at that research and outline best practices you can use depending on your industry and customer risk profile.
+
+    Security keys and app based authentication are great until the user loses the device but SMS 2FA is too insecure to use as the only account recovery mechanism. Since phone support is commonly used for account recovery, we'll highlight how to build guardrails for your call center agents to minimize costs and delight customers. You'll leave understanding the trade-offs of mechanisms for 2FA recovery (like government ID verification, forced waiting periods, security questions) and debating the value of recovery tokens.
+  slides: https://www.slideshare.net/KelleyRobinson1/designing-customer-account-recovery-in-a-2fa-world
+  video: q0Tll2fNR2s
+  conferences:
+    - name: BSides SF 2023
+      website: https://bsidessf.org/
+    - name: Northsec 2020
+      website: https://www.nsec.io/
+    - name: Identiverse 2020
+      website: https://identiverse.com/
 
 - title: What if we had TLS for phone calls? An introduction to SHAKEN/STIR
   abstract: >
@@ -15,21 +43,6 @@
       website: https://www.shmoocon.org/
     - name: OWASP AppSec California 2020
       website: https://2020.appseccalifornia.org
-
-- title: Designing customer account recovery in a 2FA world
-  abstract: >
-    You've built login for your application—and even added 2FA—but what happens when a customer upgrades their phone, loses their device, or otherwise gets locked out of their account? This session will show how to accommodate account recovery when the user has 2FA enabled while minimizing account takeover and support overhead.
-
-    At Twilio, we provide a free consumer 2FA service via the Authy App. We've spent over seven years thinking about account recovery, refining the process, and designing our system to balance the support burden with necessary friction. During that time I've tracked dozens of other account recovery procedures to learn how everyone from utility companies to crypto startups attempt to re-verify identity when life happens. This talk will look at that research and outline best practices you can use depending on your industry and customer risk profile.
-
-    Security keys and app based authentication are great until the user loses the device but SMS 2FA is too insecure to use as the only account recovery mechanism. Since phone support is commonly used for account recovery, we'll highlight how to build guardrails for your call center agents to minimize costs and delight customers. You'll leave understanding the trade-offs of mechanisms for 2FA recovery (like government ID verification, forced waiting periods, security questions) and debating the value of recovery tokens.
-  slides: https://www.slideshare.net/KelleyRobinson1/designing-customer-account-recovery-in-a-2fa-world
-  video: q0Tll2fNR2s
-  conferences:
-    - name: Northsec 2020
-      website: https://www.nsec.io/
-    - name: Identiverse 2020
-      website: https://identiverse.com/
 
 - title: 2FA in 2020 and Beyond
   abstract: >

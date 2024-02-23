@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link, graphql } from 'gatsby';
+import React from "react";
+import { Link, graphql } from "gatsby";
 
-import Layout from '../components/layout';
-import SEO from '../components/seo';
-import { rhythm } from '../utils/typography';
-import ExternalLink from '../components/external-link';
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import { rhythm } from "../utils/typography";
+import ExternalLink from "../components/external-link";
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title;
@@ -14,12 +14,19 @@ const BlogIndex = ({ data, location }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title="Blog posts" />
       <p>
-        {`You can find more of my writing on the `}
-        <ExternalLink to={'https://www.twilio.com/blog/author/krobinson'}>
-          Twilio blog
-        </ExternalLink>
-        {`.`}
+        <strong>
+          {`Hi there! This may seem sparse, but you can find a lot of my recent writing on the `}
+          <ExternalLink to={"https://www.twilio.com/blog/author/krobinson"}>
+            Twilio blog
+          </ExternalLink>
+          {`. Sometimes I also write about `}
+          <ExternalLink to={"https://www.kelleycooks.com"}>
+            food and cooking
+          </ExternalLink>
+          {`.`}
+        </strong>
       </p>
+      <hr />
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug;
         return (
